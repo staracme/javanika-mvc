@@ -1,0 +1,487 @@
+E:\Java Project\Java.API\Java.API\bin\roslyn\csc.exe
+E:\Java Project\Java.API\Java.API\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+E:\Java Project\Java.API\Java.API\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+E:\Java Project\Java.API\Java.API\bin\roslyn\Microsoft.CodeAnalysis.dll
+E:\Java Project\Java.API\Java.API\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+E:\Java Project\Java.API\Java.API\bin\roslyn\Microsoft.CSharp.Core.targets
+E:\Java Project\Java.API\Java.API\bin\roslyn\Microsoft.VisualBasic.Core.targets
+E:\Java Project\Java.API\Java.API\bin\roslyn\System.Collections.Immutable.dll
+E:\Java Project\Java.API\Java.API\bin\roslyn\System.Reflection.Metadata.dll
+E:\Java Project\Java.API\Java.API\bin\roslyn\vbc.exe
+E:\Java Project\Java.API\Java.API\bin\roslyn\VBCSCompiler.exe
+E:\Java Project\Java.API\Java.API\bin\roslyn\VBCSCompiler.exe.config
+E:\Java Project\Java.API\Java.API\bin\Java.API.dll.config
+E:\Java Project\Java.API\Java.API\bin\Java.API.dll
+E:\Java Project\Java.API\Java.API\bin\Java.API.pdb
+E:\Java Project\Java.API\Java.API\bin\Antlr3.Runtime.dll
+E:\Java Project\Java.API\Java.API\bin\EntityFramework.dll
+E:\Java Project\Java.API\Java.API\bin\EntityFramework.SqlServer.dll
+E:\Java Project\Java.API\Java.API\bin\Microsoft.AspNet.Identity.Core.dll
+E:\Java Project\Java.API\Java.API\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+E:\Java Project\Java.API\Java.API\bin\Microsoft.AspNet.Identity.Owin.dll
+E:\Java Project\Java.API\Java.API\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+E:\Java Project\Java.API\Java.API\bin\Microsoft.Owin.dll
+E:\Java Project\Java.API\Java.API\bin\Microsoft.Owin.Host.SystemWeb.dll
+E:\Java Project\Java.API\Java.API\bin\Microsoft.Owin.Security.Cookies.dll
+E:\Java Project\Java.API\Java.API\bin\Microsoft.Owin.Security.dll
+E:\Java Project\Java.API\Java.API\bin\Microsoft.Owin.Security.Facebook.dll
+E:\Java Project\Java.API\Java.API\bin\Microsoft.Owin.Security.Google.dll
+E:\Java Project\Java.API\Java.API\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+E:\Java Project\Java.API\Java.API\bin\Microsoft.Owin.Security.OAuth.dll
+E:\Java Project\Java.API\Java.API\bin\Microsoft.Owin.Security.Twitter.dll
+E:\Java Project\Java.API\Java.API\bin\Microsoft.Web.Infrastructure.dll
+E:\Java Project\Java.API\Java.API\bin\Newtonsoft.Json.dll
+E:\Java Project\Java.API\Java.API\bin\Owin.dll
+E:\Java Project\Java.API\Java.API\bin\System.Net.Http.Formatting.dll
+E:\Java Project\Java.API\Java.API\bin\System.Web.Helpers.dll
+E:\Java Project\Java.API\Java.API\bin\System.Web.Http.dll
+E:\Java Project\Java.API\Java.API\bin\System.Web.Http.Owin.dll
+E:\Java Project\Java.API\Java.API\bin\System.Web.Http.WebHost.dll
+E:\Java Project\Java.API\Java.API\bin\System.Web.Mvc.dll
+E:\Java Project\Java.API\Java.API\bin\System.Web.Optimization.dll
+E:\Java Project\Java.API\Java.API\bin\System.Web.Razor.dll
+E:\Java Project\Java.API\Java.API\bin\System.Web.WebPages.Deployment.dll
+E:\Java Project\Java.API\Java.API\bin\System.Web.WebPages.dll
+E:\Java Project\Java.API\Java.API\bin\System.Web.WebPages.Razor.dll
+E:\Java Project\Java.API\Java.API\bin\WebGrease.dll
+E:\Java Project\Java.API\Java.API\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+E:\Java Project\Java.API\Java.API\bin\Newtonsoft.Json.xml
+E:\Java Project\Java.API\Java.API\bin\System.Net.Http.Formatting.xml
+E:\Java Project\Java.API\Java.API\bin\System.Web.Helpers.xml
+E:\Java Project\Java.API\Java.API\bin\System.Web.Http.xml
+E:\Java Project\Java.API\Java.API\bin\System.Web.Http.WebHost.xml
+E:\Java Project\Java.API\Java.API\bin\System.Web.Mvc.xml
+E:\Java Project\Java.API\Java.API\bin\System.Web.Optimization.xml
+E:\Java Project\Java.API\Java.API\bin\System.Web.Razor.xml
+E:\Java Project\Java.API\Java.API\bin\System.Web.WebPages.xml
+E:\Java Project\Java.API\Java.API\bin\System.Web.WebPages.Deployment.xml
+E:\Java Project\Java.API\Java.API\bin\System.Web.WebPages.Razor.xml
+E:\Java Project\Java.API\Java.API\bin\Antlr3.Runtime.pdb
+E:\Java Project\Java.API\Java.API\bin\EntityFramework.xml
+E:\Java Project\Java.API\Java.API\bin\EntityFramework.SqlServer.xml
+E:\Java Project\Java.API\Java.API\bin\Microsoft.AspNet.Identity.Core.xml
+E:\Java Project\Java.API\Java.API\bin\Microsoft.AspNet.Identity.Owin.xml
+E:\Java Project\Java.API\Java.API\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+E:\Java Project\Java.API\Java.API\bin\Microsoft.Owin.xml
+E:\Java Project\Java.API\Java.API\bin\Microsoft.Owin.Host.SystemWeb.xml
+E:\Java Project\Java.API\Java.API\bin\Microsoft.Owin.Security.xml
+E:\Java Project\Java.API\Java.API\bin\Microsoft.Owin.Security.Facebook.xml
+E:\Java Project\Java.API\Java.API\bin\Microsoft.Owin.Security.Cookies.xml
+E:\Java Project\Java.API\Java.API\bin\Microsoft.Owin.Security.OAuth.xml
+E:\Java Project\Java.API\Java.API\bin\Microsoft.Owin.Security.Google.xml
+E:\Java Project\Java.API\Java.API\bin\Microsoft.Owin.Security.Twitter.xml
+E:\Java Project\Java.API\Java.API\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+E:\Java Project\Java.API\Java.API\bin\System.Web.Http.Owin.xml
+E:\Java Project\Java.API\Java.API\obj\Debug\Java.API.csprojResolveAssemblyReference.cache
+E:\Java Project\Java.API\Java.API\obj\Debug\Java.API.dll
+E:\Java Project\Java.API\Java.API\obj\Debug\Java.API.pdb
+E:\Java Project\Java.API\Java.API\bin\System.Web.Cors.dll
+E:\Java Project\Java.API\Java.API\bin\System.Web.Http.Cors.dll
+E:\Java Project\Java.API\Java.API\bin\System.Web.Http.Cors.xml
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\roslyn\csc.exe
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\roslyn\vbc.exe
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\roslyn\VBCSCompiler.exe
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\Java.API.dll.config
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\Java.API.dll
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\Java.API.pdb
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\Antlr3.Runtime.dll
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\EntityFramework.dll
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\EntityFramework.SqlServer.dll
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\Microsoft.Owin.dll
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\Microsoft.Owin.Security.Cookies.dll
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\Microsoft.Owin.Security.dll
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\Microsoft.Owin.Security.Facebook.dll
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\Microsoft.Owin.Security.Google.dll
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\Microsoft.Owin.Security.OAuth.dll
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\Microsoft.Owin.Security.Twitter.dll
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\Newtonsoft.Json.dll
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\Owin.dll
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\System.Net.Http.Formatting.dll
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\System.Web.Cors.dll
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\System.Web.Helpers.dll
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\System.Web.Http.Cors.dll
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\System.Web.Http.dll
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\System.Web.Http.Owin.dll
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\System.Web.Http.WebHost.dll
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\System.Web.Mvc.dll
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\System.Web.Optimization.dll
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\System.Web.Razor.dll
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\System.Web.WebPages.Deployment.dll
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\System.Web.WebPages.dll
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\System.Web.WebPages.Razor.dll
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\WebGrease.dll
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\System.Net.Http.Formatting.xml
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\System.Web.Http.xml
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\System.Web.Http.Cors.xml
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\Newtonsoft.Json.xml
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\System.Web.Helpers.xml
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\System.Web.Http.WebHost.xml
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\System.Web.Mvc.xml
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\System.Web.Optimization.xml
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\System.Web.Razor.xml
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\System.Web.WebPages.xml
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\System.Web.WebPages.Deployment.xml
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\System.Web.WebPages.Razor.xml
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\Antlr3.Runtime.pdb
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\EntityFramework.xml
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\EntityFramework.SqlServer.xml
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\Microsoft.Owin.xml
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\Microsoft.Owin.Security.xml
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\Microsoft.Owin.Security.Facebook.xml
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\Microsoft.Owin.Security.OAuth.xml
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\Microsoft.Owin.Security.Google.xml
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\Microsoft.Owin.Security.Twitter.xml
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\bin\System.Web.Http.Owin.xml
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\obj\Debug\Java.API.csprojResolveAssemblyReference.cache
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\obj\Debug\Java.API.dll
+C:\Users\Omkar\Desktop\For Pranav\Java\Java.API\Java.API\obj\Debug\Java.API.pdb
+E:\Java Project\In development\Java.API\Java.API\obj\Debug\Java.API.csprojResolveAssemblyReference.cache
+E:\Java Project\In development\Java.API\Java.API\obj\Debug\Java.API.dll
+E:\Java Project\In development\Java.API\Java.API\obj\Debug\Java.API.pdb
+E:\Java Project\In development\Java.API\Java.API\bin\roslyn\csc.exe
+E:\Java Project\In development\Java.API\Java.API\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+E:\Java Project\In development\Java.API\Java.API\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+E:\Java Project\In development\Java.API\Java.API\bin\roslyn\Microsoft.CodeAnalysis.dll
+E:\Java Project\In development\Java.API\Java.API\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+E:\Java Project\In development\Java.API\Java.API\bin\roslyn\Microsoft.CSharp.Core.targets
+E:\Java Project\In development\Java.API\Java.API\bin\roslyn\Microsoft.VisualBasic.Core.targets
+E:\Java Project\In development\Java.API\Java.API\bin\roslyn\System.Collections.Immutable.dll
+E:\Java Project\In development\Java.API\Java.API\bin\roslyn\System.Reflection.Metadata.dll
+E:\Java Project\In development\Java.API\Java.API\bin\roslyn\vbc.exe
+E:\Java Project\In development\Java.API\Java.API\bin\roslyn\VBCSCompiler.exe
+E:\Java Project\In development\Java.API\Java.API\bin\roslyn\VBCSCompiler.exe.config
+E:\Java Project\In development\Java.API\Java.API\bin\Java.API.dll.config
+E:\Java Project\In development\Java.API\Java.API\bin\Java.API.dll
+E:\Java Project\In development\Java.API\Java.API\bin\Java.API.pdb
+E:\Java Project\In development\Java.API\Java.API\bin\Antlr3.Runtime.dll
+E:\Java Project\In development\Java.API\Java.API\bin\EntityFramework.dll
+E:\Java Project\In development\Java.API\Java.API\bin\EntityFramework.SqlServer.dll
+E:\Java Project\In development\Java.API\Java.API\bin\Microsoft.AspNet.Identity.Core.dll
+E:\Java Project\In development\Java.API\Java.API\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+E:\Java Project\In development\Java.API\Java.API\bin\Microsoft.AspNet.Identity.Owin.dll
+E:\Java Project\In development\Java.API\Java.API\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+E:\Java Project\In development\Java.API\Java.API\bin\Microsoft.Owin.dll
+E:\Java Project\In development\Java.API\Java.API\bin\Microsoft.Owin.Host.SystemWeb.dll
+E:\Java Project\In development\Java.API\Java.API\bin\Microsoft.Owin.Security.Cookies.dll
+E:\Java Project\In development\Java.API\Java.API\bin\Microsoft.Owin.Security.dll
+E:\Java Project\In development\Java.API\Java.API\bin\Microsoft.Owin.Security.Facebook.dll
+E:\Java Project\In development\Java.API\Java.API\bin\Microsoft.Owin.Security.Google.dll
+E:\Java Project\In development\Java.API\Java.API\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+E:\Java Project\In development\Java.API\Java.API\bin\Microsoft.Owin.Security.OAuth.dll
+E:\Java Project\In development\Java.API\Java.API\bin\Microsoft.Owin.Security.Twitter.dll
+E:\Java Project\In development\Java.API\Java.API\bin\Microsoft.Web.Infrastructure.dll
+E:\Java Project\In development\Java.API\Java.API\bin\Newtonsoft.Json.dll
+E:\Java Project\In development\Java.API\Java.API\bin\Owin.dll
+E:\Java Project\In development\Java.API\Java.API\bin\System.Net.Http.Formatting.dll
+E:\Java Project\In development\Java.API\Java.API\bin\System.Web.Cors.dll
+E:\Java Project\In development\Java.API\Java.API\bin\System.Web.Helpers.dll
+E:\Java Project\In development\Java.API\Java.API\bin\System.Web.Http.Cors.dll
+E:\Java Project\In development\Java.API\Java.API\bin\System.Web.Http.dll
+E:\Java Project\In development\Java.API\Java.API\bin\System.Web.Http.Owin.dll
+E:\Java Project\In development\Java.API\Java.API\bin\System.Web.Http.WebHost.dll
+E:\Java Project\In development\Java.API\Java.API\bin\System.Web.Mvc.dll
+E:\Java Project\In development\Java.API\Java.API\bin\System.Web.Optimization.dll
+E:\Java Project\In development\Java.API\Java.API\bin\System.Web.Razor.dll
+E:\Java Project\In development\Java.API\Java.API\bin\System.Web.WebPages.Deployment.dll
+E:\Java Project\In development\Java.API\Java.API\bin\System.Web.WebPages.dll
+E:\Java Project\In development\Java.API\Java.API\bin\System.Web.WebPages.Razor.dll
+E:\Java Project\In development\Java.API\Java.API\bin\WebGrease.dll
+E:\Java Project\In development\Java.API\Java.API\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+E:\Java Project\In development\Java.API\Java.API\bin\System.Net.Http.Formatting.xml
+E:\Java Project\In development\Java.API\Java.API\bin\System.Web.Http.xml
+E:\Java Project\In development\Java.API\Java.API\bin\System.Web.Http.Cors.xml
+E:\Java Project\In development\Java.API\Java.API\bin\Newtonsoft.Json.xml
+E:\Java Project\In development\Java.API\Java.API\bin\System.Web.Helpers.xml
+E:\Java Project\In development\Java.API\Java.API\bin\System.Web.Http.WebHost.xml
+E:\Java Project\In development\Java.API\Java.API\bin\System.Web.Mvc.xml
+E:\Java Project\In development\Java.API\Java.API\bin\System.Web.Optimization.xml
+E:\Java Project\In development\Java.API\Java.API\bin\System.Web.Razor.xml
+E:\Java Project\In development\Java.API\Java.API\bin\System.Web.WebPages.xml
+E:\Java Project\In development\Java.API\Java.API\bin\System.Web.WebPages.Deployment.xml
+E:\Java Project\In development\Java.API\Java.API\bin\System.Web.WebPages.Razor.xml
+E:\Java Project\In development\Java.API\Java.API\bin\Antlr3.Runtime.pdb
+E:\Java Project\In development\Java.API\Java.API\bin\EntityFramework.xml
+E:\Java Project\In development\Java.API\Java.API\bin\EntityFramework.SqlServer.xml
+E:\Java Project\In development\Java.API\Java.API\bin\Microsoft.AspNet.Identity.Core.xml
+E:\Java Project\In development\Java.API\Java.API\bin\Microsoft.AspNet.Identity.Owin.xml
+E:\Java Project\In development\Java.API\Java.API\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+E:\Java Project\In development\Java.API\Java.API\bin\Microsoft.Owin.xml
+E:\Java Project\In development\Java.API\Java.API\bin\Microsoft.Owin.Host.SystemWeb.xml
+E:\Java Project\In development\Java.API\Java.API\bin\Microsoft.Owin.Security.xml
+E:\Java Project\In development\Java.API\Java.API\bin\Microsoft.Owin.Security.Facebook.xml
+E:\Java Project\In development\Java.API\Java.API\bin\Microsoft.Owin.Security.Cookies.xml
+E:\Java Project\In development\Java.API\Java.API\bin\Microsoft.Owin.Security.OAuth.xml
+E:\Java Project\In development\Java.API\Java.API\bin\Microsoft.Owin.Security.Google.xml
+E:\Java Project\In development\Java.API\Java.API\bin\Microsoft.Owin.Security.Twitter.xml
+E:\Java Project\In development\Java.API\Java.API\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+E:\Java Project\In development\Java.API\Java.API\bin\System.Web.Http.Owin.xml
+E:\Java Project\In development\Java.API\Java.API\bin\QRCoder.dll
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\roslyn\csc.exe
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\roslyn\System.Collections.Immutable.dll
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\roslyn\System.Reflection.Metadata.dll
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\roslyn\vbc.exe
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\roslyn\VBCSCompiler.exe
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\roslyn\VBCSCompiler.exe.config
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\Java.API.dll.config
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\Java.API.dll
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\Java.API.pdb
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\Antlr3.Runtime.dll
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\EntityFramework.dll
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\EntityFramework.SqlServer.dll
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\Microsoft.AspNet.Identity.Core.dll
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\Microsoft.AspNet.Identity.Owin.dll
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\Microsoft.Owin.dll
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\Microsoft.Owin.Host.SystemWeb.dll
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\Microsoft.Owin.Security.Cookies.dll
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\Microsoft.Owin.Security.dll
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\Microsoft.Owin.Security.Facebook.dll
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\Microsoft.Owin.Security.Google.dll
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\Microsoft.Owin.Security.OAuth.dll
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\Microsoft.Owin.Security.Twitter.dll
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\Microsoft.Web.Infrastructure.dll
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\Newtonsoft.Json.dll
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\Owin.dll
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\System.Net.Http.Formatting.dll
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\System.Web.Cors.dll
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\System.Web.Helpers.dll
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\System.Web.Http.Cors.dll
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\System.Web.Http.dll
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\System.Web.Http.Owin.dll
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\System.Web.Http.WebHost.dll
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\System.Web.Mvc.dll
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\System.Web.Optimization.dll
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\System.Web.Razor.dll
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\System.Web.WebPages.Deployment.dll
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\System.Web.WebPages.dll
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\System.Web.WebPages.Razor.dll
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\WebGrease.dll
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\System.Net.Http.Formatting.xml
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\System.Web.Http.xml
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\System.Web.Http.Cors.xml
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\Newtonsoft.Json.xml
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\System.Web.Helpers.xml
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\System.Web.Http.WebHost.xml
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\System.Web.Mvc.xml
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\System.Web.Optimization.xml
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\System.Web.Razor.xml
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\System.Web.WebPages.xml
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\System.Web.WebPages.Deployment.xml
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\System.Web.WebPages.Razor.xml
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\Antlr3.Runtime.pdb
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\EntityFramework.xml
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\EntityFramework.SqlServer.xml
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\Microsoft.AspNet.Identity.Core.xml
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\Microsoft.AspNet.Identity.Owin.xml
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\Microsoft.Owin.xml
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\Microsoft.Owin.Host.SystemWeb.xml
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\Microsoft.Owin.Security.xml
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\Microsoft.Owin.Security.Facebook.xml
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\Microsoft.Owin.Security.Cookies.xml
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\Microsoft.Owin.Security.OAuth.xml
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\Microsoft.Owin.Security.Google.xml
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\Microsoft.Owin.Security.Twitter.xml
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\bin\System.Web.Http.Owin.xml
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\obj\Debug\Java.API.csprojAssemblyReference.cache
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\obj\Debug\Java.API.csproj.CoreCompileInputs.cache
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\obj\Debug\Java.API.csproj.CopyComplete
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\obj\Debug\Java.API.dll
+D:\Solutions to be copied to Office Sytem\Java\Java.API\Java.API\Java.API\obj\Debug\Java.API.pdb
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\obj\Debug\Java.API.csproj.AssemblyReference.cache
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\obj\Debug\Java.API.csproj.CoreCompileInputs.cache
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\obj\Debug\Java.API.dll
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\obj\Debug\Java.API.pdb
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\roslyn\csc.exe
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\roslyn\vbc.exe
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\roslyn\VBCSCompiler.exe
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\Java.API.dll.config
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\Java.API.dll
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\Java.API.pdb
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\Antlr3.Runtime.dll
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\EntityFramework.dll
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\EntityFramework.SqlServer.dll
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\Microsoft.Owin.dll
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\Microsoft.Owin.Security.Cookies.dll
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\Microsoft.Owin.Security.dll
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\Microsoft.Owin.Security.Facebook.dll
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\Microsoft.Owin.Security.Google.dll
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\Microsoft.Owin.Security.OAuth.dll
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\Microsoft.Owin.Security.Twitter.dll
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\Newtonsoft.Json.dll
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\Owin.dll
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\System.Net.Http.Formatting.dll
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\System.Web.Cors.dll
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\System.Web.Helpers.dll
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\System.Web.Http.Cors.dll
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\System.Web.Http.dll
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\System.Web.Http.Owin.dll
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\System.Web.Http.WebHost.dll
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\System.Web.Mvc.dll
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\System.Web.Optimization.dll
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\System.Web.Razor.dll
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\System.Web.WebPages.Deployment.dll
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\System.Web.WebPages.dll
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\System.Web.WebPages.Razor.dll
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\WebGrease.dll
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\System.Net.Http.Formatting.xml
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\System.Web.Http.xml
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\System.Web.Http.Cors.xml
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\Newtonsoft.Json.xml
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\System.Web.Helpers.xml
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\System.Web.Http.WebHost.xml
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\System.Web.Mvc.xml
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\System.Web.Optimization.xml
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\System.Web.Razor.xml
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\System.Web.WebPages.xml
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\System.Web.WebPages.Deployment.xml
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\System.Web.WebPages.Razor.xml
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\Antlr3.Runtime.pdb
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\EntityFramework.xml
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\EntityFramework.SqlServer.xml
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\Microsoft.Owin.xml
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\Microsoft.Owin.Security.xml
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\Microsoft.Owin.Security.Facebook.xml
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\Microsoft.Owin.Security.OAuth.xml
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\Microsoft.Owin.Security.Google.xml
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\Microsoft.Owin.Security.Twitter.xml
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\bin\System.Web.Http.Owin.xml
+C:\Users\Pranav\OneDrive - STARACME\Documents\Workspace\Projects\Javanika\Java.API\Java.API\Java.API\obj\Debug\Java.API.csproj.CopyComplete
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\roslyn\csc.exe
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\roslyn\Microsoft.CodeAnalysis.dll
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\roslyn\Microsoft.CSharp.Core.targets
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\roslyn\Microsoft.VisualBasic.Core.targets
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\roslyn\System.Collections.Immutable.dll
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\roslyn\System.Reflection.Metadata.dll
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\roslyn\vbc.exe
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\roslyn\VBCSCompiler.exe
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\roslyn\VBCSCompiler.exe.config
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\Java.API.dll.config
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\Java.API.dll
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\Java.API.pdb
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\Antlr3.Runtime.dll
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\EntityFramework.dll
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\EntityFramework.SqlServer.dll
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\Microsoft.AspNet.Identity.Core.dll
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\Microsoft.AspNet.Identity.Owin.dll
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\Microsoft.Owin.dll
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\Microsoft.Owin.Host.SystemWeb.dll
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\Microsoft.Owin.Security.Cookies.dll
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\Microsoft.Owin.Security.dll
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\Microsoft.Owin.Security.Facebook.dll
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\Microsoft.Owin.Security.Google.dll
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\Microsoft.Owin.Security.OAuth.dll
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\Microsoft.Owin.Security.Twitter.dll
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\Microsoft.Web.Infrastructure.dll
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\Newtonsoft.Json.dll
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\Owin.dll
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\System.Net.Http.Formatting.dll
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\System.Web.Cors.dll
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\System.Web.Helpers.dll
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\System.Web.Http.Cors.dll
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\System.Web.Http.dll
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\System.Web.Http.Owin.dll
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\System.Web.Http.WebHost.dll
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\System.Web.Mvc.dll
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\System.Web.Optimization.dll
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\System.Web.Razor.dll
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\System.Web.WebPages.Deployment.dll
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\System.Web.WebPages.dll
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\System.Web.WebPages.Razor.dll
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\WebGrease.dll
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\System.Net.Http.Formatting.xml
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\System.Web.Http.xml
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\System.Web.Http.Cors.xml
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\Newtonsoft.Json.xml
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\System.Web.Helpers.xml
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\System.Web.Http.WebHost.xml
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\System.Web.Mvc.xml
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\System.Web.Optimization.xml
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\System.Web.Razor.xml
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\System.Web.WebPages.xml
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\System.Web.WebPages.Deployment.xml
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\System.Web.WebPages.Razor.xml
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\Antlr3.Runtime.pdb
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\EntityFramework.xml
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\EntityFramework.SqlServer.xml
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\Microsoft.AspNet.Identity.Core.xml
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\Microsoft.AspNet.Identity.Owin.xml
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\Microsoft.Owin.xml
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\Microsoft.Owin.Host.SystemWeb.xml
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\Microsoft.Owin.Security.xml
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\Microsoft.Owin.Security.Facebook.xml
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\Microsoft.Owin.Security.Cookies.xml
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\Microsoft.Owin.Security.OAuth.xml
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\Microsoft.Owin.Security.Google.xml
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\Microsoft.Owin.Security.Twitter.xml
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\bin\System.Web.Http.Owin.xml
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\obj\Debug\Java.API.csprojAssemblyReference.cache
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\obj\Debug\Java.API.csproj.CoreCompileInputs.cache
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\obj\Debug\Java.API.csproj.CopyComplete
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\obj\Debug\Java.API.dll
+E:\RAZAWORKS\Git\projects\javanika\javanika-mvc\Java.API\Java.API\obj\Debug\Java.API.pdb

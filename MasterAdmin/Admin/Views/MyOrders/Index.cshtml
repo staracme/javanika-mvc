@@ -1,0 +1,200 @@
+﻿@{
+    ViewBag.Title = "My Orders";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model List<Admin.Controllers.OrderModel>
+
+
+@{
+    var events = (List<Admin.Models.EventsViewModel>)TempData["Events"];
+    var rowsPerPage = (List<int>)TempData["rowsPerPage"];
+
+    TempData.Keep("Events");
+    TempData.Keep("rowsPerPage");
+}
+
+<div class="FormBlock">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="MainHeader">List of Orders</div>
+        </div>
+        <div class="col-sm-12">
+            <div class="underline"></div>
+        </div>
+        <div class="col-sm-12">
+            <div class="mt-5">
+                <div class="d-flex justify-content-center">
+                    <div>
+                        <div class="card p-3 py-4">
+                            <div class="row">
+                                <div class="col-sm-9">
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="dropdown">
+                                        Show
+                                        <button class="btn btn-secondary dropdown-toggle"
+                                                type="button" id="dropdownMenuButton"
+                                                data-toggle="dropdown" aria-expanded="false">
+                                            @rowsPerPage[0].ToString()
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            @foreach (var item in rowsPerPage)
+                                            {
+                                                <li>
+                                                    @Html.ActionLink(item.ToString(), "Index", "MyOrders", new { rowsPerPage = item.ToString() }, null)
+                                                </li>
+                                            }
+                                        </ul>
+                                        Entries
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    &nbsp;
+                                </div>
+                            </div>
+                            <div class="row g-3 mt-2">
+                                <div class="col-md-3">
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle"
+                                                type="button" id="dropdownMenuButton"
+                                                data-toggle="dropdown" aria-expanded="false">
+                                            Events
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            @foreach (var item in events)
+                                            {
+                                                <li>
+                                                    @Html.ActionLink(item.EventName, "Index", "MyOrders", new { eventID = item.EventID }, null)
+                                                </li>
+                                            }
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-md-6"> <input type="text" class="form-control" placeholder="Enter address e.g. street, city and state or zip"> </div>
+                                <div class="col-md-3"> <button class="btn btn-secondary btn-block">Search Results</button> </div>
+                            </div>
+                            <div class="mt-3">
+                                <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" class="advanced"> Advance Search With Filters <i class="fa fa-angle-down"></i> </a>
+                                <div class="collapse" id="collapseExample">
+                                    <div class="card card-body">
+                                        <div class="row">
+                                            <div class="col-md-4"> <input type="text" placeholder="Property ID" class="form-control"> </div>
+                                            <div class="col-md-4"> <input type="text" class="form-control" placeholder="Search by MAP"> </div>
+                                            <div class="col-md-4"> <input type="text" class="form-control" placeholder="Search by Country"> </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+                @foreach (var item in events)
+                {
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <a class="img-card" href="javascript:void(0);">
+                                <img src="no-image.jpg" />
+                            </a>
+                            <div class="card-content">
+                                <h4 class="card-title">
+                                    Event Name: @item.EventName
+                                    Event Date: @item.EventDate
+                                </h4>
+                                <p class="">
+                                    Sr No : @item.EventName
+                                    Action: a,b,c,d
+                                </p>
+                            </div>
+                            <div class="card-read-more">
+                                <a href="javascript:void(0);" class="btn btn-link btn-block">
+                                    Read More
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+    </div>
+    <div class="row" style="display:none;">
+        <div class="col-sm-12">
+            <div class="row">
+                @foreach (var item in Model)
+                {
+                    <div class="col-sm-4">
+                        <div class="card">
+                            <a class="img-card" href="javascript:void(0);">
+                                <img src="https://admin.javanika.com/EventBanners/883526352_SmallBanner.png" />
+                            </a>
+                            <div class="card-content">
+                                <h4 class="card-title">
+                                    order id - @item.OrderID
+                                    order no - @item.OrderNo
+                                </h4>
+                                <p class="">
+                                    Sr No : @item.EventName
+                                    Order ID: @item.OrderID
+                                    Name: User @item.CustomerName
+                                    Email: @item.Email
+                                    No Of Tickets: @item.Quantity
+                                    Amount: @item.TicketPrice $
+                                    @*ServiceFees: item.ServiceFees $*@
+                                    @*TotalAmount: item.TotalAmount $*@
+                                    @*NetAmount: item.NetAmount $*@
+                                    @*Status: item.EventName*@
+                                    Action: a,b,c,d
+                                </p>
+                            </div>
+                            <div class="card-read-more">
+                                <a href="javascript:void(0);" class="btn btn-link btn-block">
+                                    Read More
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <button class="FormBtnStyle" type="button" onclick="JavaScript: location.href='/Orders/ExportMIS?drpEventID=@Request["drpEventID"]';" id="but_upload" style="float:right!important;">Export to excel</button><img id="but_loader" src="~/App_Images/loader.gif" style="height:20px!important;width:20px!important;display:none;" />
+            <br>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    //$(function () {
+
+    //    $('#datatable').DataTable({
+    //        "order": [[1, "asc"]]
+    //    });
+
+    //});
+    function GetOrder(orderID) {
+        $.ajax({
+            url: "/Orders/GetOrder",
+            data: { orderID: orderID },
+            type: "GET",
+            success: function (response) {
+                $("#frmEvent").show();
+
+                $("#txtOrderID").val(response.OrderID);
+                $("#txtEventName").val(response.EventName);
+                $("#txtSrNo").val(response.SrNo);
+                $("#txtNoOfTickets").val(response.NoOfTickets);
+                $("#txtTotalAmount").val(response.Amount);
+                $("#txtPaypalOrderID").val(response.PaypalOrderID);
+                $("#txtOrderStatus").val(response.OrderStatus);
+                $("#txtOrderID").val(response.OrderID);
+                $("#txtPaymentStatus").val(response.PaymentStatus)
+            }
+        });
+    }
+</script>
+

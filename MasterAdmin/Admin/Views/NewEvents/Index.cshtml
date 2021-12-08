@@ -1,0 +1,1075 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model List<Admin.Models.EventsViewModel>
+
+@{
+    var view_image_path = CustomHelper.GetViewImagePath();
+    //var venues = (List<Admin.Models.tblVenue>)ViewData["Venues"];
+    var events = (List<Admin.Models.EventsViewModel>)TempData["ListEvents"];
+    List<Admin.Models.EventsViewModel> searchEvents = new List<Admin.Models.EventsViewModel>();
+    if (TempData["SearchEvents"] != null)
+    {
+        searchEvents = (List<Admin.Models.EventsViewModel>)TempData["SearchEvents"];
+    }
+
+    var eventsAllEvents = events;
+    var rowsPerPage = (List<int>)TempData["rowsPerPage"];
+
+    TempData.Keep("ListEvents");
+    TempData.Keep("rowsPerPage");
+    TempData.Keep("EventRequest");
+    var eventsRequest = (Admin.Models.EventRequest)TempData["EventRequest"];
+}
+
+<script src="~/App_Scripts/jquery.validate.js"></script>
+<script src="~/App_Scripts/ckeditor/ckeditor.js"></script>
+
+<link href="~/App_Theme/datatables-bootstrap.css" rel="stylesheet" />
+<script src="~/App_Scripts/datatables.js"></script>
+
+
+<div class="FormBlock" id="frmSearchEvents">
+    <div class="row MainHeader ">
+        <div class="col-sm-6">
+            Search
+        </div>
+        <div class="col-sm-6 d-flex ml-auto justify-content-end">
+            <button class="pgn-btn btn btn-sm"
+                    type="button" id="dropdownMenuButton"
+                    data-toggle="dropdown" aria-expanded="false">
+                <i class="fa fa-angle-left"></i>
+                <i class="fa fa-angle-left"></i>
+            </button>
+            <button class="btn btn-sm mx-2 pgn-btn"
+                    type="button" id="dropdownMenuButton"
+                    data-toggle="dropdown" aria-expanded="false">
+                <i class="fa fa-angle-left"></i>
+            </button>
+            <div class="dropdown">
+                Showing
+                <button class="btn dropdown-toggle pgn-btn"
+                        type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-expanded="false">
+                    @eventsRequest.rowsPerPage
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    @foreach (var item in rowsPerPage)
+                    {
+                        <li>
+                            @Html.ActionLink(item.ToString(), "SearchEvents", "NewEvents",
+                        new {  EventId = eventsRequest.EventId,
+                            pageNum = eventsRequest.pageNum,
+                            rowsPerPage = Convert.ToInt32(item.ToString())
+                            }
+                         ,null
+                         )
+                        </li>
+                    }
+                </ul>
+                Entries
+            </div>
+            <button class="btn btn-sm mx-2 pgn-btn"
+                    type="button" id="dropdownMenuButton"
+                    data-toggle="dropdown" aria-expanded="false">
+                <i class="fa fa-angle-right"></i>
+            </button>
+            <button class="btn btn-sm pgn-btn"
+                    type="button" id="dropdownMenuButton"
+                    data-toggle="dropdown" aria-expanded="false">
+                <i class="fa fa-angle-right"></i>
+                <i class="fa fa-angle-right"></i>
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle w-100"
+                                type="button" id="dropdownMenuButton"
+                                data-toggle="dropdown" aria-expanded="false">
+                            Select Events &nbsp;<i class="fa fa-angle-down"></i>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <li>
+                                @Html.ActionLink("Select All", "SearchEvents", "NewEvents", new
+                                {
+                                    EventId = 0,
+                                    pageNum = eventsRequest.pageNum,
+                                    rowsPerPage = eventsRequest.rowsPerPage
+                                }, null)
+                            </li>
+                            @foreach (var item in events)
+                            {
+                                <li>
+                                    @Html.ActionLink(item.EventName + " - [ " + Convert.ToDateTime(item.EventDate).ToShortDateString() + " ]", "SearchEvents", "NewEvents"
+                                    , new
+                                    {
+                                        EventId = item.EventID,
+                                        pageNum = eventsRequest.pageNum,
+                                        rowsPerPage = eventsRequest.rowsPerPage
+                                    }
+                                    , null
+                                    )
+                                </li>
+                            }
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-8"> <input type="text" class="form-control" placeholder="Search Events"> </div>
+                <div class="col-md-2"> <button class="btn btn-secondary btn-block w-100">Search Results</button> </div>
+            </div>
+            @*Advance Search*@
+            @*<div class="row">
+                    <div class="col-md-12">
+                        <div class="mt-3">
+                            <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" class="advanced"> Advance Search With Filters <i class="fa fa-angle-down"></i> </a>
+                            <div class="collapse" id="collapseExample">
+                                <div class="card card-body">
+                                    <div class="row">
+                                        <div class="col-md-4"> <input type="text" placeholder="Property ID" class="form-control"> </div>
+                                        <div class="col-md-4"> <input type="text" class="form-control" placeholder="Search by MAP"> </div>
+                                        <div class="col-md-4"> <input type="text" class="form-control" placeholder="Search by Country"> </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+        </div>
+    </div>
+</div>
+
+<div class="FormBlock" id="frmAddEvents">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="MainHeader">
+                Add/Manage Events
+                <button id="listEvent" class="button-62" role="button">List Events</button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <form id="frmEvent">
+                <input type="hidden" class="FormTxtStyle" id="txtEventID" name="txtEventID" value="0" />
+                @*Event Name*@
+                <div class="col-sm-3"><div class="FormLabelStyle">Event Name</div></div>
+                <div class="col-sm-5"><input type="text" class="FormTxtStyle" id="txtEventName" name="txtEventName" /></div>
+                <div class="col-sm-4"><div class="FormValidationStyle" id="lblEventName"></div></div>
+                <div class="col-sm-12"><br /></div>
+
+                @*Event Type*@
+                <div class="col-sm-3"><div class="FormLabelStyle">Event Type</div></div>
+                <div class="col-sm-5"><input type="text" class="FormTxtStyle" id="txtEventType" name="txtEventType" /></div>
+                <div class="col-sm-4"><div class="FormValidationStyle" id="lblEventType"></div></div>
+                <div class="col-sm-12"><br /></div>
+
+                @*Event Name*@
+                <div class="col-sm-3"><div class="FormLabelStyle">Event Language</div></div>
+                <div class="col-sm-5"><input type="text" class="FormTxtStyle" id="txtEventLanguage" name="txtEventLanguage" /></div>
+                <div class="col-sm-4"><div class="FormValidationStyle" id="lblEventLanguage"></div></div>
+                <div class="col-sm-12"><br /></div>
+
+                @*Event Name*@
+                <div class="col-sm-3"><div class="FormLabelStyle">Event Playtime</div></div>
+                <div class="col-sm-5"><input type="text" class="FormTxtStyle" id="txtEventPlaytime" name="txtEventPlaytime" /></div>
+                <div class="col-sm-4"><div class="FormValidationStyle" id="lblEventPlaytime"></div></div>
+                <div class="col-sm-12"><br /></div>
+
+                @*Event Name*@
+                <div class="col-sm-3"><div class="FormLabelStyle">Booking Type</div></div>
+                <div class="col-sm-5">
+                    <select class="FormTxtStyle" id="drpBookingType" name="drpBookingType">
+                        <option value="">--Select Booking Type--</option>
+                        <option value="TICKETS">Ticket</option>
+                        <option value="SEATS">Seats</option>
+                    </select>
+                </div>
+                <div class="col-sm-4"><div class="FormValidationStyle" id="lblEventDurationType"></div></div>
+                <div class="col-sm-12"><br /></div>
+
+                @*Event Name*@
+                <div class="col-sm-3" id="evt_date_1"><div class="FormLabelStyle">Event Date</div></div>
+                <div class="col-sm-5" id="evt_date_2"><input type="date" class="FormTxtStyle" id="txtEventDate" name="txtEventDate" /></div>
+                <div class="col-sm-4" id="evt_date_3"><div class="FormValidationStyle" id="lblEventDate"></div></div>
+                <div class="col-sm-12" id="evt_date_4"><br /></div>
+                @*Event Name*@
+                <div class="col-sm-3" id="evt_start_date_1"><div class="FormLabelStyle">Early Bird Ticket Type</div></div>
+                <div class="col-sm-5" id="evt_start_date_2">
+                    <select class="FormTxtStyle" id="drpEarlyBirdTicketType" name="drpEarlyBirdTicketType">
+                        <option value="-1">--Select early bird type--</option>
+                        <option value="DATEWISE">Date wise early bird selection</option>
+                        <option value="SEATWISE">Seats wise early bird selection</option>
+                    </select>
+                </div>
+                <div class="col-sm-4" id="evt_start_date_3"><div class="FormValidationStyle" id="lblEarlyBirdTicketType"></div></div>
+                <div class="col-sm-12" id="evt_start_date_4"><br /></div>
+
+                @*Event Name*@
+                <div class="col-sm-3" id="evt_start_date_1"><div class="FormLabelStyle">Early Bird Start Date</div></div>
+                <div class="col-sm-5" id="evt_start_date_2"><input type="date" class="FormTxtStyle" id="txtStartDate" name="txtStartDate" /></div>
+                <div class="col-sm-4" id="evt_start_date_3"><div class="FormValidationStyle" id="lblStartDate"></div></div>
+                <div class="col-sm-12" id="evt_start_date_4"><br /></div>
+
+                @*Event Name*@
+                <div class="col-sm-3" id="evt_end_date_1"><div class="FormLabelStyle">Early Bird End Date</div></div>
+                <div class="col-sm-5" id="evt_end_date_2"><input type="date" class="FormTxtStyle" id="txtEndDate" name="txtEndDate" /></div>
+                <div class="col-sm-4" id="evt_end_date_3"><div class="FormValidationStyle" id="lblEndDate"></div></div>
+                <div class="col-sm-12" id="evt_end_date_4"><br /></div>
+
+                @*Event Name*@
+                <div class="col-sm-3" id="evt_end_date_1"><div class="FormLabelStyle">Total Tickets</div></div>
+                <div class="col-sm-5" id="evt_end_date_2"><input oninput="numberOnly(this.id);" type="text" pattern="\d*" maxlength="3" class="FormTxtStyle" id="txtTotalTickets" name="txtTotalTickets" /></div>
+                <div class="col-sm-4" id="evt_end_date_3"><div class="FormValidationStyle" id="lblTotalTickets"></div></div>
+                <div class="col-sm-12" id="evt_end_date_4"><br /></div>
+
+                @*Event Name*@
+                <div class="col-sm-3" id="evt_end_date_1"><div class="FormLabelStyle">Allocate Early Bird Seats Percentile</div></div>
+                <div class="col-sm-5" id="evt_end_date_2"><input oninput="numberOnly(this.id);" type="text" pattern="\d*" maxlength="2" class="FormTxtStyle" id="txtPercentEBSeats" name="txtPercentEBSeats" /></div>
+                <div class="col-sm-4" id="evt_end_date_3"><div class="FormValidationStyle" id="lblPercentEBSeats"></div></div>
+                <div class="col-sm-12" id="evt_end_date_4"><br /></div>
+
+                @*Event Name*@
+                <div class="col-sm-3" id="evt_end_date_1"><div class="FormLabelStyle">Ticket Price</div></div>
+                <div class="col-sm-5" id="evt_end_date_2"><input oninput="numberOnly(this.id);" type="text" pattern="\d*" maxlength="3" class="FormTxtStyle" id="txtTicketPrice" name="txtTicketPrice" /></div>
+                <div class="col-sm-4" id="evt_end_date_3"><div class="FormValidationStyle" id="lblTicketPrice"></div></div>
+                <div class="col-sm-12" id="evt_end_date_4"><br /></div>
+
+                @*Event Name*@
+                <div class="col-sm-3" id="evt_end_date_1"><div class="FormLabelStyle">Early Bird Ticket Price</div></div>
+                <div class="col-sm-5" id="evt_end_date_2"><input oninput="numberOnly(this.id);" type="text" pattern="\d*" maxlength="3" class="FormTxtStyle" id="txtEBTicketPrice" name="txtEBTicketPrice" /></div>
+                <div class="col-sm-4" id="evt_end_date_3"><div class="FormValidationStyle" id="lblEBTicketPrice"></div></div>
+                <div class="col-sm-12" id="evt_end_date_4"><br /></div>
+
+                @*Event Name*@
+                <div class="col-sm-3" id="evt_end_date_1"><div class="FormLabelStyle">Early Bird Min Tickets Allowed</div></div>
+                <div class="col-sm-5" id="evt_end_date_2"><input oninput="numberOnly(this.id);" type="text" pattern="\d*" maxlength="2" class="FormTxtStyle" id="txtEBMinTicketAllowed" name="txtEBMinTicketAllowed" /></div>
+                <div class="col-sm-4" id="evt_end_date_3"><div class="FormValidationStyle" id="lblEBMinTicketAllowed"></div></div>
+                <div class="col-sm-12" id="evt_end_date_4"><br /></div>
+
+                @*Event Name*@
+                <div class="col-sm-3" id="evt_end_date_1"><div class="FormLabelStyle">Early Bird Max Tickets Allowed</div></div>
+                <div class="col-sm-5" id="evt_end_date_2"><input oninput="numberOnly(this.id);" type="text" pattern="\d*" maxlength="2" class="FormTxtStyle" id="txtEBMaxTicketAllowed" name="txtEBMaxTicketAllowed" /></div>
+                <div class="col-sm-4" id="evt_end_date_3"><div class="FormValidationStyle" id="lblEBMaxTicketAllowed"></div></div>
+                <div class="col-sm-12" id="evt_end_date_4"><br /></div>
+
+                @*Event Name*@
+                <div class="col-sm-3"><div class="FormLabelStyle">Show Time</div></div>
+                <div class="col-sm-5"><input type="text" class="FormTxtStyle" id="txtShowTime" name="txtShowTime" /></div>
+                <div class="col-sm-4"><div class="FormValidationStyle" id="lblShowTime"></div></div>
+                <div class="col-sm-12"><br /></div>
+
+                @*Event Name*@
+                <div class="col-sm-3"><div class="FormLabelStyle">Event Home Banner</div></div>
+                <div class="col-sm-5"><input type="file" class="FormTxtStyle" id="txtHomeBannerImage" name="txtHomeBannerImage" /></div>
+                <div class="col-sm-4"><div class="FormValidationStyle" id="lblHomeBannerImage"></div></div>
+                <div class="col-sm-12"><br /></div>
+
+                @*Event Name*@
+                <div class="col-sm-3"><div class="FormLabelStyle">Event Main Banner</div></div>
+                <div class="col-sm-5"><input type="file" class="FormTxtStyle" id="txtMainBannerImage" name="txtMainBannerImage" /></div>
+                <div class="col-sm-4"><div class="FormValidationStyle" id="lblMainBannerImage"></div></div>
+                <div class="col-sm-12"><br /></div>
+
+                @*Event Name*@
+                <div class="col-sm-3"><div class="FormLabelStyle">Event Banner</div></div>
+                <div class="col-sm-5"><input type="file" class="FormTxtStyle" id="txtEventBannerImage" name="txtEventBannerImage" /></div>
+                <div class="col-sm-4"><div class="FormValidationStyle" id="lblEventBannerImage"></div></div>
+                <div class="col-sm-12"><br /></div>
+
+                @*Event Name*@
+                <div class="col-sm-3"><div class="FormLabelStyle">For Age Group</div></div>
+                <div class="col-sm-5"><input type="text" class="FormTxtStyle" id="txtAgeGroup" name="txtAgeGroup" /></div>
+                <div class="col-sm-4"><div class="FormValidationStyle" id="lblLocationTracker"></div></div>
+                <div class="col-sm-12"><br /></div>
+
+                @*Event Name*@
+                <div class="col-sm-3"><div class="FormLabelStyle">Event Description</div></div>
+                <div class="col-sm-5"><textarea type="text" class="FormTxtStyle" id="txtEventDesc" name="txtEventDesc"></textarea></div>
+                <div class="col-sm-4"><div class="FormValidationStyle" id="lblEventDesc"></div></div>
+                <div class="col-sm-12"><br /></div>
+
+                @*Event Name*@
+                <div class="col-sm-3"><div class="FormLabelStyle">Event TNC</div></div>
+                <div class="col-sm-5"><textarea type="text" class="FormTxtStyle" id="txtEventTNC" name="txtEventTNC"></textarea></div>
+                <div class="col-sm-4"><div class="FormValidationStyle" id="lblEventTNC"></div></div>
+                <div class="col-sm-12"><br /></div>
+
+                @*Event Name*@
+                <div class="col-sm-3"><div class="FormLabelStyle">Service Fees</div></div>
+                <div class="col-sm-5"><input type="text" class="FormTxtStyle" id="txtProcessingFee" name="txtProcessingFee" /></div>
+                <div class="col-sm-4"><div class="FormValidationStyle" id="lblProcessingFee"></div></div>
+                <div class="col-sm-12"><br /></div>
+
+
+                <div class="col-sm-4" id="block_div_3" style="display:none;"><div class="FormValidationStyle" id="lblEventTNC"></div></div>
+                @*Event Name*@
+                <div class="col-sm-3"><div class="FormLabelStyle"></div></div>
+                <div class="col-sm-5">
+                    <button id="backToList" type="button">
+                        Back
+                    </button>
+                    <button type="button" onclick="JavaScript: ManageEvent();"
+                            class="button-62" id="but_upload">
+                        Update Event
+                    </button>
+                    <img id="but_loader"
+                         src="~/App_Images/loader.gif"
+                         style="height:20px!important;width:20px!important;display:none;" />
+                </div>
+                <div class="col-sm-4"><div class="FormValidationStyle"></div></div>
+                <div class="col-sm-12"><br /></div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="FormBlock" id="frmListEvents">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="MainHeader d-flex w-100">
+                List of Events
+                <button id="addEvent" class="button-62 ml-auto" role="button">Add Event</button>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="underline"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        @foreach (var item in searchEvents)
+        {
+            <div class="col-sm-12">
+                <div class="card ev-card">
+                    <div class="card-body d-flex">
+                        <div class="img-content">
+                            <a class="img-card" href="javascript:void(0);">
+                                <img src="@view_image_path/EventBanners/@item.EventBanner" />
+                            </a>
+                        </div>
+                        <div class="card-content">
+                            <h4 class="card-title">
+                                Event Name: @item.EventName
+                            </h4>
+                            <div class="ev-date-time">
+                                <span class="ev-date">
+                                    On @item.EventDate.ToShortDateString();
+                                    , Starts @item.ShowTime,
+                                </span>
+                                <span class="ev-location-marker">at</span>
+                                <span class="ev-location">@item.VenueName</span>
+                            </div>
+                            <div class="ev-date-duration">
+                                <span class="ev-start-date">Opening Date:@item.StartDate.ToShortDateString();</span>
+                                <span class="sprtr"> - </span>
+                                <span class="ev-end-date">Closing Date: @item.EndDate.ToShortDateString();</span>
+                                <span class="ev-duration">Duration of the show: ( @item.EventPlaytime ) </span>
+                            </div>
+                            <div class="ev-date-duration">
+                                <span class="ev-start-date">Event Status: @item.Status,</span>
+                                <span class="sprtr"> - </span>
+                                <span class="ev-end-date">Event Type: @item.EventType</span>
+                                <span class="ev-duration">Duration of the show: ( @item.EventPlaytime ) </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="card-read-more no-float d-flex justify-content-center">
+                            @Html.ActionLink("Manage", "Index", "MyOrders", new { eventID = item.EventID }, null)
+                            <a href="JavaScript:;"
+                               onclick="JavaScript:GetEvent(@item.EventID)"
+                               class="btn btn-link">
+                                Edit
+                            </a>
+                            <a href="/NewEvents/Venue?evtID=@item.EventID">Add Venue</a>
+                            <a href="/NewEvents/Artists?eventID=@item.EventID">Add Artist</a>
+                            <a href="JavaScript:;"
+                               onclick="JavaScript:DeleteUnorderedSeats(@item.EventID);">
+                                Release Seats
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<script type="text/javascript">
+    function showModal(eventId) {
+        $('#ModalPopUp').modal('show');
+        $("#hdnEventId").val(eventId);
+    }
+    function numberOnly(id) {
+        // Get element by id which passed as parameter within HTML element event
+        var element = document.getElementById(id);
+        // This removes any other character but numbers as entered by user
+        element.value = element.value.replace(/[^0-9]/gi, "");
+    }
+    function rowsPerPageSelected(rowsPerPage) {
+        var eventsRequest = {
+            EventId: '@eventsRequest.EventId',
+            pageNum: '@eventsRequest.pageNum',
+            rowsPerPage: rowsPerPage,
+            };
+        alert(eventsRequest.EventId);
+        //$("#modalLoader").modal('show');
+        //$.ajax({
+        //    url: "/NewEvents/SearchEvents",
+        //    data: { eventID: id, pageNum = 1, rowsPerPage = rowsPerPage },
+        //    type: "POST",
+        //    success: function (response) {
+        //        $("#modalLoader").modal('show');
+
+        //        showAddEvent("addEvent");
+        //    },
+        //    error: function () {
+        //        $("#modalLoader").modal('hide');
+        //    }
+        //});
+        return false;
+    }
+    function configureTickets() {
+        var eventId = $("#hdnEventId").val();
+        debugger;
+        var request = {
+            eventId: eventId,
+            startDate: $("#txtEventStartDate").val(),
+            endDate: $("#txtEventEndDate").val(),
+            ticketPercentile: $("#txtTickeSlot").val(),
+        }
+
+        $.ajax({
+            url: "/NewEvents/Search",
+            data: request,
+            type: "POST",
+            success: function (response) {
+                //$("#divLoader").hide();
+
+                //$("#txtEventID").val(response.EventID);
+                //$("#txtEventName").val(response.EventName);
+                //$("#txtEventType").val(response.EventType);
+                //$("#txtEventLanguage").val(response.EventLanguage);
+                //$("#txtEventPlaytime").val(response.EventPlayTime);
+                //$("#txtEventDate").val(response.EventDate);
+                //$("#txtShowTime").val(response.ShowTime);
+                //$("#txtProcessingFee").val(response.ProcessingFee);
+                //$("#txtLocationTracker").val(response.LocationTracker);
+                //$("#drpBookingType").val(response.BookingType);
+                //CKEDITOR.instances['txtEventDesc'].setData(response.EventDesc);
+                //CKEDITOR.instances['txtEventTNC'].setData(response.EventTNC);
+
+                //showAddEvent("addEvent");
+            },
+            error: function () {
+                //$("#divLoader").hide();
+            }
+        });
+    }
+
+    $(function () {
+        CKEDITOR.replace('txtEventDesc');
+        CKEDITOR.replace('txtEventTNC');
+
+        $('#datatable').DataTable({
+            "order": [[0, "asc"]]
+        });
+        $.validator.addMethod(
+            "percentEBCheck",
+            function (value, element) {
+                //debugger;
+                var a = parseInt(($("#txtTotalTickets").val() == "") ? 0 : $("#txtTotalTickets").val());
+                var b = parseInt(($(element).val() == "") ? 0 : $(element).val());
+                if($("#drpEarlyBirdTicketType").val() === "SEATWISE" && b === 0)
+                    return false;
+                else
+                    return a > b;
+            },
+            "Early Birds Percent depends on Total Tickets entered"
+        );
+        $.validator.addMethod(
+            "dateEBCheck",
+            function (value, element) {
+                var isValidationPassed = false;
+                if ($("#drpEarlyBirdTicketType").val() === "DATEWISE"
+                    && $("#txtStartDate").val() === "") return false;
+                if ($("#drpEarlyBirdTicketType").val() === "DATEWISE"
+                    && $("#txtEndDate").val() === "") return false;
+                if ($("#drpEarlyBirdTicketType").val() === "DATEWISE") {
+                    var startDate = new Date($("#txtStartDate").val());
+                    var endDate = new Date($("#txtEndDate").val());
+                    isValidationPassed = (startDate > endDate) ? false : true;
+                }
+                if ($("#drpEarlyBirdTicketType").val() === "DATEWISE") {
+                    var eventDate = new Date($("#txtEventDate").val());
+                    var startDate = new Date($("#txtStartDate").val());
+                    var endDate = new Date($("#txtEndDate").val());
+                    isValidationPassed = (startDate > eventDate || endDate > eventDate) ? false : true;
+                }
+                if ($("#drpEarlyBirdTicketType").val() === "SEATWISE") {
+                    $("#txtStartDate").val("");
+                    $("#txtEndDate").val("");
+                    isValidationPassed = true
+                }
+                return isValidationPassed;
+            },
+            "Invalid date entered / Date is required / Date is greater than event start date."
+        );
+        $.validator.addMethod(
+            "checkTicketPrice",
+            function (value, element) {
+                var isValidationPassed = false;
+                if ($("#drpBookingType").val() === "TICKETS") {
+                    isValidationPassed = ($("#txtTicketPrice").val() === "") ? false : true;
+                }
+                else return true;
+
+                return isValidationPassed;
+            },
+            "Ticket price cannot be empty."
+        );
+        $.validator.addMethod(
+            "checkEBTicketPrice",
+            function (value, element) {
+                
+                var txtTicketPrice = parseInt(($("#txtTicketPrice").val() == "") ? 0 : $("#txtTicketPrice").val());
+                var txtEBTicketPrice = parseInt(($("#txtEBTicketPrice").val() == "") ? 0 : $("#txtEBTicketPrice").val());
+                var isValidationPassed = false;
+
+                if ($("#drpEarlyBirdTicketType").val() !== "-1") {
+                    if (txtEBTicketPrice === 0) return false;
+
+                    if (txtTicketPrice !== 0) {
+                        if (txtTicketPrice <= txtEBTicketPrice)
+                            isValidationPassed = false;
+                        else
+                            isValidationPassed = true;
+                    }
+                }
+                else return true;
+
+                return isValidationPassed;
+            },
+            "EB ticket price cannot be empty / EB tickets price should be smaller than ticket price."
+            );
+        $.validator.addMethod(
+            "checkEBMinTickesAllowed",
+            function (value, element) {
+                var txtEBMinTicketAllowed = parseInt(($("#txtEBMinTicketAllowed").val() == "") ? 0 : $("#txtEBMinTicketAllowed").val());
+                var txtEBMaxTicketAllowed = parseInt(($("#txtEBMaxTicketAllowed").val() == "") ? 0 : $("#txtEBMaxTicketAllowed").val());
+                var isValidationPassed = false;
+
+                if ($("#drpEarlyBirdTicketType").val() !== "-1") {
+                    if (txtEBMinTicketAllowed === 0) return false;
+                    if (txtEBMaxTicketAllowed === 0) return false;
+
+                    if (txtEBMinTicketAllowed !== 0 && txtEBMaxTicketAllowed !== 0) {
+                        if (txtEBMaxTicketAllowed <= txtEBMinTicketAllowed)
+                            isValidationPassed = false;
+                        else
+                            isValidationPassed = true;
+                    }
+                }
+                else return true;
+
+                return isValidationPassed;
+            },
+            "EB minimum tickets allowed is required / EB minimum tickets allowed should be greater than 0"
+        );
+        $.validator.addMethod(
+            "checkEBMaxTickesAllowed",
+            function (value, element) {
+                var txtEBMinTicketAllowed = parseInt(($("#txtEBMinTicketAllowed").val() == "") ? 0 : $("#txtEBMinTicketAllowed").val());
+                var txtEBMaxTicketAllowed = parseInt(($("#txtEBMaxTicketAllowed").val() == "") ? 0 : $("#txtEBMaxTicketAllowed").val());
+                var isValidationPassed = false;
+
+                if ($("#drpEarlyBirdTicketType").val() !== "-1") {
+                    if (txtEBMinTicketAllowed === 0) return false;
+                    if (txtEBMaxTicketAllowed === 0) return false;
+                    if (txtEBMaxTicketAllowed > 10) return false;
+
+                    if (txtEBMinTicketAllowed !== 0 && txtEBMaxTicketAllowed !== 0) {
+                        if (txtEBMaxTicketAllowed <= txtEBMinTicketAllowed)
+                            isValidationPassed = false;
+                        else
+                            isValidationPassed = true;
+                    }
+                }
+                else return true;
+
+                return isValidationPassed;
+            },
+            "EB maximum tickets allowedis required / EB maximum tickets allowed should be greater than EB minimum tickets"
+        );
+        $("#frmEvent").validate({
+            rules: {
+                txtEventName: {
+                    required: true
+                },
+                txtEventType: {
+                    required: true
+                },
+                txtEventLanguage: {
+                    required: true
+                },
+                txtEventPlaytime: {
+                    required: true
+                },
+                txtShowTime: {
+                    required: true
+                },
+                txtProcessingFee: {
+                    number: true
+                },
+                txtEventDate: {
+                    required: true
+                },
+                txtStartDate: {
+                    dateEBCheck: true
+                },
+                txtEndDate: {
+                    dateEBCheck: true
+                },
+                drpEarlyBirdTicketType: {
+                    required: true
+                },
+                txtTotalTickets: {
+                    required: true,
+                    digits: true,
+                    minlength: 3,
+                    min: 0
+                },
+                txtPercentEBSeats: {
+                    digits: true,
+                    min: 0,
+                    max:100,
+                    percentEBCheck: true
+                },
+                txtTicketPrice: {
+                    digits: true,
+                    minlength: 1,
+                    checkTicketPrice:true
+                },
+                txtEBTicketPrice: {
+                    digits: true,
+                    minlength: 1,
+                    checkEBTicketPrice: true
+                }
+                ,txtEBMinTicketAllowed: {
+                    digits: true,
+                    minlength: 1,
+                    checkEBMinTickesAllowed: true
+                },
+                txtEBMaxTicketAllowed: {
+                    digits: true,
+                    maxlength: 2,
+                    checkEBMaxTickesAllowed: true
+                }
+            },
+            messages: {
+                txtEventName: {
+                    required: "Please enter event name"
+                },
+                txtEventType: {
+                    required: "Please enter event type"
+                },
+                txtEventLanguage: {
+                    required: "Please enter event language"
+                },
+                txtEventPlaytime: {
+                    required: "Please enter event play time"
+                },
+                txtShowTime: {
+                    required: "Please enter event start date"
+                },
+                txtProcessingFee: {
+                    number: "Processing fee should be in digits"
+                },
+                drpEarlyBirdTicketType: {
+                    required: "Please select early bird ticket type"
+                },
+                txtEventDate: {
+                    required: "Please enter event date"
+                },
+                txtTotalTickets: {
+                    required: "Total Tickets required",
+                    digits: "Only numbers accepted",
+                    minlength: "3 digits are required."
+                },
+                txtPercentEBSeats: {
+                    required: "Total Early Birds Seats are required",
+                    digits: "Only numbers accepted",
+                    minlength: "2 digits are required."
+                },
+                txtTicketPrice: {
+                    //required: "Ticket price is required",
+                    digits: "Only number is accepted.",
+                    minlength: "at1east 1 digit is required."
+                },
+                txtEBTicketPrice: {
+                    //required: "Early Bird Ticket price is required",
+                    digits: "Only number is accepted",
+                    minlength: "at1east 1 digit is required."
+                }
+                ,txtEBMinTicketAllowed: {
+                    //required: "Early Bird minimum tickets allowed",
+                    digits: "Only numbers accepted",
+                    minlength: "at1east 1 digit is required."
+                },
+                txtEBMaxTicketAllowed: {
+                    //required: "Early Bird maximun tickets allowed",
+                    digits: "Only numbers accepted",
+                    minlength: "2 digits are required."
+                }
+
+            },
+            errorPlacement: function (error, element) {
+                if (element.attr("name") == "txtEventName")
+                    error.appendTo($('#lblEventName'));
+
+                if (element.attr("name") == "txtEventType")
+                    error.appendTo($('#lblEventType'));
+
+                if (element.attr("name") == "txtEventLanguage")
+                    error.appendTo($('#lblEventLanguage'));
+
+                if (element.attr("name") == "txtEventPlaytime")
+                    error.appendTo($('#lblEventPlaytime'));
+
+                if (element.attr("name") == "txtEventDate")
+                    error.appendTo($('#lblEventDate'));
+
+                if(element.attr("name") == "drpEarlyBirdTicketType")
+                    error.appendTo($('#lblEarlyBirdTicketType'));
+                if (element.attr("name") == "txtStartDate")
+                    error.appendTo($('#lblStartDate'));
+                if (element.attr("name") == "txtEndDate")
+                    error.appendTo($('#lblEndDate'));
+
+                if (element.attr("name") == "txtShowTime")
+                    error.appendTo($('#lblShowTime'));
+
+                if (element.attr("name") == "txtProcessingFee")
+                    error.appendTo($('#lblProcessingFee'));
+
+                if (element.attr("name") == "txtTotalTickets")
+                    error.appendTo($('#lblTotalTickets'));
+                if (element.attr("name") == "txtPercentEBSeats")
+                    error.appendTo($('#lblPercentEBSeats'));
+                if (element.attr("name") == "txtTicketPrice")
+                    error.appendTo($('#lblTicketPrice'));
+                if (element.attr("name") == "txtEBTicketPrice")
+                    error.appendTo($('#lblEBTicketPrice'));
+                if (element.attr("name") == "txtEBMinTicketAllowed")
+                    error.appendTo($('#lblEBMinTicketAllowed'));
+                if (element.attr("name") == "txtEBMaxTicketAllowed")
+                    error.appendTo($('#lblEBMaxTicketAllowed'));
+
+            }
+        });
+
+        $("#drpEventDurationType").change(function () {
+            var type = $(this).val();
+
+            if (type == "S") {
+                $("#evt_start_date_1").hide();
+                $("#evt_start_date_2").hide();
+                $("#evt_start_date_3").hide();
+                $("#evt_start_date_4").hide();
+
+                $("#evt_end_date_1").hide();
+                $("#evt_end_date_2").hide();
+                $("#evt_end_date_3").hide();
+                $("#evt_end_date_4").hide();
+
+                $("#evt_date_1").show();
+                $("#evt_date_2").show();
+                $("#evt_date_3").show();
+                $("#evt_date_4").show();
+            }
+            else if (type == "M") {
+                $("#evt_date_1").hide();
+                $("#evt_date_2").hide();
+                $("#evt_date_3").hide();
+                $("#evt_date_4").hide();
+
+                $("#evt_start_date_1").show();
+                $("#evt_start_date_2").show();
+                $("#evt_start_date_3").show();
+                $("#evt_start_date_4").show();
+
+                $("#evt_end_date_1").show();
+                $("#evt_end_date_2").show();
+                $("#evt_end_date_3").show();
+                $("#evt_end_date_4").show();
+            }
+
+        });
+
+        $("#drpVenues").change(function () {
+            var venueID = $(this).val();
+
+            if (venueID != "") {
+                GetLayout(venueID);
+            }
+            else {
+                $("#drpLayout").html("");
+                ToggleLayout("hide");
+            }
+        });
+
+        $("#drpLayout").on("change", function () {
+            var layoutID = $(this).val();
+
+            if (layoutID != "") {
+                GetBlocks(layoutID);
+            }
+            else {
+                $("#drpLayout").html("");
+                ToggleBlock("show");
+            }
+        });
+    });
+
+    $(document).ready(function () {
+        $("#frmAddEvents").hide();
+        $("#frmListEvents").show();
+
+        $("#addEvent").on("click", function () {
+            showAddEvent("addEvent");
+        });
+        $("#listEvent").on("click", function () {
+            showAddEvent("listEvent");
+        });
+        $("#backToList").on("click", function () {
+            showAddEvent("listEvent");
+        });
+
+    });
+    function showAddEvent(value) {
+        if (value == "addEvent") {
+            $("#frmAddEvents").show();
+            $("#frmListEvents").hide();
+        }
+        else if (value == "listEvent") {
+            $("#frmAddEvents").hide();
+            $("#frmListEvents").show();
+        }
+    }
+
+    function GetEvent(id) {
+        $("#modalLoader").modal('show');
+        $.ajax({
+            url: "/NewEvents/GetEvent",
+            data: { eventID: id },
+            type: "POST",
+            success: function (response) {
+                $("#modalLoader").modal('hide');
+
+                $("#txtEventID").val(response.EventID);
+                $("#txtEventName").val(response.EventName);
+                $("#txtEventType").val(response.EventType);
+                $("#txtEventLanguage").val(response.EventLanguage);
+                $("#txtEventPlaytime").val(response.EventPlayTime);
+                $("#txtEventDate").val(response.EventDate);
+                $("#drpEarlyBirdTicketType").val(response.EarlyBirdTicketSelection);
+                $("#txtStartDate").val(response.StartDate);
+                $("#txtEndDate").val(response.EndDate);
+                $("#txtTotalTickets").val(response.TotalTickets);
+                $("#txtPercentEBSeats").val(response.PercentEBSeats);
+
+                $("#txtTicketPrice").val(response.TicketPrice);
+                $("#txtEBTicketPrice").val(response.EBTicketPrice);
+                $("#txtEBMinTicketAllowed").val(response.EBMinTicketOrder);
+                $("#txtEBMaxTicketAllowed").val(response.EBMaxTicketOrder);
+
+
+                $("#txtShowTime").val(response.ShowTime);
+                $("#txtAgeGroup").val(response.AgeGroup);
+
+                $("#txtProcessingFee").val(response.ProcessingFee);
+                $("#txtLocationTracker").val(response.LocationTracker);
+                $("#drpBookingType").val(response.BookingType);
+                CKEDITOR.instances['txtEventDesc'].setData(response.EventDesc);
+                CKEDITOR.instances['txtEventTNC'].setData(response.EventTNC);
+
+                showAddEvent("addEvent");
+            },
+            error: function () {
+                $("#modalLoader").modal('hide');
+            }
+        });
+    }
+
+
+    function ManageEvent() {
+        
+        if ($("#frmEvent").valid()) {
+            $("#modalLoader").modal('show');
+            $("#but_upload").hide();
+            $("#but_loader").show();
+
+            var data;
+            data = new FormData();
+
+            data.append('txtEventID', $("#txtEventID").val());
+            data.append('txtEventName', $("#txtEventName").val());
+            data.append('txtEventType', $("#txtEventType").val());
+            data.append('txtEventLanguage', $("#txtEventLanguage").val());
+            data.append('txtEventPlaytime', $("#txtEventPlaytime").val());
+            data.append('txtEventDate', $("#txtEventDate").val());
+
+            data.append('drpEarlyBirdTicketType', $("#drpEarlyBirdTicketType").val());
+
+            data.append('txtStartDate', ($("#txtStartDate").val() == undefined) ? "" : $("#txtStartDate").val());
+            data.append('txtEndDate', ($("#txtEndDate").val() == undefined) ? "" : $("#txtEndDate").val());
+
+            data.append('txtTotalTickets', ($("#txtTotalTickets").val() == undefined) ? "" : $("#txtTotalTickets").val());
+            data.append('txtPercentEBSeats', ($("#txtPercentEBSeats").val() == undefined) ? "" : $("#txtPercentEBSeats").val());
+
+            data.append('txtTicketPrice', ($("#txtTicketPrice").val() == undefined) ? "" : $("#txtTicketPrice").val());
+            data.append('txtEBTicketPrice', ($("#txtEBTicketPrice").val() == undefined) ? "" : $("#txtEBTicketPrice").val());
+            data.append('txtEBMinTicketAllowed', ($("#txtEBMinTicketAllowed").val() == undefined) ? "" : $("#txtEBMinTicketAllowed").val());
+            data.append('txtEBMaxTicketAllowed', ($("#txtEBMaxTicketAllowed").val() == undefined) ? "" : $("#txtEBMaxTicketAllowed").val());
+
+            data.append('txtShowTime', $("#txtShowTime").val());
+            data.append('txtLocationTracker', $("#txtLocationTracker").val());
+            data.append('drpBookingType', $("#drpBookingType").val());
+            data.append('txtAgeGroup', $("#txtAgeGroup").val());
+            data.append('txtProcessingFee', $("#txtProcessingFee").val());
+
+            if ($('#txtHomeBannerImage')[0].files[0] != null && $('#txtHomeBannerImage')[0].files[0] != undefined)
+                data.append('txtHomeBannerImage', $('#txtHomeBannerImage')[0].files[0]);
+
+            if ($('#txtMainBannerImage')[0].files[0] != null && $('#txtMainBannerImage')[0].files[0] != undefined)
+                data.append('txtMainBannerImage', $('#txtMainBannerImage')[0].files[0]);
+
+            if ($('#txtEventBannerImage')[0].files[0] != null && $('#txtEventBannerImage')[0].files[0] != undefined)
+                data.append('txtEventBannerImage', $('#txtEventBannerImage')[0].files[0]);
+
+            data.append('txtEventDesc', CKEDITOR.instances.txtEventDesc.getData());
+            data.append('txtEventTNC', CKEDITOR.instances.txtEventTNC.getData());
+
+            $.ajax({
+                url: '/NewEvents/ManageEvents',
+                data: data,
+                type: 'POST',
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    $("#modalLoader").modal('hide');
+                    if (response == "i") {
+                        alert("Event created successfully.");
+                        location.reload();
+                    }
+                    else if (response == "u") {
+                        alert("Event updated successfully.");
+
+                        $("#but_loader").hide();
+                        $("#but_upload").show();
+
+                        location.reload();
+                    }
+                    else {
+                        alert("Oops! Something went wrong. Please try again after sometime.");
+
+                        $("#but_loader").hide();
+                        $("#but_upload").show();
+                    }
+                }
+            });
+        }
+        else {
+            return false;
+        }
+    }
+
+    function GetBlocks(layoutID) {
+        $.ajax({
+            url: "/Events/GetBlocks",
+            data: { layoutID: layoutID },
+            type: "POST",
+            success: function (response) {
+                $("#tblBlocks").html(response);
+                ToggleBlock("show");
+            }
+        });
+    }
+
+    function GetLayout(venueID) {
+        $.ajax({
+            url: "/Events/GetLayout",
+            data: { venueID: venueID },
+            type: "POST",
+            success: function (response) {
+
+                var str = '<option>--Select Layout--</option>';;
+
+                $.each(response, function (i, k) {
+                    str += '<option value="' + k.layoutID + '">' + k.layout_name + '</option>';
+                });
+
+                $("#drpLayout").html(str);
+
+                ToggleLayout("show");
+            }
+        });
+    }
+
+    function ToggleLayout(action) {
+        if (action == "hide") {
+            $("#layout_div_1").hide();
+            $("#layout_div_2").hide();
+            $("#layout_div_3").hide();
+            $("#layout_div_4").hide();
+        }
+        else if (action == "show") {
+            $("#layout_div_1").show();
+            $("#layout_div_2").show();
+            $("#layout_div_3").show();
+            $("#layout_div_4").show();
+        }
+    }
+
+    function ToggleBlock(action) {
+        if (action == "hide") {
+            $("#block_div_1").hide();
+            $("#block_div_2").hide();
+            $("#block_div_3").hide();
+        }
+        else if (action == "show") {
+            $("#block_div_1").show();
+            $("#block_div_2").show();
+            $("#block_div_3").show();
+        }
+    }
+
+    function DeleteUnorderedSeats(id) {
+        var userConfirmation = confirm("Do you want to remove these seats?");
+
+        if (userConfirmation) {
+            $.ajax({
+                url: "/Events/DeleteUnorderedSeats",
+                data: { id: id },
+                type: "GET",
+                success: function (response) {
+                    if (response == "OK") {
+                        alert("Seats deleted successfully.");
+                        location.reload();
+                    }
+                    else {
+                        alert("Sorry! Something went wrong. Please try again after sometime.");
+                    }
+                }
+
+            });
+        }
+    }
+</script>

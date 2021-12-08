@@ -1,0 +1,725 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{61180567-90A9-44FF-8AB7-981354A5156A}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Admin</RootNamespace>
+    <AssemblyName>Admin</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=5.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.5.1.1\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="ClosedXML">
+      <HintPath>D:\Projects\Shubhlabh\Sanofi.Shubhlabh.SA.New\Sanofi.Shubhlabh.SA.New\bin\ClosedXML.dll</HintPath>
+    </Reference>
+    <Reference Include="Dapper, Version=1.60.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.60.6\lib\net451\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="DapperParameters, Version=2018.12.7.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.ParameterExtensions.2018.12.7.1\lib\net451\DapperParameters.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml">
+      <HintPath>D:\Projects\Shubhlabh\Sanofi.Shubhlabh.SA.New\Sanofi.Shubhlabh.SA.New\bin\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.13\lib\net45\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.0.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.0.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.0.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.0.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.0.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.0.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.3.0.1\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.3.0.1\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.3.0.1\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.3.0.1\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\AddPastEventsController.cs" />
+    <Compile Include="Controllers\AddVolunteersController.cs" />
+    <Compile Include="Controllers\BlockSeatController.cs" />
+    <Compile Include="Controllers\CouponGenerationController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\EventsController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MyOrdersController.cs" />
+    <Compile Include="Controllers\NewEventsController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
+    <Compile Include="Controllers\VOBAEventController.cs" />
+    <Compile Include="CustomHelper.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Infra\AutoMapperWebProfile.cs" />
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Common\PaginationRequest.cs" />
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Model1.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Orders\Events.cs" />
+    <Compile Include="Models\Orders\OrderRequest.cs" />
+    <Compile Include="Models\Orders\OrderResponse.cs" />
+    <Compile Include="Models\tblAdminUser.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblAppVersion.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblBlock.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblCoupon.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblCouponGroup.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblCustomer.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblEvent.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblEventArtist.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblEventLayoutBlock.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblEventVolunteer.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblLayout.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblMailLog.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblOrderCoupon.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblOTP.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblPastEvent.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblReleaseLog.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblSeat.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblSeatRow.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblSeatSelection.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblSeatSelectionsLog.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblTicket.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblTicketOrder.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblTier.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblTierCoupon.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblVenue.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblVolunteer.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TempOrder.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VOBARegistration.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
+    <Compile Include="Utility\Log.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Images\BG2.png" />
+    <Content Include="App_Images\bootstrap-theme.min.css" />
+    <Content Include="App_Images\bootstrap.min.css" />
+    <Content Include="App_Images\cross.png" />
+    <Content Include="App_Images\loader.gif" />
+    <Content Include="App_Images\sort_asc.png" />
+    <Content Include="App_Images\sort_asc_disabled.png" />
+    <Content Include="App_Images\sort_both.png" />
+    <Content Include="App_Images\sort_desc.png" />
+    <Content Include="App_Images\sort_desc_disabled.png" />
+    <Content Include="App_Images\tick.png" />
+    <Content Include="App_Images\Venue1.png" />
+    <Content Include="App_Scripts\bootstrap-datatables.js" />
+    <Content Include="App_Scripts\bootstrap.bundle.min.js" />
+    <Content Include="App_Scripts\bootstrap.min.js" />
+    <Content Include="App_Scripts\ckeditor.js" />
+    <Content Include="App_Scripts\datatables.js" />
+    <Content Include="App_Scripts\jquery-1.10.2.min.js" />
+    <Content Include="App_Scripts\jquery-3.4.1.min.js" />
+    <Content Include="App_Scripts\jquery.validate.js" />
+    <Content Include="App_Scripts\Menu.js" />
+    <Content Include="App_Theme\bootstrap-theme.css" />
+    <Content Include="App_Theme\bootstrap.css" />
+    <Content Include="App_Theme\cards.css" />
+    <Content Include="App_Theme\colorbox.css" />
+    <Content Include="App_Theme\datatables-bootstrap.css" />
+    <Content Include="App_Theme\jquery.bxslider.css" />
+    <Content Include="App_Theme\MasterStylesheet.css" />
+    <Content Include="App_Theme\search.css" />
+    <Content Include="App_Theme\slick-theme.css" />
+    <Content Include="App_Theme\slick.css" />
+    <Content Include="App_Theme\V1-SeatingArrangementStyle.css" />
+    <Content Include="App_Theme\V2-SeatingArrangementStyle.css" />
+    <Content Include="App_Theme\V3-SeatingArrangementStyle.css" />
+    <Content Include="App_Theme\V5-SeatingArrangementStyle.css" />
+    <Content Include="ArtistImages\152824592_SiddharthRanderia.png" />
+    <Content Include="ArtistImages\167063294_YashSoni.png" />
+    <Content Include="ArtistImages\201502046_AarohiPatel.png" />
+    <Content Include="ArtistImages\232499661_JageshMukhati.png" />
+    <Content Include="ArtistImages\459851364_2004925.jpg" />
+    <Content Include="ArtistImages\506925422_aarohi-patel.jpg" />
+    <Content Include="ArtistImages\539050646_MaulikNayak.png" />
+    <Content Include="ArtistImages\558583595_HemangShah.png" />
+    <Content Include="ArtistImages\561377733_2004925.jpg" />
+    <Content Include="ArtistImages\571833686_MehulSolanki.png" />
+    <Content Include="ArtistImages\585943161_PinkyParikh.png" />
+    <Content Include="ArtistImages\599349504_KiranJoshi.png" />
+    <Content Include="ArtistImages\615162115_HappyBhavsar.png" />
+    <Content Include="ArtistImages\625349687_KaushambhiBhatt.png" />
+    <Content Include="ArtistImages\639240409_VishalVaishya.png" />
+    <Content Include="ArtistImages\655193646_BanshiRajput.png" />
+    <Content Include="EventBanners\061894799_SliderBanner.png" />
+    <Content Include="EventBanners\077742007_252122246_EventBanner4.png" />
+    <Content Include="EventBanners\099955975_595507407_446579051_195136419_176131842_166230186_Banner.jpg" />
+    <Content Include="EventBanners\127493548_252122246_EventBanner4.png" />
+    <Content Include="EventBanners\144728538_Banner.png" />
+    <Content Include="EventBanners\151363775_252122246_EventBanner4.png" />
+    <Content Include="EventBanners\166230186_Banner.jpg" />
+    <Content Include="EventBanners\169716316_EventBanner3.png" />
+    <Content Include="EventBanners\176131842_166230186_Banner.jpg" />
+    <Content Include="EventBanners\189196872_spawner-sheet0.png" />
+    <Content Include="EventBanners\195136419_176131842_166230186_Banner.jpg" />
+    <Content Include="EventBanners\235504414_MainBanner.png" />
+    <Content Include="EventBanners\247880814_EventBanner4.png" />
+    <Content Include="EventBanners\253086595_099955975_595507407_446579051_195136419_176131842_166230186_Banner.jpg" />
+    <Content Include="EventBanners\289436310_EventBanner2.png" />
+    <Content Include="EventBanners\376838546_665305139_Banner2.png" />
+    <Content Include="EventBanners\446579051_195136419_176131842_166230186_Banner.jpg" />
+    <Content Include="EventBanners\455327885_Banner.png" />
+    <Content Include="EventBanners\488048598_EventBanner2.png" />
+    <Content Include="EventBanners\490260740_793273588_EventBanner1.png" />
+    <Content Include="EventBanners\512712206_252122246_EventBanner4.png" />
+    <Content Include="EventBanners\536491491_EventBanner.png" />
+    <Content Include="EventBanners\550150019_EventBanner.png" />
+    <Content Include="EventBanners\579150187_EventBanner3.png" />
+    <Content Include="EventBanners\595507407_446579051_195136419_176131842_166230186_Banner.jpg" />
+    <Content Include="EventBanners\615022956_LEGO-Dinosaur-fossils.jpg" />
+    <Content Include="EventBanners\620449720_665320765_EventBanner4.png" />
+    <Content Include="EventBanners\649058562_EventBanner.png" />
+    <Content Include="EventBanners\665320765_EventBanner4.png" />
+    <Content Include="EventBanners\693003938_EventBanner3.png" />
+    <Content Include="EventBanners\712670243_579150187_EventBanner3.png" />
+    <Content Include="EventBanners\727831751_BannerBlock.png" />
+    <Content Include="EventBanners\763020111_Main.png" />
+    <Content Include="EventBanners\783063254_EventBanner1.png" />
+    <Content Include="EventBanners\793273588_EventBanner1.png" />
+    <Content Include="EventBanners\814532260_665320765_EventBanner4.png" />
+    <Content Include="EventBanners\824825686_EventBanner.png" />
+    <Content Include="EventBanners\828391637_166230186_Banner.jpg" />
+    <Content Include="EventBanners\833098319_252122246_EventBanner4.png" />
+    <Content Include="EventBanners\883526352_SmallBanner.png" />
+    <Content Include="EventBanners\999458346_EventBanner1.png" />
+    <Content Include="EventBanners\EventBanner1.png" />
+    <Content Include="EventBanners\VOBA.jpeg" />
+    <Content Include="EventBanners\VobaBanner.png" />
+    <Content Include="EventBanners\WhatsApp Image 2021-06-02 at 7.10.23 PM.jpeg" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="HomeBanners\077710757_665305139_Banner2.png" />
+    <Content Include="HomeBanners\099953973_595507407_MainBanner.jpg" />
+    <Content Include="HomeBanners\111139581_252122246_EventBanner4.png" />
+    <Content Include="HomeBanners\127493548_665305139_Banner2.png" />
+    <Content Include="HomeBanners\166230186_HomeMainBanner.jpg" />
+    <Content Include="HomeBanners\169700689_Banner2.png" />
+    <Content Include="HomeBanners\189165623_health2-sheet4.png" />
+    <Content Include="HomeBanners\195136419_828391637_326626993_630643744_MainHomeBanner.png" />
+    <Content Include="HomeBanners\235504414_MainBanner.png" />
+    <Content Include="HomeBanners\247880814_Banner2.png" />
+    <Content Include="HomeBanners\253086595_957210796_MainHomeBanner.png" />
+    <Content Include="HomeBanners\289436310_Banner2.png" />
+    <Content Include="HomeBanners\326626993_630643744_MainHomeBanner.jpg" />
+    <Content Include="HomeBanners\332936491_Banner.png" />
+    <Content Include="HomeBanners\358958900_SliderBanner.png" />
+    <Content Include="HomeBanners\359284616_665305139_Banner2.png" />
+    <Content Include="HomeBanners\408734882_logo_javanika .png" />
+    <Content Include="HomeBanners\446579051_195136419_828391637_326626993_630643744_MainHomeBanner.png" />
+    <Content Include="HomeBanners\488017348_Banner2.png" />
+    <Content Include="HomeBanners\490260740_793273588_EventBanner1.png" />
+    <Content Include="HomeBanners\550118768_MainHomeBanner.png" />
+    <Content Include="HomeBanners\579150187_Banner2.png" />
+    <Content Include="HomeBanners\595507407_MainBanner.png" />
+    <Content Include="HomeBanners\615022956_LEGO-Dinosaur-fossils.jpg" />
+    <Content Include="HomeBanners\620449720_665320765_EventBanner4.png" />
+    <Content Include="HomeBanners\623587035_Home.png" />
+    <Content Include="HomeBanners\630643744_MainHomeBanner.jpg" />
+    <Content Include="HomeBanners\649058562_550118768_MainHomeBanner.png" />
+    <Content Include="HomeBanners\665305139_Banner2.png" />
+    <Content Include="HomeBanners\672567285_252122246_EventBanner4.png" />
+    <Content Include="HomeBanners\693003938_Banner2.png" />
+    <Content Include="HomeBanners\712638994_579150187_EventBanner3.png" />
+    <Content Include="HomeBanners\720122274_252122246_EventBanner4.png" />
+    <Content Include="HomeBanners\727831751_HomeBanner.png" />
+    <Content Include="HomeBanners\783047629_Banner2.png" />
+    <Content Include="HomeBanners\793273588_Banner2.png" />
+    <Content Include="HomeBanners\814532260_665320765_EventBanner4.png" />
+    <Content Include="HomeBanners\824825686_550118768_MainHomeBanner.png" />
+    <Content Include="HomeBanners\828391637_326626993_630643744_MainHomeBanner.png" />
+    <Content Include="HomeBanners\833067068_665305139_Banner2.png" />
+    <Content Include="HomeBanners\883526352_LargeBanner.png" />
+    <Content Include="HomeBanners\957210796_MainHomeBanner.png" />
+    <Content Include="HomeBanners\999442720_Banner2.png" />
+    <Content Include="HomeBanners\SliderBanner31.png" />
+    <Content Include="HomeBanners\VOBA.jpeg" />
+    <Content Include="HomeBanners\VobaBanner.png" />
+    <Content Include="HomeBanners\WhatsApp Image 2021-06-02 at 7.10.23 PM.jpeg" />
+    <Content Include="MainBanners\077726382_665305139_Banner2.png" />
+    <Content Include="MainBanners\099954974_595507407_MainBanner.jpg" />
+    <Content Include="MainBanners\127493548_665305139_Banner2.png" />
+    <Content Include="MainBanners\144728538_SliderBanner.png" />
+    <Content Include="MainBanners\166230186_HomeMainBanner.jpg" />
+    <Content Include="MainBanners\169700689_Banner2.png" />
+    <Content Include="MainBanners\176131842_630643744_MainHomeBanner.jpg" />
+    <Content Include="MainBanners\189165623_allegra-sheet0.png" />
+    <Content Include="MainBanners\195136419_828391637_326626993_630643744_MainHomeBanner.png" />
+    <Content Include="MainBanners\235504414_Banner.png" />
+    <Content Include="MainBanners\247880814_Banner2.png" />
+    <Content Include="MainBanners\253086595_957210796_MainHomeBanner.png" />
+    <Content Include="MainBanners\289436310_Banner2.png" />
+    <Content Include="MainBanners\305585487_Banner.png" />
+    <Content Include="MainBanners\376838546_665305139_Banner2.png" />
+    <Content Include="MainBanners\402361161_Banner.png" />
+    <Content Include="MainBanners\446579051_195136419_828391637_326626993_630643744_MainHomeBanner.png" />
+    <Content Include="MainBanners\488048598_Banner2.png" />
+    <Content Include="MainBanners\490260740_793273588_EventBanner1.png" />
+    <Content Include="MainBanners\512696580_252122246_EventBanner4.png" />
+    <Content Include="MainBanners\550134394_MainHomeBanner.png" />
+    <Content Include="MainBanners\579150187_Banner2.png" />
+    <Content Include="MainBanners\595507407_MainBanner.png" />
+    <Content Include="MainBanners\615022956_LEGO-Dinosaur-fossils.jpg" />
+    <Content Include="MainBanners\620449720_665320765_EventBanner4.png" />
+    <Content Include="MainBanners\623587035_Home.png" />
+    <Content Include="MainBanners\630643744_MainHomeBanner.jpg" />
+    <Content Include="MainBanners\647382996_252122246_EventBanner4.png" />
+    <Content Include="MainBanners\649058562_550118768_MainHomeBanner.png" />
+    <Content Include="MainBanners\665305139_Banner2.png" />
+    <Content Include="MainBanners\693003938_Banner2.png" />
+    <Content Include="MainBanners\706387818_252122246_EventBanner4.png" />
+    <Content Include="MainBanners\712670243_579150187_EventBanner3.png" />
+    <Content Include="MainBanners\727831751_HomeBanner.png" />
+    <Content Include="MainBanners\783063254_Banner2.png" />
+    <Content Include="MainBanners\789121167_665305139_Banner2.png" />
+    <Content Include="MainBanners\793273588_Banner2.png" />
+    <Content Include="MainBanners\814532260_665320765_EventBanner4.png" />
+    <Content Include="MainBanners\824825686_550118768_MainHomeBanner.png" />
+    <Content Include="MainBanners\828391637_326626993_630643744_MainHomeBanner.png" />
+    <Content Include="MainBanners\833067068_665305139_Banner2.png" />
+    <Content Include="MainBanners\883526352_LargeBanner.png" />
+    <Content Include="MainBanners\957210796_MainHomeBanner.png" />
+    <Content Include="MainBanners\999442720_Banner2.png" />
+    <Content Include="MainBanners\Banner1.png" />
+    <Content Include="MainBanners\EventBanner1.png" />
+    <Content Include="MainBanners\SliderBanner31.png" />
+    <Content Include="MainBanners\VOBA.jpeg" />
+    <Content Include="MainBanners\VobaBanner.png" />
+    <Content Include="Models\Model1.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Model1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.cs</LastGenOutput>
+    </Content>
+    <Content Include="PastEventImages\208644622_Silver Jubilee 4.jpg" />
+    <Content Include="PastEventImages\209176022_Silver Jubilee 10.jpg" />
+    <Content Include="PastEventImages\209176022_Silver Jubilee 11.jpg" />
+    <Content Include="PastEventImages\209176022_Silver jubilee 6.jpg" />
+    <Content Include="PastEventImages\209176022_Silver Jubilee 7.jpg" />
+    <Content Include="PastEventImages\209191641_Silver Jubilee 13.jpg" />
+    <Content Include="PastEventImages\209191641_Silver Jubilee 14.jpg" />
+    <Content Include="PastEventImages\209191641_Silver Jubilee 15.jpg" />
+    <Content Include="PastEventImages\209191641_Silver Jubilee 16.jpg" />
+    <Content Include="PastEventImages\209191641_Silver Jubilee 17.jpg" />
+    <Content Include="PastEventImages\209191641_Silver Jubilee 18.jpg" />
+    <Content Include="PastEventImages\209191641_Silver Jubilee 19.jpg" />
+    <Content Include="PastEventImages\209191641_Silver Jubilee 20.jpg" />
+    <Content Include="PastEventImages\209191641_Silver Jubilee 21.jpg" />
+    <Content Include="PastEventImages\209191641_Silver Jubilee 22.jpg" />
+    <Content Include="PastEventImages\209207295_Silver Jubilee 23.jpg" />
+    <Content Include="PastEventImages\209207295_Silver Jubilee 24.jpg" />
+    <Content Include="PastEventImages\209207295_Silver Jubilee 25.jpg" />
+    <Content Include="PastEventImages\209207295_Silver Jubilee 26.jpg" />
+    <Content Include="PastEventImages\209207295_Silver Jubilee 27.jpg" />
+    <Content Include="PastEventImages\209207295_Silver Jubilee 29.jpg" />
+    <Content Include="PastEventImages\209207295_Silver Jubilee 30.jpg" />
+    <Content Include="PastEventImages\209207295_Silver Jubilee 31.jpg" />
+    <Content Include="PastEventImages\209207295_Silver Jubilee 32.jpg" />
+    <Content Include="PastEventImages\209222900_Silver Jubilee 33.jpg" />
+    <Content Include="PastEventImages\209222900_Silver Jubilee 34.jpg" />
+    <Content Include="PastEventImages\209222900_Silver Jubilee 36.jpg" />
+    <Content Include="PastEventImages\209222900_Silver Jubilee 37.jpg" />
+    <Content Include="PastEventImages\209222900_Silver Jubilee 38.jpg" />
+    <Content Include="PastEventImages\209222900_Silver Jubilee 39.jpg" />
+    <Content Include="PastEventImages\209222900_Silver Jubilee 40.jpg" />
+    <Content Include="PastEventImages\209222900_Silver Jubilee 44.jpg" />
+    <Content Include="PastEventImages\209222900_Silver Jubilee 45.jpg" />
+    <Content Include="PastEventImages\209238527_Silver Jubilee 46.jpg" />
+    <Content Include="PastEventImages\209238527_Silver Jubilee 47.jpg" />
+    <Content Include="PastEventImages\209238527_Silver Jubilee 48.jpg" />
+    <Content Include="PastEventImages\209238527_Silver Jubilee 49.jpg" />
+    <Content Include="PastEventImages\209238527_Silver Jubilee 50.jpg" />
+    <Content Include="PastEventImages\209238527_Silver Jubilee 51.jpg" />
+    <Content Include="PastEventImages\209238527_Silver Jubilee 52.jpg" />
+    <Content Include="PastEventImages\209238527_Silver Jubilee 53.jpg" />
+    <Content Include="PastEventImages\209238527_Silver Jubilee 54.jpg" />
+    <Content Include="PastEventImages\209254159_Silver Jubilee 55.jpg" />
+    <Content Include="PastEventImages\209254159_Silver Jubilee 56.jpg" />
+    <Content Include="PastEventImages\209254159_Silver Jubilee 57.jpg" />
+    <Content Include="PastEventImages\209254159_Silver Jubilee 58.jpg" />
+    <Content Include="PastEventImages\209254159_Silver Jubilee 59.jpg" />
+    <Content Include="PastEventImages\209254159_Silver Jubilee 60.jpg" />
+    <Content Include="PastEventImages\209254159_Silver Jubilee 61.jpg" />
+    <Content Include="PastEventImages\209254159_Silver Jubilee 62.jpg" />
+    <Content Include="PastEventImages\209254159_Silver Jubilee 63.jpg" />
+    <Content Include="PastEventImages\209269785_Silver Jubilee 64.jpg" />
+    <Content Include="PastEventImages\209269785_Silver Jubilee 65.jpg" />
+    <Content Include="PastEventImages\209269785_Silver Jubilee 66.jpg" />
+    <Content Include="PastEventImages\209269785_Silver Jubilee 67.jpg" />
+    <Content Include="PastEventImages\209269785_Silver Jubilee 68.jpg" />
+    <Content Include="PastEventImages\209269785_Silver Jubilee 70.jpg" />
+    <Content Include="PastEventImages\209269785_Silver Jubilee 71.jpg" />
+    <Content Include="PastEventImages\209269785_Silver Jubilee 72.jpg" />
+    <Content Include="PastEventImages\209269785_Silver Jubilee 74.jpg" />
+    <Content Include="PastEventImages\209285413_Silver Jubilee 75.jpg" />
+    <Content Include="PastEventImages\209285413_Silver Jubilee 76.jpg" />
+    <Content Include="PastEventImages\209285413_Silver Jubilee 77.jpg" />
+    <Content Include="PastEventImages\209285413_Silver Jubilee 78.jpg" />
+    <Content Include="PastEventImages\209285413_Silver Jubilee 79.jpg" />
+    <Content Include="PastEventImages\209285413_Silver Jubilee 80.jpg" />
+    <Content Include="PastEventImages\209285413_Silver Jubilee 82.jpg" />
+    <Content Include="PastEventImages\209285413_Silver Junilee 2.jpg" />
+    <Content Include="PastEventImages\409098354_test-design-china-name.png" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="App_Images\images\" />
+    <Folder Include="App_Scripts\ckeditor\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+    <Content Include="App_Images\bootstrap-theme.min.css.map" />
+    <Content Include="App_Images\bootstrap.min.css.map" />
+    <Content Include="EventBanners\Thumbs.db" />
+    <EntityDeploy Include="Models\Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Content>
+    <Content Include="HomeBanners\Thumbs.db" />
+    <None Include="Project_Readme.html" />
+    <Content Include="Views\Dashboard\Index.cshtml" />
+    <Content Include="Views\Events\Artists.cshtml" />
+    <Content Include="Views\Events\Index.cshtml" />
+    <Content Include="Views\Events\Venue.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Orders\Index.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\CouponGeneration\Index.cshtml" />
+    <Content Include="Views\Events\Index - Copy.cshtml" />
+    <Content Include="Views\BlockSeat\Index.cshtml" />
+    <Content Include="Views\AddPastEvents\Index.cshtml" />
+    <Content Include="Views\Events - Backup 2-3-2020\Artists.cshtml" />
+    <Content Include="Views\Events - Backup 2-3-2020\Index - Copy.cshtml" />
+    <Content Include="Views\Events - Backup 2-3-2020\Index.cshtml" />
+    <Content Include="Views\Events - Backup 2-3-2020\Venue.cshtml" />
+    <Content Include="Views\AddVolunteers\Index.cshtml" />
+    <Content Include="Views\VOBAEvent\Index.cshtml" />
+    <Content Include="Views\MyOrders\Index.cshtml" />
+    <Content Include="Views\NewEvents\Index.cshtml" />
+    <Content Include="Views\NewEvents\Venue.cshtml" />
+    <Content Include="Views\NewEvents\Artists.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>2745</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:2745/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

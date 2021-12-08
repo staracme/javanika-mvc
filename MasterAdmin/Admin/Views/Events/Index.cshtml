@@ -1,0 +1,544 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model List<Admin.Models.tblEvent>
+
+@{
+    var venues = (List<Admin.Models.tblVenue>)ViewData["Venues"];
+}
+
+<script src="~/App_Scripts/jquery.validate.js"></script>
+<script src="~/App_Scripts/ckeditor/ckeditor.js"></script>
+
+<link href="~/App_Theme/datatables-bootstrap.css" rel="stylesheet" />
+<script src="~/App_Scripts/datatables.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+        CKEDITOR.replace('txtEventDesc');
+        CKEDITOR.replace('txtEventTNC');
+
+        $('#datatable').DataTable({
+            "order": [[0, "asc"]]
+        });
+
+        $("#frmEvent").validate({
+            rules: {
+                txtEventName: {
+                    required: true
+                },
+                txtEventType: {
+                    required: true
+                },
+                txtEventLanguage: {
+                    required: true
+                },
+                txtEventPlaytime: {
+                    required: true
+                },
+                txtShowTime: {
+                    required: true
+                },
+                txtProcessingFee: {
+                    number: true
+                },
+                txtEventDate: {
+                    required: true
+                }
+            },
+            messages: {
+                txtEventName: {
+                    required: "Please enter event name"
+                },
+                txtEventType: {
+                    required: "Please enter event type"
+                },
+                txtEventLanguage: {
+                    required: "Please enter event language"
+                },
+                txtEventPlaytime: {
+                    required: "Please enter event play time"
+                },
+
+                txtShowTime: {
+                    required: "Please enter event start date"
+                },
+                txtProcessingFee: {
+                    number: "Processing fee should be in digits"
+                },
+                txtEventDate: {
+                    required: "Please enter event date"
+                }
+            },
+            errorPlacement: function (error, element) {
+                if (element.attr("name") == "txtEventName")
+                    error.appendTo($('#lblEventName'));
+
+                if (element.attr("name") == "txtEventType")
+                    error.appendTo($('#lblEventType'));
+
+                if (element.attr("name") == "txtEventLanguage")
+                    error.appendTo($('#lblEventLanguage'));
+
+                if (element.attr("name") == "txtEventPlaytime")
+                    error.appendTo($('#lblEventPlaytime'));
+
+                if (element.attr("name") == "txtEventDate")
+                    error.appendTo($('#lblEventDate'));
+
+                if (element.attr("name") == "txtShowTime")
+                    error.appendTo($('#lblShowTime'));
+
+                if (element.attr("name") == "txtProcessingFee")
+                    error.appendTo($('#lblProcessingFee'));
+            }
+        });
+
+        $("#drpEventDurationType").change(function () {
+            var type = $(this).val();
+
+            if (type == "S") {
+                $("#evt_start_date_1").hide();
+                $("#evt_start_date_2").hide();
+                $("#evt_start_date_3").hide();
+                $("#evt_start_date_4").hide();
+
+                $("#evt_end_date_1").hide();
+                $("#evt_end_date_2").hide();
+                $("#evt_end_date_3").hide();
+                $("#evt_end_date_4").hide();
+
+                $("#evt_date_1").show();
+                $("#evt_date_2").show();
+                $("#evt_date_3").show();
+                $("#evt_date_4").show();
+            }
+            else if (type == "M") {
+                $("#evt_date_1").hide();
+                $("#evt_date_2").hide();
+                $("#evt_date_3").hide();
+                $("#evt_date_4").hide();
+
+                $("#evt_start_date_1").show();
+                $("#evt_start_date_2").show();
+                $("#evt_start_date_3").show();
+                $("#evt_start_date_4").show();
+
+                $("#evt_end_date_1").show();
+                $("#evt_end_date_2").show();
+                $("#evt_end_date_3").show();
+                $("#evt_end_date_4").show();
+            }
+
+        });
+
+        $("#drpVenues").change(function () {
+            var venueID = $(this).val();
+
+            if (venueID != "") {
+                GetLayout(venueID);
+            }
+            else {
+                $("#drpLayout").html("");
+                ToggleLayout("hide");
+            }
+        });
+
+        $("#drpLayout").on("change", function () {
+            var layoutID = $(this).val();
+
+            if (layoutID != "") {
+                GetBlocks(layoutID);
+            }
+            else {
+                $("#drpLayout").html("");
+                ToggleBlock("show");
+            }
+        });
+    });
+
+    $(document).ready(function () {
+        $("#frmAddEvents").hide();
+        $("#frmListEvents").show();
+
+        $("#addEvent").on("click", function () {
+            showAddEvent("addEvent");
+        });
+        $("#listEvent").on("click", function () {
+            showAddEvent("listEvent");
+        });
+
+    });
+    function showAddEvent(value) {
+        if (value == "addEvent") {
+            $("#frmAddEvents").show();
+            $("#frmListEvents").hide();
+        }
+        else if (value == "listEvent") {
+            $("#frmAddEvents").hide();
+            $("#frmListEvents").show();
+        }
+    }
+
+    function GetEvent(id) {
+        $("#modalLoader").modal('show');
+        $.ajax({
+            url: "/Events/GetEvent",
+            data: { eventID: id },
+            type: "POST",
+            success: function (response) {
+                $("#modalLoader").modal('hide');
+
+                $("#txtEventID").val(response.EventID);
+                $("#txtEventName").val(response.EventName);
+                $("#txtEventType").val(response.EventType);
+                $("#txtEventLanguage").val(response.EventLanguage);
+                $("#txtEventPlaytime").val(response.EventPlayTime);
+                $("#txtEventDate").val(response.EventDate);
+                $("#txtShowTime").val(response.ShowTime);
+                $("#txtProcessingFee").val(response.ProcessingFee);
+                $("#txtLocationTracker").val(response.LocationTracker);
+                $("#drpBookingType").val(response.BookingType);
+                CKEDITOR.instances['txtEventDesc'].setData(response.EventDesc);
+                CKEDITOR.instances['txtEventTNC'].setData(response.EventTNC);
+
+                showAddEvent("addEvent");
+            },
+            error: function () {
+                $("#modalLoader").modal('hide');
+            }
+        });
+    }
+
+
+    function ManageEvent() {
+        if ($("#frmEvent").valid()) {
+
+            $("#but_upload").hide();
+            $("#but_loader").show();
+
+            var data;
+            data = new FormData();
+
+            data.append('txtEventID', $("#txtEventID").val());
+            data.append('txtEventName', $("#txtEventName").val());
+            data.append('txtEventType', $("#txtEventType").val());
+            data.append('txtEventLanguage', $("#txtEventLanguage").val());
+            data.append('txtEventPlaytime', $("#txtEventPlaytime").val());
+            data.append('txtEventDate', $("#txtEventDate").val());
+            data.append('txtShowTime', $("#txtShowTime").val());
+            data.append('txtLocationTracker', $("#txtLocationTracker").val());
+            data.append('drpBookingType', $("#drpBookingType").val());
+            data.append('txtAgeGroup', $("#txtAgeGroup").val());
+            data.append('txtProcessingFee', $("#txtProcessingFee").val());
+
+            if ($('#txtHomeBannerImage')[0].files[0] != null && $('#txtHomeBannerImage')[0].files[0] != undefined)
+                data.append('txtHomeBannerImage', $('#txtHomeBannerImage')[0].files[0]);
+
+            if ($('#txtMainBannerImage')[0].files[0] != null && $('#txtMainBannerImage')[0].files[0] != undefined)
+                data.append('txtMainBannerImage', $('#txtMainBannerImage')[0].files[0]);
+
+            if ($('#txtEventBannerImage')[0].files[0] != null && $('#txtEventBannerImage')[0].files[0] != undefined)
+                data.append('txtEventBannerImage', $('#txtEventBannerImage')[0].files[0]);
+
+            data.append('txtEventDesc', CKEDITOR.instances.txtEventDesc.getData());
+            data.append('txtEventTNC', CKEDITOR.instances.txtEventTNC.getData());
+
+            $.ajax({
+                url: '/Events/ManageEvents',
+                data: data,
+                type: 'POST',
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    if (response == "i") {
+                        alert("Event created successfully.");
+                        location.reload();
+                    }
+                    else if (response == "u") {
+                        alert("Event updated successfully.");
+
+                        $("#but_loader").hide();
+                        $("#but_upload").show();
+
+                        location.reload();
+                    }
+                    else {
+                        alert("Oops! Something went wrong. Please try again after sometime.");
+
+                        $("#but_loader").hide();
+                        $("#but_upload").show();
+                    }
+                }
+            });
+        }
+        else {
+            return false;
+        }
+    }
+
+    function GetBlocks(layoutID) {
+        $.ajax({
+            url: "/Events/GetBlocks",
+            data: { layoutID: layoutID },
+            type: "POST",
+            success: function (response) {
+                $("#tblBlocks").html(response);
+                ToggleBlock("show");
+            }
+        });
+    }
+
+    function GetLayout(venueID) {
+        $.ajax({
+            url: "/Events/GetLayout",
+            data: { venueID: venueID },
+            type: "POST",
+            success: function (response) {
+
+                var str = '<option>--Select Layout--</option>';;
+
+                $.each(response, function (i, k) {
+                    str += '<option value="' + k.layoutID + '">' + k.layout_name + '</option>';
+                });
+
+                $("#drpLayout").html(str);
+
+                ToggleLayout("show");
+            }
+        });
+    }
+
+    function ToggleLayout(action) {
+        if (action == "hide") {
+            $("#layout_div_1").hide();
+            $("#layout_div_2").hide();
+            $("#layout_div_3").hide();
+            $("#layout_div_4").hide();
+        }
+        else if (action == "show") {
+            $("#layout_div_1").show();
+            $("#layout_div_2").show();
+            $("#layout_div_3").show();
+            $("#layout_div_4").show();
+        }
+    }
+
+    function ToggleBlock(action) {
+        if (action == "hide") {
+            $("#block_div_1").hide();
+            $("#block_div_2").hide();
+            $("#block_div_3").hide();
+        }
+        else if (action == "show") {
+            $("#block_div_1").show();
+            $("#block_div_2").show();
+            $("#block_div_3").show();
+        }
+    }
+
+    function DeleteUnorderedSeats(id) {
+        var c = confirm("Do you want to remove these seats?");
+
+        if (c) {
+            $.ajax({
+                url: "/Events/DeleteUnorderedSeats",
+                data: { id: id },
+                type: "GET",
+                success: function (response) {
+                    if (response == "OK") {
+                        alert("Seats deleted successfully.");
+                        location.reload();
+                    }
+                    else {
+                        alert("Sorry! Something went wrong. Please try again after sometime.");
+                    }
+                }
+
+            });
+        }
+    }
+</script>
+
+<div class="FormBlock" id="frmAddEvents">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="MainHeader">
+                Add/Manage Events
+                <button id="listEvent" class="button-62" role="button">List Events</button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <form id="frmEvent">
+                <input type="hidden" class="FormTxtStyle" id="txtEventID" name="txtEventID" value="0" />
+                @*Event Name*@
+                <div class="col-sm-3"><div class="FormLabelStyle">Event Name</div></div>
+                <div class="col-sm-5"><input type="text" class="FormTxtStyle" id="txtEventName" name="txtEventName" /></div>
+                <div class="col-sm-4"><div class="FormValidationStyle" id="lblEventName"></div></div>
+                <div class="col-sm-12"><br /></div>
+
+                @*Event Type*@
+                <div class="col-sm-3"><div class="FormLabelStyle">Event Type</div></div>
+                <div class="col-sm-5"><input type="text" class="FormTxtStyle" id="txtEventType" name="txtEventType" /></div>
+                <div class="col-sm-4"><div class="FormValidationStyle" id="lblEventType"></div></div>
+                <div class="col-sm-12"><br /></div>
+
+                @*Event Name*@
+                <div class="col-sm-3"><div class="FormLabelStyle">Event Language</div></div>
+                <div class="col-sm-5"><input type="text" class="FormTxtStyle" id="txtEventLanguage" name="txtEventLanguage" /></div>
+                <div class="col-sm-4"><div class="FormValidationStyle" id="lblEventLanguage"></div></div>
+                <div class="col-sm-12"><br /></div>
+
+                @*Event Name*@
+                <div class="col-sm-3"><div class="FormLabelStyle">Event Playtime</div></div>
+                <div class="col-sm-5"><input type="text" class="FormTxtStyle" id="txtEventPlaytime" name="txtEventPlaytime" /></div>
+                <div class="col-sm-4"><div class="FormValidationStyle" id="lblEventPlaytime"></div></div>
+                <div class="col-sm-12"><br /></div>
+
+                @*Event Name*@
+                <div class="col-sm-3"><div class="FormLabelStyle">Booking Type</div></div>
+                <div class="col-sm-5">
+                    <select class="FormTxtStyle" id="drpBookingType" name="drpBookingType">
+                        <option value="">--Select Booking Type--</option>
+                        <option value="TICKETS">Ticket</option>
+                        <option value="SEATS">Seats</option>
+                    </select>
+                </div>
+                <div class="col-sm-4"><div class="FormValidationStyle" id="lblEventDurationType"></div></div>
+                <div class="col-sm-12"><br /></div>
+
+                @*Event Name*@
+                <div class="col-sm-3" id="evt_date_1"><div class="FormLabelStyle">Event Date</div></div>
+                <div class="col-sm-5" id="evt_date_2"><input type="date" class="FormTxtStyle" id="txtEventDate" name="txtEventDate" /></div>
+                <div class="col-sm-4" id="evt_date_3"><div class="FormValidationStyle" id="lblEventDate"></div></div>
+                <div class="col-sm-12" id="evt_date_4"><br /></div>
+
+                @*Event Name*@
+                @*<div class="col-sm-3" id="evt_start_date_1" style="display:none;"><div class="FormLabelStyle">Event Start Date</div></div>
+                    <div class="col-sm-5" id="evt_start_date_2" style="display:none;"><input type="date" class="FormTxtStyle" id="txtEventStartDate" name="txtEventStartDate" /></div>
+                    <div class="col-sm-4" id="evt_start_date_3" style="display:none;"><div class="FormValidationStyle" id="lblEventStartDate"></div></div>
+                    <div class="col-sm-12" id="evt_start_date_4" style="display:none;"><br /></div>*@
+
+                @*Event Name*@
+                @*<div class="col-sm-3" id="evt_end_date_1" style="display:none;"><div class="FormLabelStyle">Event End Date</div></div>
+                    <div class="col-sm-5" id="evt_end_date_2" style="display:none;"><input type="date" class="FormTxtStyle" id="txtEventEndDate" name="txtEventEndDate" /></div>
+                    <div class="col-sm-4" id="evt_end_date_3" style="display:none;"><div class="FormValidationStyle" id="lblEventEndDate"></div></div>
+                    <div class="col-sm-12" id="evt_end_date_4" style="display:none;"><br /></div>*@
+
+                @*Event Name*@
+                <div class="col-sm-3"><div class="FormLabelStyle">Show Time</div></div>
+                <div class="col-sm-5"><input type="text" class="FormTxtStyle" id="txtShowTime" name="txtShowTime" /></div>
+                <div class="col-sm-4"><div class="FormValidationStyle" id="lblShowTime"></div></div>
+                <div class="col-sm-12"><br /></div>
+
+                @*Event Name*@
+                <div class="col-sm-3"><div class="FormLabelStyle">Event Home Banner</div></div>
+                <div class="col-sm-5"><input type="file" class="FormTxtStyle" id="txtHomeBannerImage" name="txtHomeBannerImage" /></div>
+                <div class="col-sm-4"><div class="FormValidationStyle" id="lblHomeBannerImage"></div></div>
+                <div class="col-sm-12"><br /></div>
+
+                @*Event Name*@
+                <div class="col-sm-3"><div class="FormLabelStyle">Event Main Banner</div></div>
+                <div class="col-sm-5"><input type="file" class="FormTxtStyle" id="txtMainBannerImage" name="txtMainBannerImage" /></div>
+                <div class="col-sm-4"><div class="FormValidationStyle" id="lblMainBannerImage"></div></div>
+                <div class="col-sm-12"><br /></div>
+
+                @*Event Name*@
+                <div class="col-sm-3"><div class="FormLabelStyle">Event Banner</div></div>
+                <div class="col-sm-5"><input type="file" class="FormTxtStyle" id="txtEventBannerImage" name="txtEventBannerImage" /></div>
+                <div class="col-sm-4"><div class="FormValidationStyle" id="lblEventBannerImage"></div></div>
+                <div class="col-sm-12"><br /></div>
+
+                @*Event Name*@
+                <div class="col-sm-3"><div class="FormLabelStyle">For Age Group</div></div>
+                <div class="col-sm-5"><input type="text" class="FormTxtStyle" id="txtAgeGroup" name="txtAgeGroup" /></div>
+                <div class="col-sm-4"><div class="FormValidationStyle" id="lblLocationTracker"></div></div>
+                <div class="col-sm-12"><br /></div>
+
+                @*Event Name*@
+                <div class="col-sm-3"><div class="FormLabelStyle">Event Description</div></div>
+                <div class="col-sm-5"><textarea type="text" class="FormTxtStyle" id="txtEventDesc" name="txtEventDesc"></textarea></div>
+                <div class="col-sm-4"><div class="FormValidationStyle" id="lblEventDesc"></div></div>
+                <div class="col-sm-12"><br /></div>
+
+                @*Event Name*@
+                <div class="col-sm-3"><div class="FormLabelStyle">Event TNC</div></div>
+                <div class="col-sm-5"><textarea type="text" class="FormTxtStyle" id="txtEventTNC" name="txtEventTNC"></textarea></div>
+                <div class="col-sm-4"><div class="FormValidationStyle" id="lblEventTNC"></div></div>
+                <div class="col-sm-12"><br /></div>
+
+                @*Event Name*@
+                <div class="col-sm-3"><div class="FormLabelStyle">Service Fees</div></div>
+                <div class="col-sm-5"><input type="text" class="FormTxtStyle" id="txtProcessingFee" name="txtProcessingFee" /></div>
+                <div class="col-sm-4"><div class="FormValidationStyle" id="lblProcessingFee"></div></div>
+                <div class="col-sm-12"><br /></div>
+
+
+                <div class="col-sm-4" id="block_div_3" style="display:none;"><div class="FormValidationStyle" id="lblEventTNC"></div></div>
+                @*Event Name*@
+                <div class="col-sm-3"><div class="FormLabelStyle"></div></div>
+                <div class="col-sm-5"><button class="FormBtnStyle" type="button" onclick="JavaScript: ManageEvent();" id="but_upload">Update Event</button><img id="but_loader" src="~/App_Images/loader.gif" style="height:20px!important;width:20px!important;display:none;" /></div>
+                <div class="col-sm-4"><div class="FormValidationStyle"></div></div>
+                <div class="col-sm-12"><br /></div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="FormBlock" id="frmListEvents">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="MainHeader">
+                List of Events
+                <button id="addEvent" class="button-62" role="button">Add Event</button>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="underline"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th><center>Sr No</center></th>
+                        <th><center>Event Name</center></th>
+                        <th><center>Event Type</center></th>
+                        <th><center>Event Date</center></th>
+                        <th><center>Action</center></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @{
+                        int i = 0;
+                    }
+                    @foreach (var evt in Model)
+                    {
+                        i++;
+                        <tr class="dynamic">
+                            <td><center>@i</center></td>
+                            <td><center>@evt.EventName</center></td>
+                            <td><center>@evt.EventType</center></td>
+                            <td><center>@Convert.ToDateTime(evt.EventDate).ToString("yyyy-MM-dd")</center></td>
+                            <td>
+                                <a href="JavaScript:;"
+                                   onclick="JavaScript:GetEvent(@evt.EventID)">Update</a>&nbsp;
+                                ||&nbsp;<a href="/Events/Venue?evtID=@evt.EventID">Add Venue</a>&nbsp;
+                                ||&nbsp;<a href="/Events/Artists?eventID=@evt.EventID">Add Artist</a>&nbsp;
+                                ||&nbsp;<a href="JavaScript:;" onclick="JavaScript: DeleteUnorderedSeats(@evt.EventID);">Release Seats</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
