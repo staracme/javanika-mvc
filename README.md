@@ -1,2 +1,2 @@
-# javanika-mvc
+# javanika-mvc-dev
 javanika-mvc
