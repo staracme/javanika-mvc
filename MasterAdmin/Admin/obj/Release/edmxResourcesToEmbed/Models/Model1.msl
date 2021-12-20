@@ -101,6 +101,7 @@
     <EntitySetMapping Name="tblEvents">
       <EntityTypeMapping TypeName="JAVADBNewModel.tblEvent">
         <MappingFragment StoreEntitySet="tblEvents">
+          <ScalarProperty Name="EBTickets" ColumnName="EBTickets" />
           <ScalarProperty Name="EBMaxTicketOrder" ColumnName="EBMaxTicketOrder" />
           <ScalarProperty Name="EBMinTicketOrder" ColumnName="EBMinTicketOrder" />
           <ScalarProperty Name="EBTicketPrice" ColumnName="EBTicketPrice" />

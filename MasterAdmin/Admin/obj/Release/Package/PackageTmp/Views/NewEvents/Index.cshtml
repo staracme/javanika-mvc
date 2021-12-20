@@ -360,13 +360,22 @@
                     </div>
                 </div>
 
-                <div class="col-sm-4">
+                <div class="col-sm-4" style="display:none">
                     <div class="form-group">
                         <div class="input-holder">
                             <label for="txtEBTicketPrice">Early Bird Ticket Price</label>
                             <input oninput="numberOnly(this.id);" type="text" pattern="\d*" maxlength="3" class="form-control" id="txtEBTicketPrice" name="txtEBTicketPrice" />
                         </div>
                         <div class="FormValidationStyle" id="lblEBTicketPrice"></div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <div class="input-holder">
+                            <label for="txtEBTickets">Early Bird Tickets</label>
+                            <input oninput="numberOnly(this.id);" type="text" pattern="\d*" maxlength="3" class="form-control" id="txtEBTickets" name="txtEBTickets" />
+                        </div>
+                        <div class="FormValidationStyle" id="lbltxtEBTickets"></div>
                     </div>
                 </div>
 
@@ -729,6 +738,30 @@
                 return isValidationPassed;
             },
             "Ticket price cannot be empty."
+        ); 
+        $.validator.addMethod(
+            "checkEBTickets",
+            function (value, element) {
+
+                var txtEBTickets = parseInt(($("#txtEBTickets").val() == "") ? 0 : $("#txtEBTickets").val());
+                var txtTotalTickets = parseInt(($("#txtTotalTickets").val() == "") ? 0 : $("#txtTotalTickets").val());
+                var isValidationPassed = false;
+
+                if ($("#drpBookingType").val() === "TICKETS") {
+                    if (txtEBTickets === 0) return false;
+
+                    if (txtEBTickets !== 0) {
+                        if (txtTotalTickets <= txtEBTickets)
+                            isValidationPassed = false;
+                        else
+                            isValidationPassed = true;
+                    }
+                }
+                else return true;
+
+                return isValidationPassed;
+            },
+            "EB tickets cannot be empty / EB tickets should be smaller than total ticket"
         );
         $.validator.addMethod(
             "checkEBTicketPrice",
@@ -862,8 +895,13 @@
                     digits: true,
                     minlength: 1,
                     checkEBTicketPrice: true
-                }
-                ,txtEBMinTicketAllowed: {
+                },
+                txtEBTickets: {
+                    digits: true,
+                    minlength: 1,
+                    checkEBTickets: true
+                },
+                txtEBMinTicketAllowed: {
                     digits: true,
                     minlength: 1,
                     checkEBMinTickesAllowed: true
@@ -918,8 +956,12 @@
                     //required: "Early Bird Ticket price is required",
                     digits: "Only number is accepted",
                     minlength: "at1east 1 digit is required."
-                }
-                ,txtEBMinTicketAllowed: {
+                },
+                txtEBTickets: {
+                    digits: "Only number is accepted",
+                    minlength: "at1east 1 digit is required."
+                },
+                txtEBMinTicketAllowed: {
                     //required: "Early Bird minimum tickets allowed",
                     digits: "Only numbers accepted",
                     minlength: "at1east 1 digit is required."
@@ -968,6 +1010,8 @@
                     error.appendTo($('#lblTicketPrice'));
                 if (element.attr("name") == "txtEBTicketPrice")
                     error.appendTo($('#lblEBTicketPrice'));
+                if (element.attr("name") == "txtEBTickets")
+                    error.appendTo($('#lbltxtEBTickets'));
                 if (element.attr("name") == "txtEBMinTicketAllowed")
                     error.appendTo($('#lblEBMinTicketAllowed'));
                 if (element.attr("name") == "txtEBMaxTicketAllowed")
@@ -1092,8 +1136,9 @@
 
                 $("#txtTicketPrice").val(response.TicketPrice);
                 $("#txtEBTicketPrice").val(response.EBTicketPrice);
-                $("#txtEBMinTicketAllowed").val(response.EBMinTicketOrder);
-                $("#txtEBMaxTicketAllowed").val(response.EBMaxTicketOrder);
+                
+                
+                
 
 
                 $("#txtShowTime").val(response.ShowTime);
@@ -1126,16 +1171,36 @@
                 if ($('#drpEarlyBirdTicketType').val() == 'DATEWISE') {
                     $('#txtStartDate').prop('disabled', false);
                     $('#txtEndDate').prop('disabled', false);
-                }
-                else {
+                } else if ($('#drpEarlyBirdTicketType').val() == 'SEATWISE') {
+                    $('#txtStartDate').prop('disabled', true);
+                    $('#txtEndDate').prop('disabled', true);
+                    $('#txtEBMinTicketAllowed').prop('disabled', false);
+                    $('#txtEBMaxTicketAllowed').prop('disabled', false);
+                    $('#txtEBTickets').prop('disabled', false);
+
+                    $('#txtStartDate').val("");
+                    $('#txtEndDate').val("");
+                    $('#txtEBMinTicketAllowed').val(1);
+                    $('#txtEBMaxTicketAllowed').val(10);
+                    $('#txtEBTickets').val(0);
+                } else {
                     $('#txtStartDate').prop('disabled', true);
                     $('#txtEndDate').prop('disabled', true);
                     $('#txtEBTicketPrice').prop('disabled', true);
                     $('#txtStartDate').val("");
                     $('#txtEndDate').val("");
                     $('#txtEBTicketPrice').val(0);
-                }
 
+                    $('#txtEBMinTicketAllowed').prop('disabled', true);
+                    $('#txtEBMaxTicketAllowed').prop('disabled', true);
+                    $('#txtEBTickets').prop('disabled', true);
+                    $('#txtEBMinTicketAllowed').val(0);
+                    $('#txtEBMaxTicketAllowed').val(0);
+                    $('#txtEBTickets').val(0);
+                }
+                $("#txtEBTickets").val(response.EBTickets);
+                $("#txtEBMinTicketAllowed").val(response.EBMinTicketOrder);
+                $("#txtEBMaxTicketAllowed").val(response.EBMaxTicketOrder);
                 showAddEvent("addEvent");
             },
             error: function () {
@@ -1173,6 +1238,8 @@
 
             data.append('txtTicketPrice', ($("#txtTicketPrice").val() == undefined) ? "" : $("#txtTicketPrice").val());
             data.append('txtEBTicketPrice', ($("#txtEBTicketPrice").val() == undefined) ? "" : $("#txtEBTicketPrice").val());
+            data.append('txtEBTickets', ($("#txtEBTickets").val() == undefined) ? "" : $("#txtEBTickets").val());
+            
             data.append('txtEBMinTicketAllowed', ($("#txtEBMinTicketAllowed").val() == undefined) ? "" : $("#txtEBMinTicketAllowed").val());
             data.append('txtEBMaxTicketAllowed', ($("#txtEBMaxTicketAllowed").val() == undefined) ? "" : $("#txtEBMaxTicketAllowed").val());
 
@@ -1315,6 +1382,7 @@
                 $('#txtTotalTickets').prop('disabled', false);
                 $('#txtTicketPrice').prop('disabled', false);
                 $('#txtEBTicketPrice').prop('disabled', false);
+                $('#drpEarlyBirdTicketType').val(-1)
             }
             else {
                 $('#txtTotalTickets').prop('disabled', true);
@@ -1323,6 +1391,8 @@
                 $('#txtTicketPrice').val(0);
                 $('#txtEBTicketPrice').prop('disabled', true);
                 $('#txtEBTicketPrice').val(0);
+               // $('#txtEBTickets').prop('disabled', true);
+                //$('#txtEBTickets').val(0);
             }
         });
 
@@ -1338,14 +1408,37 @@
             if ($('#drpEarlyBirdTicketType').val() == 'DATEWISE') {
                 $('#txtStartDate').prop('disabled', false);
                 $('#txtEndDate').prop('disabled', false);
-            }
-            else if ($('#drpEarlyBirdTicketType').val() == 'NONE') {
-                $('#txtStartDate').prop('disabled', false);
-                $('#txtEndDate').prop('disabled', false);
                 $('#txtEBMinTicketAllowed').prop('disabled', false);
                 $('#txtEBMaxTicketAllowed').prop('disabled', false);
+                $('#txtEBTickets').prop('disabled', false);
+                $('#txtEBMinTicketAllowed').val(1);
+                $('#txtEBMaxTicketAllowed').val(10);
             }
-            else {
+            else if ($('#drpEarlyBirdTicketType').val() == 'NONE') {
+                $('#txtStartDate').prop('disabled', true);
+                $('#txtEndDate').prop('disabled', true);
+                $('#txtEBMinTicketAllowed').prop('disabled', true);
+                $('#txtEBMaxTicketAllowed').prop('disabled', true);
+                $('#txtEBTickets').prop('disabled', true);
+
+                $('#txtStartDate').val("");
+                $('#txtEndDate').val("");
+                $('#txtEBMinTicketAllowed').val(0);
+                $('#txtEBMaxTicketAllowed').val(0);
+                $('#txtEBTickets').val(0);
+            } else if ($('#drpEarlyBirdTicketType').val() == 'SEATWISE') {
+                $('#txtStartDate').prop('disabled', true);
+                $('#txtEndDate').prop('disabled', true);
+                $('#txtEBMinTicketAllowed').prop('disabled', false);
+                $('#txtEBMaxTicketAllowed').prop('disabled', false);
+                $('#txtEBTickets').prop('disabled', false);
+
+                $('#txtStartDate').val("");
+                $('#txtEndDate').val("");
+                $('#txtEBMinTicketAllowed').val(1);
+                $('#txtEBMaxTicketAllowed').val(10);
+                $('#txtEBTickets').val(0);
+            } else {
                 $('#txtStartDate').prop('disabled', true);
                 $('#txtEndDate').prop('disabled', true);
                 $('#txtStartDate').val("");

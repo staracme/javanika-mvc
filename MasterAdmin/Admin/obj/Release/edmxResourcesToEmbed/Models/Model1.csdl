@@ -257,6 +257,7 @@
     <Property Name="EBTicketPrice" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="EBMinTicketOrder" Type="Int32" />
     <Property Name="EBMaxTicketOrder" Type="Int32" />
+    <Property Name="EBTickets" Type="Decimal" Precision="18" Scale="2" />
   </EntityType>
   <EntityType Name="tblEventVolunteer">
     <Key>

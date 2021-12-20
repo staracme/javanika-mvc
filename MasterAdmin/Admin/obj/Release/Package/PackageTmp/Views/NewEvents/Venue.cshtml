@@ -26,7 +26,10 @@
     $(function () {
 
         $('#datatable').DataTable();
-        $("#tblBlocks").css("display", "none");
+        @if (selected_layout == 0)
+        {
+            @:ToggleBlock("hide");
+        }
 
         $("#drpVenues").change(function () {
             var venueID = $(this).val();
@@ -36,7 +39,6 @@
             }
             else {
                 $("#drpLayout").html("");
-                $("#tblBlocks").css("display", "none");
                 ToggleLayout("hide");
             }
         });
@@ -49,7 +51,6 @@
             }
             else {
                 $("#drpLayout").html("");
-                $("$tblBlocks").css("display", "none");
                 ToggleBlock("show");
             }
         });
@@ -93,7 +94,6 @@
                 let tblResponse = thead + response;
 
                 $("#tblBlocks").html(tblResponse);
-                $("#tblBlocks").css("display","block");
                 ToggleBlock("show");
             }
         });
