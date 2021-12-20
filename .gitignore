@@ -400,6 +400,11 @@ MasterAdmin/Admin/obj
 MasterAdmin/packages/
 MasterAdmin/bin/
 
+Java.API/Java.API/bin
+Java.API/Java.API/obj
+Java.API/packages/
+Java.API/bin/
+
 #ignore all files
 *.log
 *.cache
