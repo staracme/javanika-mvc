@@ -26,7 +26,10 @@
     $(function () {
 
         $('#datatable').DataTable();
-
+        @if (selected_layout == 0)
+        {
+            @:ToggleBlock("hide");
+        }
 
         $("#drpVenues").change(function () {
             var venueID = $(this).val();
@@ -87,7 +90,10 @@
             data: { layoutID: layoutID },
             type: "POST",
             success: function (response) {
-                $("#tblBlocks").html(response);
+                let thead = "<thead><tr><th>Venue Label</th><th>Tier</th><th>Ticket Price</th><th>Early Bird Price</th></tr></thead>";
+                let tblResponse = thead + response;
+
+                $("#tblBlocks").html(tblResponse);
                 ToggleBlock("show");
             }
         });
@@ -201,24 +207,33 @@
             <div>
                 <div class="col-sm-3" id="block_div_1" @(selected_layout > 0 ? "" : "style='display:none;'")><div class="FormLabelStyle">Blocks</div></div>
                 <div class="col-sm-5" id="block_div_2" @(selected_layout > 0 ? "" : "style='display:none;'")>
-                    <table cellpadding="10" id="tblBlocks">
+                    <table class="table table-responsive table-bordered table-hover" cellpadding="10" id="tblBlocks">
+                        <thead>
+                            <tr>
+                                <th>Venue Label</th>
+                                <th>Tier</th>
+                                <th>Ticket Price</th>
+                                <th>Early Bird Price</th>
+                            </tr>
+                        </thead>
                         @foreach (var block in blocks)
                         {
                             var selected = db.tblEventLayoutBlocks.Where(e => e.EventID == evt.EventID && e.BlockID == block.BlockID).SingleOrDefault();
                             var tiers = db.tblTiers.ToList();
-                            <tr>
-                                <td><div class="VenueLabel">@block.BlockNumber</div></td>
-                                <td>
-                                    <select class='FormTxtStyle' id="@("block_tier_" + block.BlockID)" name="@("block_tier_" + block.BlockID)">
-                                        <option value=''>--Select Tier--</option>";
-                                        @foreach (var tier in tiers)
-                                        {
-                                            <option value='@tier.TierID' @(selected != null && selected.TierID == tier.TierID ? "selected" : "")>@tier.TierName</option>
-                                        }
-                                    </select>
-                                </td>
-                                <td><input type='text' class='FormTxtStyle' placeholder='Enter Price' id="@("block_price_" + block.BlockID)" name="@("block_price_" + block.BlockID)" value="@(selected != null ? selected.Price : 0)" /></td>
-                            </tr>
+                        <tr>
+                            <td><div class="VenueLabel">@block.BlockNumber</div></td>
+                            <td>
+                                <select class='FormTxtStyle' id="@("block_tier_" + block.BlockID)" name="@("block_tier_" + block.BlockID)">
+                                    <option value=''>--Select Tier--</option>";
+                                    @foreach (var tier in tiers)
+                                    {
+                                        <option value='@tier.TierID' @(selected != null && selected.TierID == tier.TierID ? "selected" : "")>@tier.TierName</option>
+                                    }
+                                </select>
+                            </td>
+                            <td><input type='text' class='FormTxtStyle' placeholder='Enter Price' id="@("block_price_" + block.BlockID)" name="@("block_price_" + block.BlockID)" value="@(selected != null ? Convert.ToInt32(selected.Price) : 0)" /></td>
+                            <td><input type='text' class='FormTxtStyle' placeholder='Enter Early Bird Price' id="@("eb_price_" + block.BlockID)" name="@("eb_price_" + block.BlockID)" value="@(selected != null ? Convert.ToInt32(selected.EBPrice) : 0)" /></td>
+                        </tr>
                         }
                     </table>
                 </div>

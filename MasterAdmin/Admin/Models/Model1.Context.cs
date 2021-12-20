@@ -53,5 +53,6 @@ namespace Admin.Models
         public virtual DbSet<tblVolunteer> tblVolunteers { get; set; }
         public virtual DbSet<TempOrder> TempOrders { get; set; }
         public virtual DbSet<VOBARegistration> VOBARegistrations { get; set; }
+        public virtual DbSet<tblConfig> tblConfigs { get; set; }
     }
 }

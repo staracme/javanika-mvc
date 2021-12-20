@@ -15,6 +15,8 @@ namespace Admin.Controllers
 
     public class MyOrdersController : Controller
     {
+        
+
         JAVADBEntities db = new JAVADBEntities();
 
         // GET: MyOrders
@@ -22,41 +24,42 @@ namespace Admin.Controllers
         {
             int eventID = (string.IsNullOrEmpty(Request["eventID"]))
                 ? 0 : Convert.ToInt32(Request["eventID"]);
-            if (TempData["Events"] == null)
+            //if (TempData["Events"] == null)
+            //{
+            List<int> rowsPerPage = new List<int>();
+            rowsPerPage.Add(10);
+            rowsPerPage.Add(20);
+            rowsPerPage.Add(30);
+            rowsPerPage.Add(50);
+            rowsPerPage.Add(100);
+            TempData["rowsPerPage"] = rowsPerPage;
+
+            //    List<EventsViewModel> eventsVM = getEvents();
+            //    TempData["Events"] = eventsVM;
+            //}
+            if (TempData["EventsOrders"] == null)
             {
-                List<int> rowsPerPage = new List<int>();
-                rowsPerPage.Add(10);
-                rowsPerPage.Add(20);
-                rowsPerPage.Add(30);
-                rowsPerPage.Add(50);
-                rowsPerPage.Add(100);
-                TempData["rowsPerPage"] = rowsPerPage;
+                List<EventOrderModel> eventOrderModels = new List<EventOrderModel>();
+                OrderRequest orderRequest = new OrderRequest();
+                orderRequest.EventId = eventID;
+                orderRequest.pageNum = 1;
+                orderRequest.rowsPerPage = (string.IsNullOrEmpty(Request["rowsPerPage"]))
+                    ? 50 : Convert.ToInt32(Request["rowsPerPage"]); ;
 
-                List<EventsViewModel> eventsVM = getEvents();
-                TempData["Events"] = eventsVM;
+                eventOrderModels = getOrders(orderRequest);
+                TempData["EventsOrders"] = eventOrderModels;
             }
-            List<OrderModel> orderModels = new List<OrderModel>();
-            OrderRequest orderRequest = new OrderRequest();
-            orderRequest.EventId = eventID;
-            orderRequest.pageNum = 1;
-            orderRequest.rowsPerPage = (string.IsNullOrEmpty(Request["rowsPerPage"]))
-                ? 10 : Convert.ToInt32(Request["rowsPerPage"]); ;
-
-            orderModels = getOrders(orderRequest);
-
-            return View(orderModels);
+            return View();
             
         }
 
-        private List<OrderModel> getOrders(OrderRequest orderRequest)
+        private List<EventOrderModel> getOrders(OrderRequest orderRequest)
         {
-            List<OrderModel> orderModels = null;
+            List<EventOrderModel> eventOrderModels = null;
             string constr = System.Configuration.ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString();
-            //string sql = "SELECT * FROM ORDERS ORDER BY 1 DESC";
-
             using (SqlConnection con = new SqlConnection(constr))
             {
-                orderModels = new List<OrderModel>();
+                eventOrderModels = new List<EventOrderModel>();
                 var parameters = new DynamicParameters();
                 parameters.Add("@EventId", orderRequest.EventId);
                 parameters.Add("@rowsPerPage", orderRequest.rowsPerPage);
@@ -66,11 +69,10 @@ namespace Admin.Controllers
                     , parameters
                     , commandType: System.Data.CommandType.StoredProcedure))
                 {
-                    orderModels = multi.Read<OrderModel>().ToList();
-                    //var b = multi.Read<OrderModel>().ToList();
+                    eventOrderModels = multi.Read<EventOrderModel>().ToList();
                 }
             }
-            return orderModels;
+            return eventOrderModels;
         }
 
         private List<EventsViewModel> getEvents()

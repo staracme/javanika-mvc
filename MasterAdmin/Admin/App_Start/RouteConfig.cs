@@ -18,6 +18,11 @@ namespace Admin
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Login", action = "Index", id = UrlParameter.Optional }
             );
+
+            //routes.MapRoute(
+            //    "ReportOrders", "/Report/Orders/{eventId}",
+            //    new { controller = "report", action = "getOrderByEventId", eventId = UrlParameter.Optional }
+            //);
         }
     }
 }

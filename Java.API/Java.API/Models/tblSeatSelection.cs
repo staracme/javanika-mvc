@@ -23,6 +23,7 @@ namespace Java.API.Models
         public Nullable<int> OrderID { get; set; }
         public Nullable<decimal> Price { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
+        public Nullable<decimal> EBPrice { get; set; }
     
         public virtual tblCustomer tblCustomer { get; set; }
         public virtual tblSeat tblSeat { get; set; }

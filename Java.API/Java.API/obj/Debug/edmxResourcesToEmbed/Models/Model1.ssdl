@@ -87,6 +87,7 @@
     <Property Name="TierID" Type="int" />
     <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
     <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="EBPrice" Type="decimal" Precision="18" Scale="2" />
   </EntityType>
   <EntityType Name="tblEvents">
     <Key>
@@ -114,7 +115,15 @@
     <Property Name="CreatedDate" Type="datetime" />
     <Property Name="BookingType" Type="varchar" MaxLength="500" />
     <Property Name="ProcessingFee" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="TicketStock" Type="int" />
     <Property Name="Status" Type="char" MaxLength="1" />
+    <Property Name="PercentEBSeats" Type="int" />
+    <Property Name="EarlyBirdTicketSelection" Type="varchar" MaxLength="20" />
+    <Property Name="TicketsAvailable" Type="int" />
+    <Property Name="TicketPrice" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="EBTicketPrice" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="EBMinTicketOrder" Type="int" />
+    <Property Name="EBMaxTicketOrder" Type="int" />
   </EntityType>
   <EntityType Name="tblLayout">
     <Key>
@@ -153,6 +162,19 @@
     <Property Name="OTPID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Email" Type="varchar" MaxLength="500" />
     <Property Name="OTP" Type="varchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="tblPastEvents">
+    <Key>
+      <PropertyRef Name="PastEventID" />
+    </Key>
+    <Property Name="PastEventID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EventName" Type="varchar" MaxLength="500" />
+    <Property Name="ImagePath" Type="varchar" MaxLength="500" />
+    <Property Name="Year" Type="varchar" MaxLength="500" />
+    <Property Name="Month" Type="varchar" MaxLength="500" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="EventID" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="ImageType" Type="varchar" MaxLength="30" />
   </EntityType>
   <EntityType Name="tblReleaseLog">
     <Key>
@@ -194,6 +216,7 @@
     <Property Name="OrderID" Type="int" />
     <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
     <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="EBPrice" Type="decimal" Precision="18" Scale="2" />
   </EntityType>
   <EntityType Name="tblSeatSelectionsLog">
     <Key>
@@ -208,6 +231,7 @@
     <Property Name="OrderID" Type="int" />
     <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
     <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="EBPrice" Type="decimal" Precision="18" Scale="2" />
   </EntityType>
   <EntityType Name="tblTicketOrders">
     <Key>
@@ -232,6 +256,9 @@
     <Property Name="IsPickedUp" Type="bit" />
     <Property Name="DatePickedUp" Type="datetime" />
     <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="TicketType" Type="varchar" MaxLength="20" />
+    <Property Name="ActualPrice" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="PriceAfterDiscount" Type="decimal" Precision="18" Scale="2" />
   </EntityType>
   <EntityType Name="tblTickets">
     <Key>
@@ -526,6 +553,7 @@
     <EntitySet Name="tblMailLog" EntityType="Self.tblMailLog" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblOrderCoupons" EntityType="Self.tblOrderCoupons" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblOTPS" EntityType="Self.tblOTPS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblPastEvents" EntityType="Self.tblPastEvents" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblReleaseLog" EntityType="Self.tblReleaseLog" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblSeat" EntityType="Self.tblSeat" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblSeatRows" EntityType="Self.tblSeatRows" Schema="dbo" store:Type="Tables" />

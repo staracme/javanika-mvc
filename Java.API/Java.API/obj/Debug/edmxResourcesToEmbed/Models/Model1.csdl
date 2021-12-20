@@ -101,6 +101,7 @@
       <End Role="tblTicketOrder" EntitySet="tblTicketOrders" />
       <End Role="tblOrderCoupon" EntitySet="tblOrderCoupons" />
     </AssociationSet>
+    <EntitySet Name="tblPastEvents" EntityType="JAVADBModel.tblPastEvent" />
   </EntityContainer>
   <EntityType Name="tblAdminUser">
     <Key>
@@ -161,6 +162,7 @@
     <NavigationProperty Name="tblBlock" Relationship="JAVADBModel.FK_tblEventLayoutBlocks_tblBlocks" FromRole="tblEventLayoutBlock" ToRole="tblBlock" />
     <NavigationProperty Name="tblTier" Relationship="JAVADBModel.FK_tblEventLayoutBlocks_tblTier" FromRole="tblEventLayoutBlock" ToRole="tblTier" />
     <NavigationProperty Name="tblEvent" Relationship="JAVADBModel.FK_tblEventLayoutBlocks_tblEvents" FromRole="tblEventLayoutBlock" ToRole="tblEvent" />
+    <Property Name="EBPrice" Type="Decimal" Precision="18" Scale="2" />
   </EntityType>
   <EntityType Name="tblLayout">
     <Key>
@@ -236,6 +238,7 @@
     <NavigationProperty Name="tblSeat" Relationship="JAVADBModel.FK_tblSeatSelections_tblSeat" FromRole="tblSeatSelection" ToRole="tblSeat" />
     <NavigationProperty Name="tblTicket" Relationship="JAVADBModel.FK_tblSeatSelections_tblTickets" FromRole="tblSeatSelection" ToRole="tblTicket" />
     <NavigationProperty Name="tblEvent" Relationship="JAVADBModel.FK_tblSeatSelections_tblEvents" FromRole="tblSeatSelection" ToRole="tblEvent" />
+    <Property Name="EBPrice" Type="Decimal" Precision="18" Scale="2" />
   </EntityType>
   <EntityType Name="tblTicket">
     <Key>
@@ -498,6 +501,7 @@
     <Property Name="OrderID" Type="Int32" />
     <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="EBPrice" Type="Decimal" Precision="18" Scale="2" />
   </EntityType>
   <EntityType Name="tblTierCoupon">
     <Key>
@@ -554,6 +558,14 @@
     <NavigationProperty Name="tblVenue" Relationship="JAVADBModel.FK_tblEvents_tblVenue" FromRole="tblEvent" ToRole="tblVenue" />
     <NavigationProperty Name="tblSeatSelections" Relationship="JAVADBModel.FK_tblSeatSelections_tblEvents" FromRole="tblEvent" ToRole="tblSeatSelection" />
     <NavigationProperty Name="tblTickets" Relationship="JAVADBModel.FK_tblTickets_tblEvents" FromRole="tblEvent" ToRole="tblTicket" />
+    <Property Name="TicketStock" Type="Int32" />
+    <Property Name="PercentEBSeats" Type="Int32" />
+    <Property Name="EarlyBirdTicketSelection" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="TicketsAvailable" Type="Int32" />
+    <Property Name="TicketPrice" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="EBTicketPrice" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="EBMinTicketOrder" Type="Int32" />
+    <Property Name="EBMaxTicketOrder" Type="Int32" />
   </EntityType>
   <Association Name="FK_tblEventLayoutBlocks_tblEvents">
     <End Type="JAVADBModel.tblEvent" Role="tblEvent" Multiplicity="0..1" />
@@ -639,6 +651,9 @@
     <Property Name="DatePickedUp" Type="DateTime" Precision="3" />
     <Property Name="CreatedDate" Type="DateTime" Precision="3" />
     <NavigationProperty Name="tblOrderCoupons" Relationship="JAVADBModel.FK_tblOrderCoupons_tblTicketOrders" FromRole="tblTicketOrder" ToRole="tblOrderCoupon" />
+    <Property Name="TicketType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="ActualPrice" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PriceAfterDiscount" Type="Decimal" Precision="18" Scale="2" />
   </EntityType>
   <Association Name="FK_tblOrderCoupons_tblTicketOrders">
     <End Type="JAVADBModel.tblTicketOrder" Role="tblTicketOrder" Multiplicity="0..1" />
@@ -652,4 +667,17 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="tblPastEvent">
+    <Key>
+      <PropertyRef Name="PastEventID" />
+    </Key>
+    <Property Name="PastEventID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EventName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="ImagePath" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Year" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Month" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="EventID" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="ImageType" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+  </EntityType>
 </Schema>

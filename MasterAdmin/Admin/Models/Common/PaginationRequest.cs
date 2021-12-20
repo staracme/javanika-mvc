@@ -5,9 +5,14 @@ using System.Web;
 
 namespace Admin.Models
 {
-    public class PaginationRequest
+    public interface IPaginationRequest
     {
-        public int rowsPerPage { get; set; }
-        public int pageNum { get; set; }
+        int rowsPerPage { get; set; }
+        int pageNum { get; set; }
+    }
+
+    public interface IOrderRequest
+    {
+        string orderBy { get; set; }
     }
 }

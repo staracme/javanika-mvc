@@ -45,6 +45,14 @@ namespace Java.API.Models
         public string BookingType { get; set; }
         public Nullable<decimal> ProcessingFee { get; set; }
         public string Status { get; set; }
+        public Nullable<int> TicketStock { get; set; }
+        public Nullable<int> PercentEBSeats { get; set; }
+        public string EarlyBirdTicketSelection { get; set; }
+        public Nullable<int> TicketsAvailable { get; set; }
+        public Nullable<decimal> TicketPrice { get; set; }
+        public Nullable<decimal> EBTicketPrice { get; set; }
+        public Nullable<int> EBMinTicketOrder { get; set; }
+        public Nullable<int> EBMaxTicketOrder { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblEventLayoutBlock> tblEventLayoutBlocks { get; set; }

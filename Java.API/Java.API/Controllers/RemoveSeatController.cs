@@ -13,7 +13,7 @@ namespace Java.API.Controllers
     {
         [HttpPost]
         [EnableCors(origins: "*", headers: "*", methods: "*")]
-        public SeatSelectResponse RemoveSeatResponse(SeatSelectModel st)
+        public SelectedSeatsV5Response RemoveSeatResponse(SeatSelectModel st)
         {
             JAVADBEntities db = new JAVADBEntities();
 
@@ -23,7 +23,7 @@ namespace Java.API.Controllers
 
             string removeSeat = Common.RemoveSeat(eventID, sessionID, seatID);
 
-            SeatSelectResponse response = new SeatSelectResponse();
+            SelectedSeatsV5Response response = new SelectedSeatsV5Response();
 
             if (removeSeat == "OK")
             {

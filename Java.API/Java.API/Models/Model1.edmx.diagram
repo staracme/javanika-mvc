@@ -48,6 +48,7 @@
         <AssociationConnector Association="JAVADBModel.FK_tblTickets_tblEvents" />
         <EntityTypeShape EntityType="JAVADBModel.tblTicketOrder" Width="1.5" PointX="12.375" PointY="15.125" />
         <AssociationConnector Association="JAVADBModel.FK_tblOrderCoupons_tblTicketOrders" />
+        <EntityTypeShape EntityType="JAVADBModel.tblPastEvent" Width="1.5" PointX="14.375" PointY="14.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

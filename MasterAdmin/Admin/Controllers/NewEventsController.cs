@@ -33,7 +33,7 @@ namespace Admin.Controllers
             else
             {
                 eventsVM = TempData["ListEvents"] as List<EventsViewModel>;
-                TempData["SearchEvents"] = eventsVM; 
+                TempData["SearchEvents"] = eventsVM;
             }
             return View(eventsVM);
         }
@@ -116,13 +116,20 @@ namespace Admin.Controllers
                 evt.EventDate = Convert.ToDateTime(Request["txtEventDate"]);
                 evt.EarlyBirdTicketSelection = Request["drpEarlyBirdTicketType"];
 
-                if (!string.IsNullOrEmpty(Request["txtStartDate"]))
-                    evt.StartDate = Convert.ToDateTime(Request["txtStartDate"]);
-                if (!string.IsNullOrEmpty(Request["txtEndDate"]))
-                    evt.EndDate = Convert.ToDateTime(Request["txtEndDate"]);
+                if (evt.EarlyBirdTicketSelection == "DATEWISE")
+                {
+                    if (!string.IsNullOrEmpty(Request["txtStartDate"]))
+                        evt.StartDate = Convert.ToDateTime(Request["txtStartDate"]);
+                    if (!string.IsNullOrEmpty(Request["txtEndDate"]))
+                        evt.EndDate = Convert.ToDateTime(Request["txtEndDate"]);
+                } else
+                {
+                    evt.StartDate = null;
+                    evt.EndDate = null;
+                }
 
                 if (!string.IsNullOrEmpty(Request["txtTotalTickets"]))
-                { 
+                {
                     evt.TicketStock = Convert.ToInt32(Request["txtTotalTickets"]);
                     evt.TicketsAvailable = Convert.ToInt32(Request["txtTotalTickets"]);
                 }
@@ -130,15 +137,18 @@ namespace Admin.Controllers
                 if (!string.IsNullOrEmpty(Request["txtPercentEBSeats"]))
                     evt.PercentEBSeats = Convert.ToInt32(Request["txtPercentEBSeats"]);
 
-                if (!string.IsNullOrEmpty(Request["txtTicketPrie"]))
-                    evt.TicketPrice = Convert.ToInt32(Request["txtTicketPrie"]);
-                if (!string.IsNullOrEmpty(Request["txtEBTicketPrie"]))
-                    evt.EBTicketPrice = Convert.ToInt32(Request["txtEBTicketPrie"]);
+                if (!string.IsNullOrEmpty(Request["txtTicketPrice"]))
+                    evt.TicketPrice = Convert.ToInt32(Request["txtTicketPrice"]);
+                if (!string.IsNullOrEmpty(Request["txtEBTicketPrice"]))
+                    evt.EBTicketPrice = Convert.ToInt32(Request["txtEBTicketPrice"]);
+                if (!string.IsNullOrEmpty(Request["txtEBTickets"]))
+                    evt.EBTickets = Convert.ToInt32(Request["txtEBTickets"]);
+
                 if (!string.IsNullOrEmpty(Request["txtEBMinTicketAllowed"]))
                     evt.EBMinTicketOrder = Convert.ToInt32(Request["txtEBMinTicketAllowed"]);
                 if (!string.IsNullOrEmpty(Request["txtEBMaxTicketAllowed"]))
                     evt.EBMaxTicketOrder = Convert.ToInt32(Request["txtEBMaxTicketAllowed"]);
-
+                
                 evt.ShowTime = Request["txtShowTime"];
                 evt.BookingType = Request["drpBookingType"];
 
@@ -188,7 +198,10 @@ namespace Admin.Controllers
                 if (!string.IsNullOrEmpty(Request["txtEventTNC"]))
                     evt.EventTNC = Request["txtEventTNC"];
 
-                evt.Status = "a";
+                //evt.Status = "a";
+                if (!string.IsNullOrEmpty(Request["drpEventRecStatus"]))
+                    evt.Status = Request["drpEventRecStatus"];
+                
                 evt.EventDurationType = "S";
                 if (status == "i")
                 {
@@ -219,7 +232,13 @@ namespace Admin.Controllers
                     db.tblTicketOrders.Add(order);
                     db.SaveChanges();
                 }
-                TempData.Remove("Events");
+
+                
+                var config = db.tblConfigs.Where(x => x.ConfigID == 1).SingleOrDefault();
+                config.IsCacheToReferesh = true;
+                db.SaveChanges();
+
+                TempData.Remove("ListEvents");
                 return status;
             }
             catch (Exception ex)
@@ -274,6 +293,7 @@ namespace Admin.Controllers
                 str += "</select>";
                 str += "</td>";
                 str += "<td><input type='text' class='FormTxtStyle' placeholder='Enter Price'  id='block_price_" + b.blockID + "' name='block_price_" + b.blockID + "' /></td>";
+                str += "<td><input type='text' class='FormTxtStyle' placeholder='Enter Early Bird Price'  id='eb_price_" + b.blockID + "' name='eb_price_" + b.blockID + "' /></td>";
                 str += "</tr>";
             }
             return str;
@@ -327,20 +347,24 @@ namespace Admin.Controllers
                     {
                         int blockID = Convert.ToInt32(req.Replace("block_tier_", ""));
                         decimal priceVal = 0;
-
-                        if (decimal.TryParse(Request["block_price_" + blockID], out priceVal))
+                        if (Request["block_tier_" + blockID] != "")
                         {
-                            int tierID = Convert.ToInt32(Request["block_tier_" + blockID]);
-                            decimal price = Convert.ToDecimal(Request["block_price_" + blockID]);
+                            if (decimal.TryParse(Request["block_price_" + blockID], out priceVal))
+                            {
+                                int tierID = Convert.ToInt32(Request["block_tier_" + blockID]);
+                                decimal price = Convert.ToDecimal(Request["block_price_" + blockID]);
+                                decimal EBprice = Convert.ToDecimal(Request["eb_price_" + blockID]);
 
-                            tblEventLayoutBlock layout = new tblEventLayoutBlock();
-                            layout.EventID = evtID;
-                            layout.BlockID = blockID;
-                            layout.TierID = tierID;
-                            layout.Price = price;
-                            layout.CreatedDate = DateTime.Now;
-                            db.tblEventLayoutBlocks.Add(layout);
-                            db.SaveChanges();
+                                tblEventLayoutBlock layout = new tblEventLayoutBlock();
+                                layout.EventID = evtID;
+                                layout.BlockID = blockID;
+                                layout.TierID = tierID;
+                                layout.Price = price;
+                                layout.EBPrice = EBprice;
+                                layout.CreatedDate = DateTime.Now;
+                                db.tblEventLayoutBlocks.Add(layout);
+                                db.SaveChanges();
+                            }
                         }
                     }
                 }
@@ -372,6 +396,7 @@ namespace Admin.Controllers
             data.Add("EventLanguage", evt.EventLanguage);
             data.Add("EventPlayTime", evt.EventPlaytime);
             data.Add("BookingType", evt.BookingType);
+            data.Add("Status", evt.Status);
             data.Add("EventDate", Convert.ToDateTime(evt.EventDate).ToString("yyyy-MM-dd"));
 
             data.Add("EarlyBirdTicketSelection", evt.EarlyBirdTicketSelection);
@@ -379,8 +404,10 @@ namespace Admin.Controllers
             data.Add("EndDate", Convert.ToDateTime(evt.EndDate).ToString("yyyy-MM-dd"));
             data.Add("TotalTickets", evt.TicketStock.ToString());
             data.Add("PercentEBSeats", evt.PercentEBSeats.ToString());
-            data.Add("TicketPrice", evt.TicketPrice.ToString());
-            data.Add("EBTicketPrice", evt.EBTicketPrice.ToString());
+            data.Add("TicketPrice", Convert.ToInt32(evt.TicketPrice).ToString());
+            data.Add("EBTicketPrice", Convert.ToInt32(evt.EBTicketPrice).ToString());
+            data.Add("EBTickets", Convert.ToInt32(evt.EBTickets).ToString());
+
             data.Add("EBMinTicketOrder", evt.EBMinTicketOrder.ToString());
             data.Add("EBMaxTicketOrder", evt.EBMaxTicketOrder.ToString());
 

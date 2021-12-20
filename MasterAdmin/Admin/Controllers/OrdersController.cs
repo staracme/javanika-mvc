@@ -33,6 +33,8 @@ namespace Admin.Controllers
         public string EventDate { get; set; }
     }
 
+    
+
     public class SelectedSeatsOrder
     {
         public string SessionID { get; set; }

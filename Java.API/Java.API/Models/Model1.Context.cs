@@ -49,5 +49,6 @@ namespace Java.API.Models
         public virtual DbSet<tblTierCoupon> tblTierCoupons { get; set; }
         public virtual DbSet<tblEvent> tblEvents { get; set; }
         public virtual DbSet<tblTicketOrder> tblTicketOrders { get; set; }
+        public virtual DbSet<tblPastEvent> tblPastEvents { get; set; }
     }
 }

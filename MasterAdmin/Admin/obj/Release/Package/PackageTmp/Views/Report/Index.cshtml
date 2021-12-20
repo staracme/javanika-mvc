@@ -1,0 +1,214 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    //var events = (List<Admin.Models.EventsViewModel>)TempData["Events"];
+    var eventOrders = (List<Admin.Models.EventOrderModel>)TempData["EventsOrders"];
+    
+    var rowsPerPage = (List<int>)TempData["rowsPerPage"];
+
+    //TempData.Keep("Events");
+    TempData.Keep("rowsPerPage");
+}
+
+<div class="row row-page-header">
+    <div class="col-sm-12">
+        <div class="MainHeader">List of Orders</div>
+    </div>
+    <div class="col-sm-12">
+        <div class="underline"></div>
+    </div>
+</div>
+
+<div class="row row-cards mb-3">
+    <div class="col-sm-4 cardContainer orderCard">
+        <div class="r-card-content d-flex">
+            <div class="icon"></div>
+            <div class="nos">
+                <h1>288</h1>
+                <p>Orders</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4 cardContainer ticketCard">
+        <div class="r-card-content d-flex">
+            <div class="icon"></div>
+            <div class="nos">
+                <h1>778</h1>
+                <p>Tickets</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4 cardContainer amountCard">
+        <div class="r-card-content d-flex">
+            <div class="icon"></div>
+            <div class="nos">
+                <h1>$17863</h1>
+                <p>Amount</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row row-filter">
+    <div class="col-sm-12">
+        <div class="MainHeader">Reports</div>
+    </div>
+    <div class="col-sm-12">
+        <div class="underline"></div>
+    </div>
+    <div class="col-sm-3 d-flex">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle w-100"
+                    type="button" id="reportDD1"
+                    data-toggle="dropdown" aria-expanded="false">
+                Latest Orders &nbsp;<i class="fa fa-angle-down"></i>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="reportDD1">
+                <li>Orders</li>
+                <li>Customer Name</li>
+                <li>Phone No</li>
+                <li>Ticket Price</li>
+                <li>Ticket Level</li>
+                <li>Date</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-sm-5 d-flex fh-center">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle w-100"
+                    type="button" id="reportDD1"
+                    data-toggle="dropdown" aria-expanded="false">
+                Sales Wise Report &nbsp;<i class="fa fa-angle-down"></i>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="reportDD1">
+                <li>Sales Wise Report</li>
+                <li>Ticket Wise Report</li>
+                <li>Order Wise Report</li>
+            </ul>
+        </div>
+        <button class="btn btn-info ml-3">
+            <i class="glyphicon glyphicon-file"></i>
+            Preparing to download
+        </button>
+    </div>
+    <div class="col-sm-4 d-flex fv-center justify-content-end">
+        <div class="d-flex fv-center">Display records:</div>
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle w-100"
+                    type="button" id="reportDD1"
+                    data-toggle="dropdown" aria-expanded="false">
+                100 &nbsp;<i class="fa fa-angle-down"></i>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="reportDD1">
+                <li>100</li>
+                <li>50</li>
+                <li>25</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-sm-12 my-4">
+        <div class="d-flex w100 radio-report">
+            <div class="text-muted">Report combination of</div>
+            <div class="d-flex">
+                <div class="rdio-report">
+                    <input id="salesWise" value="salesWise" name="reportCombination" type="radio" class="radio-inline" />
+                    <label for="salesWise">Sales Wise Report</label>
+                </div>
+                <div class="rdio-report">
+                    <input id="ticketWise" value="ticketWise" name="reportCombination" type="radio" class="radio-inline" />
+                    <label for="ticketWise">Ticket Wise Report</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row row-order-table">
+    <div class="col-sm-12">
+        <div class="table-responsive">
+            <table class="table table-striped table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th>Event Date</th>
+                        <th>Event Name</th>
+                        <th>Ticket Count</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                    @foreach (var ev in eventOrders) {
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="rt-event-date">
+                                    <span class="badge">@ev.EventDate.ToLongDateString()</span>
+                                    <span>@ev.EventDate.ToShortTimeString()</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="rt-event-name">
+                                    @*id: <strong>5485434</strong>*@
+                                    @ev.EventName
+                                </div>
+                            </td>
+                            <td>
+                                <div class="rt-event-ticket-count">
+                                    @*<div class="cname">Customer Name</div>
+                                    <div class="cemail">customer.email@domain.com</div>
+                                    <div class="cphone">1452369870</div>*@
+                                    @ev.TicketsCount
+                                </div>
+                            </td>
+                            <td>
+                                <div class="rt-event-status">
+                                    @*<div class="text-muted">
+                                        Early Bird General Admission (2)
+                                    </div>
+                                    <div class="text-muted">
+                                        Ticket Quantity (2)
+                                    </div>*@
+                                    @ev.EventStatus
+                                </div>
+                            </td>
+                            @*<td>
+                                <div class="rt-refund">
+                                    $0.00
+                                </div>
+                            </td>*@
+                            @*<td>
+                                <div class="rt-amount">
+                                    <div class="ticketAmount">Ticket Amt: <span>$80.00</span></div>
+                                    <div class="discountAmount">Discount Amt: <span>$0.00</span></div>
+                                    <div class="servicePaid">Service paid: <span>$3.00</span></div>
+                                    <div class="overAll">Over all: <span>$83.00</span></div>
+                                </div>
+                            </td>*@
+                        </tr>
+
+                        <tr>
+                            <td colspan="6">
+                                <div class="rt-table-footer d-flex">
+                                    <div class="noaction">Action: </div>
+                                    <div>
+                                        @Html.ActionLink("View Orders", "Orders", "Report", new { EventId = ev.EventID }, null)
+                                    </div>
+                                    <div>Edit Name</div>
+                                    <div>Add Comments</div>
+                                    <div>Notification</div>
+                                    <div>Refund</div>
+                                    <div>Report Bug</div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr class="separator-row"></tr>
+                    </tbody>
+                    }
+            </table>
+        </div>
+    </div>
+
+</div>

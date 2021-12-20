@@ -20,6 +20,8 @@ namespace Java.API
                 var getBlock = db.tblBlocks.Where(t => t.BlockID == curr_seat.tblSeatRow.BlockID).SingleOrDefault();
 
                 var getPrice = db.tblEventLayoutBlocks.Where(e => e.EventID == eventID && e.BlockID == getBlock.BlockID).SingleOrDefault();
+                var Price = getPrice.Price;
+                var EBPrice = getPrice.EBPrice;
 
                 //seat can be selected only if it is not purchased
                 if (isSeatBooked == false)
@@ -29,8 +31,20 @@ namespace Java.API
                     seat.EventID = eventID;
                     seat.SeatID = seatID;
                     seat.Price = getPrice.Price;
+                    seat.EBPrice = getPrice.EBPrice;
                     seat.CreatedDate = DateTime.Now;
                     db.tblSeatSelections.Add(seat);
+                    db.SaveChanges();
+
+                    tblSeatSelectionsLog log = new tblSeatSelectionsLog();
+                    log.SessionID = uuid;
+                    log.EventID = eventID;
+                    log.SeatID = seatID;
+                    seat.Price = getPrice.Price;
+                    seat.EBPrice = getPrice.EBPrice;
+                    log.CreatedDate = DateTime.Now;
+                    db.tblSeatSelectionsLogs.Add(log);
+
                     db.SaveChanges();
                     return "OK";
                 }
@@ -59,9 +73,12 @@ namespace Java.API
             //remove session associated seat data if this ticket is already booked
             var getSeat = db.tblSeatSelections.Where(s => s.SeatID == seatID && s.SessionID == uuid && s.OrderID == null && s.EventID == eventID).ToList();
 
-            foreach (var s in getSeat)
+            if (getSeat != null)
             {
-                db.tblSeatSelections.Remove(s);
+                foreach (var s in getSeat)
+                {
+                    db.tblSeatSelections.Remove(s);
+                }
                 db.SaveChanges();
             }
             return "OK";

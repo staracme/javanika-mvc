@@ -1,0 +1,98 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>JAVANIKA :: LOGIN</title>
+    <link href="~/App_Theme/MasterStylesheet.css" rel="stylesheet" />
+
+
+
+    <script src="~/App_Scripts/jquery-3.4.1.min.js"></script>
+
+    <script type="text/javascript">
+
+        $(function () {
+            $("#txtUsername, #txtPassword").keyup(function (e) {
+                if (e.keyCode == 13)
+                    $("#btnLogin").click();
+            });
+        });
+
+        function Login() {
+
+            if ($("#txtUsername").val() != "" && $("#txtPassword").val() != "") {
+                $("#divLoader").show(); 
+                //$(".loader").html("Authenticating...");
+                $("#btnLogin").hide();
+
+                $.ajax({
+                    url: "/Login/Login",
+                    data: $("#frmLogin").serialize(),
+                    type: "POST",
+                    success: OnLoginSuccess
+                });
+            }
+            else
+                alert('Please Enter Proper Username/Password');
+        }
+
+        function OnLoginSuccess(data) {
+
+            //$(".loader").html("");
+
+            if (data.status == "OK") {
+                $("#divLoader").hide(); 
+                //$(".loader").html("<b>Loading.....</b>");
+                location.href = '/NewEvents';
+			}
+            else {
+                //$(".loader").html("");
+                $("#divLoader").hide(); 
+                $("#btnLogin").show();
+                alert('Wrong Username/Password Provided.');
+            }
+        }
+    </script>
+
+</head>
+<body>
+    <div class="MainLoginWrapper">
+
+        <div class="MainLoginBlock">
+
+            <div class="SALogoWrapLogin"><img src="~/App_Images/logo.png" width="150px" /></div>
+            <div class="LoginHeader">
+                Login to access your Workspace!
+            </div>
+
+            <form id="frmLogin">
+
+                <div class="LoginTxtWrap">
+                    <div class="LoginIcon"><img src="~/App_Images/Username.png" width="30px" /></div>
+                    <div class="LoginTxtBoxWrap"><input type="text" class="txtboxlogin" placeholder="Username" id="txtUsername" name="txtUsername" /></div>
+                    <div class="clr"></div>
+                </div>
+
+                <div class="LoginTxtWrap">
+                    <div class="LoginIcon"><img src="~/App_Images/Password.png" width="30px" /></div>
+                    <div class="LoginTxtBoxWrap"><input type="password" class="txtboxlogin" placeholder="Password" id="txtPassword" name="txtPassword" /></div>
+                    <div class="clr"></div>
+                </div>
+
+                @*<div class="Cookiebtn"><input type="checkbox" />&nbsp;Remember me</div>*@
+
+                <div class="LoginBtnWrap"><button id="btnLogin" onclick="Login()" type="button" class="LoginBtn">LOGIN</button></div>
+
+                @*<div class="LoginBottom"><a href="" class="Passlink">Recover Password</a></div>*@
+
+            </form>
+        </div>
+    </div>
+</body>
+</html>

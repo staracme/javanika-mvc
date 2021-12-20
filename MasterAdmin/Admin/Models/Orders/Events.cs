@@ -69,9 +69,22 @@ namespace Admin.Models
         public decimal ProcessingFee { get; set; }
         public int TicketStock { get; set; }
         public string Status { get; set; }
+        public string EventStatus { get; set; }
+        public decimal EBTickets { get; set; }
 
     }
+    public class EventsImageListViewModel
+    {
+        public int PastEventID { get; set; }
+        public string EventName { get; set; }
+        public string ImagePath { get; set; }
+        public string Year { get; set; }
+        public string Month { get; set; }
+        public DateTime? CreatedDate { get; set; }
+        public decimal? EventID { get; set; }
+        public string ImageType { get; set; }
 
+    }
     public class EventArtistViewModel
     {
         public int ArtistID { get; set; }
@@ -84,8 +97,10 @@ namespace Admin.Models
 
     }
 
-    public class EventRequest : PaginationRequest
+    public class EventRequest : IPaginationRequest
     {
         public int? EventId { get; set; }
+        public int rowsPerPage { get; set; }
+        public int pageNum { get; set; }
     }
 }

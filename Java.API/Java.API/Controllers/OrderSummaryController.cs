@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using Java.API.Models;
 using System.Web.Http.Cors;
+using Java.API.Enums;
 
 namespace Java.API.Controllers
 {
@@ -23,6 +24,12 @@ namespace Java.API.Controllers
         public decimal processing_fee { get; set; }
         public decimal SubTotal { get; set; }
         public decimal Discount { get; set; }
+        public decimal processingPercentage { get; set; }
+        public string ticketType { get; set; }
+        public int isEarlyBird { get; set; }
+        public decimal price { get; set; }
+        public decimal discountedAmount { get; set; }
+        public decimal amount { get; set; }
     }
 
 
@@ -35,30 +42,28 @@ namespace Java.API.Controllers
 
     public class OrderSummaryController : ApiController
     {
+        JAVADBEntities db = new JAVADBEntities();
 
         [HttpPost]
         [EnableCors(origins: "*", headers: "*", methods: "*")]
         public OrderSummaryResponse GetSummary(OrderSummaryModel model)
         {
-            JAVADBEntities db = new JAVADBEntities();
-
-           
             var items = db.Database.SqlQuery<SelectedSeatsV5>("select SessionID, count(*) as 'NoOfSeats', sum(Price) as 'TotalPrice' from tblSeatSelections where EventID = " + model.eventID + " and SessionID = '" + model.sessionID + "' group by SessionID").ToList();
-
+            var selectedSeatsTicketDetails = db.Database.SqlQuery<SelectedSeatsV5>("select SessionID, Price, EBPrice  from tblSeatSelections where EventID = " + model.eventID + " and SessionID = '" + model.sessionID + "' ").ToList();
             OrderSummaryResponse response = new OrderSummaryResponse();
 
             var evt = db.tblEvents.Where(e => e.EventID == model.eventID).SingleOrDefault();
 
             decimal subTotal = items.Sum(s => s.TotalPrice);
-            decimal amount = subTotal;
+            decimal amount = selectedSeatsTicketDetails.Sum(x => x.Price); //subTotal;
             decimal discount_amount = 0;
             decimal coupon_value = 0;
+            items[0].ActualPrice = amount;
 
             var couponsUsed = (db
                    .tblOrderCoupons
                    .Where(c => c.SessionID == model.sessionID && c.OrderID == null)
                    .SingleOrDefault());
-
 
             if (couponsUsed != null)
             {
@@ -123,15 +128,36 @@ namespace Java.API.Controllers
             }
             else
             {
-                if (evt.ProcessingFee != null && evt.ProcessingFee > 0)
+                OrderInput input = CheckIsEarlyBirdApplicable(model.eventID, selectedSeatsTicketDetails);
+                if (input.TicketType == "EARLYBIRD")
+                {
+                    input.TotalAmount = selectedSeatsTicketDetails.Sum(x => x.EBPrice);
+                }
+                else
+                {
+                    input.TotalAmount = selectedSeatsTicketDetails.Sum(x => x.Price);
+                }
+
+                amount = input.TotalAmount;
+                //to check current no of tickets does not exceed thre remaining stock of tickets
+                bool isTicketCountValid = CheckSeatsAvailability(model.eventID, selectedSeatsTicketDetails.Count);
+
+                if (isTicketCountValid && evt.ProcessingFee != null && evt.ProcessingFee > 0)
                 {
                     decimal process_fees_perc = Convert.ToDecimal(evt.ProcessingFee);
                     decimal process_amount = ((amount * process_fees_perc / 100));
 
                     amount = (amount + process_amount);
-
+                    response.processingPercentage = process_amount;
                     response.processing_fee = process_amount;
+                    response.ticketType = input.TicketType;
+                    response.isEarlyBird = (input.TicketType == "EARLYBIRD") ? 1 : 0;
+                    response.price = input.TotalAmount;
+                    items[0].Price = input.TotalAmount;
+                    items[0].DiscountedAmount = items[0].ActualPrice - items[0].Price;
+                    response.discountedAmount = items[0].DiscountedAmount;
                 }
+                response.amount = amount;
             }
 
             response.event_name = evt.EventName;
@@ -142,10 +168,87 @@ namespace Java.API.Controllers
             response.TotalPrice = Decimal.Round(Convert.ToDecimal(amount),2);
             response.SubTotal = subTotal;
             response.is_processing_fee = (evt.ProcessingFee != null);
-            response.Discount = Decimal.Round(discount_amount,2)
-                ;
+            response.Discount = Decimal.Round(discount_amount,2);
 
             return response;
+        }
+
+        public bool CheckSeatsAvailability(int eventID, int no_of_tickets)
+        {
+            //= Convert.ToInt32(Request["eventID"]);
+            //= Convert.ToInt32(Request["no_of_tickets"]);
+
+            var evt = db.tblEvents.Where(e => e.EventID == eventID).SingleOrDefault();
+
+            BookResponse response = new BookResponse();
+            //check if stock is available
+            var soldTicketsCount = db.tblTicketOrders.Where(e => e.EventID == eventID
+                                                && e.Status == "SUCCESS"
+                                                && e.PaymentStatus == "COMPLETED").ToList();
+
+            int totalSeatsAvailable = (int)(evt.TicketStock - soldTicketsCount.Count);
+            //to check current no of tickets does not exceed thre remaining stock of tickets
+            bool isTicketCountValid = totalSeatsAvailable > no_of_tickets;
+            return isTicketCountValid;
+        }
+
+        private OrderInput CheckIsEarlyBirdApplicable(int eventID, List<SelectedSeatsV5> selectedSeatsTicketDetails)
+        {
+            var evt = db.tblEvents.Where(e => e.EventID == eventID).SingleOrDefault();
+            //decimal price = (decimal)evt.TicketPrice;
+            //decimal price = selectedSeatsTicketDetails.Sum(e => e.Price);
+            //decimal EBPrice = selectedSeatsTicketDetails.Sum(e => e.EBPrice);
+
+            int noOfTickets = selectedSeatsTicketDetails.Count;
+
+            var soldTicketsCount = db.tblTicketOrders.Where(e => e.EventID == eventID
+                                        && e.Status == "SUCCESS"
+                                        && e.PaymentStatus == "COMPLETED").ToList();
+
+            //decimal totalAmount = (noOfTickets * price);
+
+            var input = new OrderInput
+            {
+                CustomerName = "",
+                CustomerEmail = "",
+                NoOfTickets = noOfTickets,
+                //Price = price,
+                //TotalAmount = totalAmount
+            };
+            //Logic to check Early Bird ticket allocation base on configurtion 
+            //datewise ot seatwise
+            if (evt.EarlyBirdTicketSelection == EarlyBirdTicketType.DATEWISE.ToString())
+            {
+                DateTime currentDate = System.DateTime.Today;
+                if (currentDate >= evt.StartDate && currentDate <= evt.EndDate)
+                {
+                    input.TicketType = TicketType.EARLYBIRD.ToString();
+                    //input.Price = (decimal)EBPrice;
+                }
+                else
+                {
+                    input.TicketType = TicketType.GENERAL.ToString();
+                    //input.Price = (decimal)price;
+                }
+            }
+            else if (evt.EarlyBirdTicketSelection == EarlyBirdTicketType.SEATWISE.ToString())
+            {
+                int percentEBSeats = (int)evt.PercentEBSeats;
+                int totalEBSeatsAllowed = (int)((evt.TicketStock * percentEBSeats) / 100);
+
+                if (totalEBSeatsAllowed >= noOfTickets && evt.TicketsAvailable >= noOfTickets)
+                {
+                    input.TicketType = TicketType.EARLYBIRD.ToString();
+                    //input.Price = (decimal)EBPrice;
+                }
+                else
+                {
+                    input.TicketType = TicketType.GENERAL.ToString();
+                    //input.Price = (decimal)price;
+                }
+            }
+            //input.TotalAmount = (input.NoOfTickets * input.Price);
+            return input;
         }
     }
 }

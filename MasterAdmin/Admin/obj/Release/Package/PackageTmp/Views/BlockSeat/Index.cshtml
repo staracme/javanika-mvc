@@ -1,0 +1,202 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{ 
+    var events = (List<Admin.Models.tblEvent>)ViewData["Events"];
+}
+
+
+<script type="text/javascript">
+    $(function () {
+        $("#drpEvent").change(function () {
+            var eventID = $(this).val();
+
+            ResetAll();
+
+            $.ajax({
+                url: "/BlockSeat/GetBlocks",
+                data: { eventID: eventID },
+                type: "GET",
+                success: function (response) {
+                    var opt = '<option value="">--Select Block--</option>';
+
+                    $.each(response, function (key, value) {
+                        opt += '<option value="' + value.EventBlockID + '">' + value.BlockName + '  -  ' +'$' +value.Price + '</option>';
+                    });
+
+                    $("#drpBlock").html(opt);
+
+                    $("#divBlock1").show();
+                    $("#divBlock2").show();
+                    $("#divBlock3").show();
+                    $("#divBlock4").show();
+                }
+            });
+
+
+
+            $("#drpBlock").change(function () {
+                var eventBlockID = $(this).val();
+                $.ajax({
+                    url: "/BlockSeat/GetBlockPrice",
+                    data: { eventBlockID: eventBlockID },
+                    type: "GET",
+                    success: function (response) {
+
+                        $("#txtPrice").val('$' + response.price);
+
+                        var chk = '';
+
+                        $.each(response.seats, function (key, value) {
+                            chk += '<div class="SeatsBlock"><input type="checkbox" class="chkSeats" name="seats" value="' + value.seatID + '" ' + (value.isBlockedByAdmin == true ? 'checked' : '') + ' ' + (value.isBlockedByCustomer ? 'disabled' : '') + ' /> ' + value.seatNumber + '</div>';
+                        });
+
+                        $("#divSeats").html(chk);
+
+
+                        $("#divPrice1").show();
+                        $("#divPrice2").show();
+                        $("#divPrice3").show();
+                        $("#divPrice4").show();
+
+                        $("#divSeat1").show();
+                        $("#divSeat2").show();
+                        $("#divSeat3").show();
+                        $("#divSeat4").show();
+
+
+
+                        $(".chkSeats").on('click', function () {
+                            var seatID = $(this).val();
+
+                            if ($(this).is(":checked")) {
+                                BlockSeat(seatID);
+                            }
+                            else {
+                                UnblockSeat(seatID);
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    });
+
+    function ResetAll() {
+
+        $("#drpBlock").html("<option value=''>--Select Block--</option>");
+        $("#divBlock1").hide();
+        $("#divBlock2").hide();
+        $("#divBlock3").hide();
+        $("#divBlock4").hide();
+
+        $("#divPrice1").hide();
+        $("#divPrice2").hide();
+        $("#divPrice3").hide();
+        $("#divPrice4").hide();
+
+        $("#divSeat1").hide();
+        $("#divSeat2").hide();
+        $("#divSeat3").hide();
+        $("#divSeat4").hide();
+        $("#txtPrice").val("");
+
+
+        $("#divSeats").html("");
+
+    }
+
+
+    function BlockSeat(seatID) {
+        $.ajax({
+            url: "/BlockSeat/Block",
+            data: { seatID: seatID, eventID: $("#drpEvent").val() },
+            type: "GET",
+            success: function (response) {
+                if (response == "OK") {
+              
+                }
+            }
+        });
+    }
+
+    function UnblockSeat(seatID) {
+        $.ajax({
+            url: "/BlockSeat/Unblock",
+            data: { seatID: seatID, eventID: $("#drpEvent").val() },
+            type: "GET",
+            success: function (response) {
+            
+                if (response == "OK") {
+                    
+                }
+            }
+        });
+    }
+
+</script>
+
+
+
+<div class="FormBlock">
+    <form id="frmEvent">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="MainHeader">Block Seats</div>
+            </div>
+
+            <input type="hidden" class="FormTxtStyle" id="txtEventID" name="txtEventID" value="0" />
+            @*Event Name*@
+            <div class="col-sm-3"><div class="FormLabelStyle">Select Event</div></div>
+            <div class="col-sm-5">
+                <select class="FormTxtStyle" id="drpEvent" name="drpEvent">
+                    <option value="">--Select Event--</option>
+                    @foreach (var evt in events)
+                    {
+                        <option value="@evt.EventID">@evt.EventName - @Convert.ToDateTime(evt.EventDate).ToString("yyyy-MM-dd")</option>
+                    }
+                </select>
+            </div>
+            <div class="col-sm-4"><div class="FormValidationStyle" id="lblEventDurationType"></div></div>
+            <div class="col-sm-12"><br /></div>
+
+            @*Event Name*@
+            <div class="col-sm-3" style="display:none;" id="divBlock1"><div class="FormLabelStyle">Select Block</div></div>
+            <div class="col-sm-5" style="display:none;" id="divBlock2">
+                <select class="FormTxtStyle" id="drpBlock" name="drpBlock">
+                </select>
+            </div>
+            <div class="col-sm-4"  style="display:none;" id="divBlock3"><div class="FormValidationStyle" id="lblEventDurationType"></div></div>
+            <div class="col-sm-12" style="display:none;" id="divBlock4"><br /></div>
+
+
+            <div class="col-sm-3"  id="divPrice1" style="display:none;"><div class="FormLabelStyle">Price Per ticket</div></div>
+            <div class="col-sm-5"  id="divPrice2" style="display:none;"><input type="text" class="FormTxtStyle" id="txtPrice"  disabled  /></div>
+            <div class="col-sm-4"  id="divPrice3" style="display:none;"><div class="FormValidationStyle"></div></div>
+            <div class="col-sm-12" id="divPrice4" style="display:none;"><br /></div>
+
+            @*Event Name*@
+            <div class="col-sm-3" id="divSeat1" style="display:none;"><div class="FormLabelStyle">Seats</div></div>
+            <div class="col-sm-5" id="divSeat2" style="display:none;">
+                <div id="divSeats">
+                   
+                </div>
+            </div>
+            <div class="col-sm-4"  id="divSeat3" style="display:none;"><div class="FormValidationStyle" id="lblEventDate"></div></div>
+            <div class="col-sm-12" id="divSeat4" style="display:none;"><br /></div>
+
+
+
+            @*<div class="col-sm-4" id="block_div_3" style="display:none;"><div class="FormValidationStyle" id="lblEventTNC"></div></div>
+            <div class="col-sm-3"><div class="FormLabelStyle"></div></div>
+            <div class="col-sm-5"><button class="FormBtnStyle" type="button" onclick="JavaScript: ManageEvent();" id="but_upload">Update Event</button><img id="but_loader" src="~/App_Images/loader.gif" style="height:20px!important;width:20px!important;display:none;" /></div>
+            <div class="col-sm-4"><div class="FormValidationStyle"></div></div>
+            <div class="col-sm-12"><br /></div>*@
+
+        </div>
+    </form>
+</div>
+

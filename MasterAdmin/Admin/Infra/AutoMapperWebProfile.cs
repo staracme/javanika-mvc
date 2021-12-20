@@ -17,7 +17,8 @@ namespace Admin.Infra
             //Transfer Entity Model to View Model / DTOs
             CreateMap<Admin.Models.tblEvent, EventsViewModel>();
             CreateMap<EventsViewModel, Admin.Models.tblEvent>();
-            
+            CreateMap<EventsImageListViewModel, Admin.Models.tblPastEvent>();
+            CreateMap<Admin.Models.tblPastEvent, EventsImageListViewModel>();
 
         }
 

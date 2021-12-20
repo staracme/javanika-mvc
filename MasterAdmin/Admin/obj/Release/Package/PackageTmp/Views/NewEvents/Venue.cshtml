@@ -1,0 +1,257 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model  Admin.Models.tblVenue
+
+@{
+    var evt = (Admin.Models.tblEvent)ViewData["Event"];
+    var venues = (List<Admin.Models.tblVenue>)ViewData["Venues"];
+    var layouts = (List<Admin.Models.tblLayout>)ViewData["Layouts"];
+    var blocks = (List<Admin.Models.tblBlock>)ViewData["Blocks"];
+    int selected_layout = (evt != null && evt.LayoutID != null ? Convert.ToInt32(evt.LayoutID) : 0);
+
+    Admin.Models.JAVADBEntities db = new Admin.Models.JAVADBEntities();
+}
+
+<script src="~/App_Scripts/jquery.validate.js"></script>
+<script src="~/App_Scripts/ckeditor/ckeditor.js"></script>
+
+<link href="~/App_Theme/datatables-bootstrap.css" rel="stylesheet" />
+<script src="~/App_Scripts/datatables.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+
+        $('#datatable').DataTable();
+        $("#tblBlocks").css("display", "none");
+
+        $("#drpVenues").change(function () {
+            var venueID = $(this).val();
+
+            if (venueID != "") {
+                GetLayout(venueID);
+            }
+            else {
+                $("#drpLayout").html("");
+                $("#tblBlocks").css("display", "none");
+                ToggleLayout("hide");
+            }
+        });
+
+        $("#drpLayout").on("change", function () {
+            var layoutID = $(this).val();
+
+            if (layoutID != "") {
+                GetBlocks(layoutID);
+            }
+            else {
+                $("#drpLayout").html("");
+                $("$tblBlocks").css("display", "none");
+                ToggleBlock("show");
+            }
+        });
+    });
+
+
+    function ManageVenue() {
+        if ($("#frmVenue").valid()) {
+            $("#but_upload").hide();
+            $("#but_loader").show();
+            $.ajax({
+                url: '/NewEvents/ManageVenue',
+                data: $("#frmVenue").serialize(),
+                type: 'POST',
+                success: function (response) {
+                    if (response == "OK") {
+                        alert("Venue updated successfully.");
+                        location.reload();
+                    }
+                    else {
+                        alert("Oops! Something went wrong. Please try again after sometime.");
+
+                        $("#but_loader").hide();
+                        $("#but_upload").show();
+                    }
+                }
+            });
+        }
+        else {
+            return false;
+        }
+    }
+
+    function GetBlocks(layoutID) {
+        $.ajax({
+            url: "/NewEvents/GetBlocks",
+            data: { layoutID: layoutID },
+            type: "POST",
+            success: function (response) {
+                let thead = "<thead><tr><th>Venue Label</th><th>Tier</th><th>Ticket Price</th><th>Early Bird Price</th></tr></thead>";
+                let tblResponse = thead + response;
+
+                $("#tblBlocks").html(tblResponse);
+                $("#tblBlocks").css("display","block");
+                ToggleBlock("show");
+            }
+        });
+    }
+
+    function GetLayout(venueID) {
+        $.ajax({
+            url: "/NewEvents/GetLayout",
+            data: { venueID: venueID },
+            type: "POST",
+            success: function (response) {
+
+                var str = '<option>--Select Layout--</option>';;
+
+                $.each(response, function (i, k) {
+                    str += '<option value="' + k.layoutID + '">' + k.layout_name + '</option>';
+                });
+
+                $("#drpLayout").html(str);
+
+                ToggleLayout("show");
+            }
+        });
+    }
+
+    function ToggleLayout(action) {
+        if (action == "hide") {
+            $("#layout_div_1").hide();
+            $("#layout_div_2").hide();
+            $("#layout_div_3").hide();
+            $("#layout_div_4").hide();
+        }
+        else if (action == "show") {
+            $("#layout_div_1").show();
+            $("#layout_div_2").show();
+            $("#layout_div_3").show();
+            $("#layout_div_4").show();
+        }
+    }
+
+    function ToggleBlock(action) {
+        if (action == "hide") {
+            $("#block_div_1").hide();
+            $("#block_div_2").hide();
+            $("#block_div_3").hide();
+        }
+        else if (action == "show") {
+            $("#block_div_1").show();
+            $("#block_div_2").show();
+            $("#block_div_3").show();
+        }
+    }
+</script>
+
+<div class="FormBlock">
+    <form id="frmVenue">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="MainHeader d-flex w-100">
+                    Manage venue for Event: @evt.EventName,
+                    Dated: @Convert.ToDateTime(evt.EventDate).ToShortDateString()
+                    <div class="ml-auto">
+                        <a class="button-62"
+                            href="/NewEvents/Index">Back</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+            <input type="hidden" class="FormTxtStyle" id="txtEventID" name="txtEventID" value="@Request["evtID"]" />
+
+            @*Event Name*@
+            <div>
+                <div class="col-sm-3"><div class="FormLabelStyle">Venue</div></div>
+                <div class="col-sm-5">
+                    <select class="FormTxtStyle" id="drpVenues" name="drpVenues">
+                        <option value="">--Select Venue--</option>
+                        @foreach (var venue in venues)
+                        {
+
+                            <option value="@venue.VenueID" @(Model != null && Model.VenueID == venue.VenueID ? "selected" : "")>@venue.VenueName</option>
+
+                        }
+                    </select>
+                </div>
+                <div class="col-sm-4"><div class="FormValidationStyle" id="lblEventDurationType"></div></div>
+                <div class="col-sm-12"><br /></div>
+            </div>
+
+            @*Event Name*@
+            <div>
+                <div class="col-sm-3" id="layout_div_1" @(selected_layout > 0 ? "" : "style='display:none;'")><div class="FormLabelStyle">Layout</div></div>
+                <div class="col-sm-5" id="layout_div_2" @(selected_layout > 0 ? "" : "style='display:none;'")>
+                    <select class="FormTxtStyle" id="drpLayout" name="drpLayout">
+                        <option value="">--Select Layout--</option>
+                        @if (layouts.Count() > 0)
+                        {
+                            foreach (var item in layouts)
+                            {
+                                <option value="@item.LayoutID" @(selected_layout > 0 && item.LayoutID.ToString() == selected_layout.ToString() ? "selected" : "")>@item.LayoutName</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="col-sm-4" id="layout_div_3" @(selected_layout > 0 ? "" : "style='display:none;'")><div class="FormValidationStyle" id="lblEventDurationType"></div></div>
+                <div class="col-sm-12" id="layout_div_4" @(selected_layout > 0 ? "" : "style='display:none;'")><br /></div>
+            </div>
+
+            @*Event Name*@
+            <div>
+                <div class="col-sm-3" id="block_div_1" @(selected_layout > 0 ? "" : "style='display:none;'")><div class="FormLabelStyle">Blocks</div></div>
+                <div class="col-sm-5" id="block_div_2" @(selected_layout > 0 ? "" : "style='display:none;'")>
+                    <table class="table table-responsive table-bordered table-hover" cellpadding="10" id="tblBlocks">
+                        <thead>
+                            <tr>
+                                <th>Venue Label</th>
+                                <th>Tier</th>
+                                <th>Ticket Price</th>
+                                <th>Early Bird Price</th>
+                            </tr>
+                        </thead>
+                        @foreach (var block in blocks)
+                        {
+                            var selected = db.tblEventLayoutBlocks.Where(e => e.EventID == evt.EventID && e.BlockID == block.BlockID).SingleOrDefault();
+                            var tiers = db.tblTiers.ToList();
+                        <tr>
+                            <td><div class="VenueLabel">@block.BlockNumber</div></td>
+                            <td>
+                                <select class='FormTxtStyle' id="@("block_tier_" + block.BlockID)" name="@("block_tier_" + block.BlockID)">
+                                    <option value=''>--Select Tier--</option>";
+                                    @foreach (var tier in tiers)
+                                    {
+                                        <option value='@tier.TierID' @(selected != null && selected.TierID == tier.TierID ? "selected" : "")>@tier.TierName</option>
+                                    }
+                                </select>
+                            </td>
+                            <td><input type='text' class='FormTxtStyle' placeholder='Enter Price' id="@("block_price_" + block.BlockID)" name="@("block_price_" + block.BlockID)" value="@(selected != null ? Convert.ToInt32(selected.Price) : 0)" /></td>
+                            <td><input type='text' class='FormTxtStyle' placeholder='Enter Early Bird Price' id="@("eb_price_" + block.BlockID)" name="@("eb_price_" + block.BlockID)" value="@(selected != null ? Convert.ToInt32(selected.EBPrice) : 0)" /></td>
+                        </tr>
+                        }
+                    </table>
+                </div>
+                <div class="col-sm-4" id="block_div_3" @(selected_layout > 0 ? "" : "style='display:none;'")><div class="FormValidationStyle" id="lblEventTNC"></div></div>
+                <div class="clr"></div>
+            </div>
+            <div class="col-sm-12"><br /></div>
+            @*Event Name*@
+            <div>
+                <div class="col-sm-3"><div class="FormLabelStyle">&nbsp;</div></div>
+                <div class="col-sm-5"><button class="FormBtnStyle" type="button" onclick="JavaScript: ManageVenue();" id="but_upload">Update Event</button><img id="but_loader" src="~/App_Images/loader.gif" style="height:20px!important;width:20px!important;display:none;" /></div>
+                <div class="col-sm-4"><div class="FormValidationStyle"></div></div>
+            </div>
+            
+            </div>
+            
+            <div class="col-sm-12"><br /></div>
+
+        </div>
+    </form>
+</div>

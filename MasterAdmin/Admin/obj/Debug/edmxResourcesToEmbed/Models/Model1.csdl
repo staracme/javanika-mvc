@@ -113,6 +113,7 @@
       <End Role="tblTicket" EntitySet="tblTickets" />
       <End Role="tblSeatSelection" EntitySet="tblSeatSelections" />
     </AssociationSet>
+    <EntitySet Name="tblConfigs" EntityType="JAVADBNewModel.tblConfig" />
   </EntityContainer>
   <EntityType Name="tblAdminUser">
     <Key>
@@ -213,6 +214,7 @@
     <NavigationProperty Name="tblBlock" Relationship="JAVADBNewModel.FK_tblEventLayoutBlocks_tblBlocks" FromRole="tblEventLayoutBlock" ToRole="tblBlock" />
     <NavigationProperty Name="tblEvent" Relationship="JAVADBNewModel.FK_tblEventLayoutBlocks_tblEvents" FromRole="tblEventLayoutBlock" ToRole="tblEvent" />
     <NavigationProperty Name="tblTier" Relationship="JAVADBNewModel.FK_tblEventLayoutBlocks_tblTier" FromRole="tblEventLayoutBlock" ToRole="tblTier" />
+    <Property Name="EBPrice" Type="Decimal" Precision="18" Scale="2" />
   </EntityType>
   <EntityType Name="tblEvent">
     <Key>
@@ -255,6 +257,7 @@
     <Property Name="EBTicketPrice" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="EBMinTicketOrder" Type="Int32" />
     <Property Name="EBMaxTicketOrder" Type="Int32" />
+    <Property Name="EBTickets" Type="Decimal" Precision="18" Scale="2" />
   </EntityType>
   <EntityType Name="tblEventVolunteer">
     <Key>
@@ -320,6 +323,8 @@
     <Property Name="Year" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Name="Month" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="EventID" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="ImageType" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="tblReleaseLog">
     <Key>
@@ -369,6 +374,7 @@
     <NavigationProperty Name="tblEvent" Relationship="JAVADBNewModel.FK_tblSeatSelections_tblEvents" FromRole="tblSeatSelection" ToRole="tblEvent" />
     <NavigationProperty Name="tblSeat" Relationship="JAVADBNewModel.FK_tblSeatSelections_tblSeat" FromRole="tblSeatSelection" ToRole="tblSeat" />
     <NavigationProperty Name="tblTicket" Relationship="JAVADBNewModel.FK_tblSeatSelections_tblTickets" FromRole="tblSeatSelection" ToRole="tblTicket" />
+    <Property Name="EBPrice" Type="Decimal" Precision="18" Scale="2" />
   </EntityType>
   <EntityType Name="tblSeatSelectionsLog">
     <Key>
@@ -383,6 +389,7 @@
     <Property Name="OrderID" Type="Int32" />
     <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="EBPrice" Type="Decimal" Precision="18" Scale="2" />
   </EntityType>
   <EntityType Name="tblTicketOrder">
     <Key>
@@ -409,6 +416,8 @@
     <Property Name="CreatedDate" Type="DateTime" Precision="3" />
     <NavigationProperty Name="tblOrderCoupons" Relationship="JAVADBNewModel.FK_tblOrderCoupons_tblTicketOrders" FromRole="tblTicketOrder" ToRole="tblOrderCoupon" />
     <Property Name="TicketType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="ActualPrice" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PriceAfterDiscount" Type="Decimal" Precision="18" Scale="2" />
   </EntityType>
   <EntityType Name="tblTicket">
     <Key>
@@ -748,4 +757,11 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="tblConfig">
+    <Key>
+      <PropertyRef Name="ConfigID" />
+    </Key>
+    <Property Name="ConfigID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IsCacheToReferesh" Type="Boolean" />
+  </EntityType>
 </Schema>
