@@ -1,0 +1,293 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model List<Admin.Models.tblVolunteer>
+
+@{
+	var events = (List<Admin.Models.tblEvent>)ViewData["Events"];
+	Admin.Models.JAVADBEntities db = new Admin.Models.JAVADBEntities();
+}
+
+<script src="~/App_Scripts/jquery.validate.js"></script>
+<script src="~/App_Scripts/ckeditor/ckeditor.js"></script>
+
+<link href="~/App_Theme/datatables-bootstrap.css" rel="stylesheet" />
+<script src="~/App_Scripts/datatables.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+       
+        $('#datatable').DataTable({
+            "order": [[ 0, "asc" ]]
+        });
+
+        $("#frmVolunteers").validate({
+            rules: {
+                txtVolunteerName: {
+                    required: true
+                },
+                txtUserName: {
+                    required: true
+                },
+                txtPassword: {
+                    required: true
+                }
+			},
+            messages: {
+                txtVolunteerName: {
+                    required: "Please enter volunteer name"
+                },
+                txtUserName: {
+                    required: "Please enter username"
+                },
+                txtPassword: {
+                    required: "Please enter password"
+                }
+            },
+            errorPlacement: function (error, element) {
+                if (element.attr("name") == "txtVolunteerName")
+                    error.appendTo($('#lblName'));
+
+                if (element.attr("name") == "txtUserName")
+                    error.appendTo($('#lblUsername'));
+
+                if (element.attr("name") == "txtPassword")
+                    error.appendTo($('#lblPassword'));
+
+            }
+        });
+	});
+	
+	
+	function Reset() {
+		$("#frmVolunteers")[0].reset();
+		$("#txtVolunteerID").val("0");
+		$(":checked").removeAttr("checked");
+	}	
+
+
+    function ManageVolunteers() {
+        if ($("#frmVolunteers").valid()) {
+
+            $("#but_upload").hide();
+            $("#but_loader").show();
+
+            $.ajax({
+                url: '/AddVolunteers/ManageVolunteers',
+                data: $("#frmVolunteers").serialize(),
+                type: 'POST',
+                success: function (response) {
+                    if (response == "i") {
+                        alert("Volunteer created successfully.");
+                        location.reload();
+                    }
+                    else if (response == "u") {
+                        alert("Volunteer updated successfully.");
+						
+                        $("#but_loader").hide();
+                        $("#but_upload").show();
+						
+						location.reload();
+                    }
+                    else {
+                        alert("Sorry! Something went wrong. Please try again after sometime.");
+
+                        $("#but_loader").hide();
+                        $("#but_upload").show();
+                    }
+                }
+            });
+        }
+        else {
+            return false;
+        }
+    }
+
+    function GetVolunteer(volunteerID) {
+		Reset();
+	
+        $.ajax({
+            url: "/AddVolunteers/GetVolunteer",
+            data: { volunteerID: volunteerID },
+            type: "POST",
+            success: function (response) {
+				$("#txtVolunteerID").val(response.VolunteerID);
+				$("#txtVolunteerName").val(response.Name);
+				$("#txtUserName").val(response.Username);
+				$("#txtPassword").val(response.Password);
+				
+				if (response.Events != null && response.Events != "") {
+           
+				   var events = response.Events.split(",");
+
+				   $.each(events, function (id, a_id) {
+
+					   $("#event_" + a_id).attr("checked", "checked").parent().attr("class", "checked");
+				   
+				   });
+				}
+            }
+        });
+    }
+	
+	function CheckUser() {
+
+        var username = $("#txtUserName").val();
+
+		if(username != "") {
+			$.ajax({
+				url: "/AddVolunteers/CheckUsername",
+				data: { username: username },
+				type: 'GET',
+				success: CheckUserSuccess
+			});
+		}
+		else {
+			$("#lblAvailable").html("");
+		}
+    }
+
+    function CheckUserSuccess(msg) {
+
+        if (msg == "1") {
+
+            $("#lblAvailable").html(" <img src='/App_Images/cross.png'  /> This username is already taken ");
+
+            $("#but_upload").hide();
+        }
+        else {
+
+            $("#lblAvailable").html(" <img src='/App_Images/tick.png'  />  This username is available");
+
+            $("#but_upload").show();
+        }
+    }
+
+
+</script>
+
+<div class="FormBlock">
+    <form id="frmVolunteers">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="MainHeader">Manage Volunteers</div>
+            </div>
+
+            <input type="hidden" class="FormTxtStyle" id="txtVolunteerID" name="txtVolunteerID" value="0" />
+            @*Event Name*@
+            <div class="col-sm-3"><div class="FormLabelStyle">Volunteer Name</div></div>
+            <div class="col-sm-5"><input type="text" class="FormTxtStyle" id="txtVolunteerName" name="txtVolunteerName" /></div>
+            <div class="col-sm-4"><div class="FormValidationStyle" id="lblName"></div></div>
+            <div class="col-sm-12"><br /></div>
+
+            @*Event Type*@
+            <div class="col-sm-3"><div class="FormLabelStyle">User Name</div></div>
+            <div class="col-sm-5"><input type="text" class="FormTxtStyle" id="txtUserName" name="txtUserName"  onkeyup="JavaScript:CheckUser();" /></div>
+            <div class="col-sm-4"><div class="FormValidationStyle" id="lblUsername"></div><div class="FormValidationStyle" id="lblAvailable"></div></div>
+            <div class="col-sm-12"><br /></div>
+
+            @*Event Name*@
+            <div class="col-sm-3"><div class="FormLabelStyle">Password</div></div>
+            <div class="col-sm-5"><input type="text" class="FormTxtStyle" id="txtPassword" name="txtPassword" /></div>
+            <div class="col-sm-4"><div class="FormValidationStyle" id="lblPassword"></div></div>
+            <div class="col-sm-12"><br /></div>
+			
+			@*Event Name*@
+            <div class="col-sm-3" id="divSeat1"><div class="FormLabelStyle">Events</div></div>
+            <div class="col-sm-5" id="divSeat2">
+                <div id="divSeats">
+				@foreach(var evt in events)
+				{
+				    int eventID = evt.EventID;
+
+					if (evt.EventDurationType == "S")
+					{
+						var isFutureEvent = db.tblEvents.SqlQuery("SELECT * FROM TBLEVENTS WHERE CONVERT(DATE,EVENTDATE,103) >= CONVERT(DATE,GETDATE(),103) AND EVENTID = " + eventID + " and status = 'a'").Any();
+
+						if(isFutureEvent)
+						{
+							<div class="SeatsBlock1"><input type="checkbox" class="chkSeats" id="@("event_" + evt.EventID)" name="chkEvents" value="@evt.EventID" />&nbsp;@evt.EventName</div>
+						}
+					}
+					
+					
+
+					if (evt.EventDurationType == "M")
+					{
+						var isFutureEvent = db.tblEvents.SqlQuery("SELECT * FROM TBLEVENTS WHERE CONVERT(DATE,STARTDATE,103) >= CONVERT(DATE,GETDATE(),103) AND EVENTID = " + eventID + " and status = 'a'").Any();
+
+						if(isFutureEvent)
+						{
+							<div class="SeatsBlock1"><input type="checkbox" class="chkSeats" id="@("event_" + evt.EventID)" name="chkEvents"  value="@evt.EventID" />&nbsp;@evt.EventName</div>
+						}
+					}
+				}
+                </div>
+				<div class="col-sm-4"><div class="FormValidationStyle" id="lblPassword"></div></div>
+            </div>
+			<div class="col-sm-12"><br /></div>
+          
+            <div class="col-sm-4" id="block_div_3" style="display:none;"><div class="FormValidationStyle" id="lblEventTNC"></div></div>
+                @*Event Name*@
+                <div class="col-sm-3"><div class="FormLabelStyle"></div></div>
+                <div class="col-sm-5"><button class="FormBtnStyle" type="button" onclick="JavaScript: ManageVolunteers();" id="but_upload">Update Volunteer</button><img id="but_loader" src="~/App_Images/loader.gif" style="height:20px!important;width:20px!important;display:none;" /></div>
+                <div class="col-sm-4"><div class="FormValidationStyle"></div></div>
+                <div class="col-sm-12"><br /></div>
+
+            </div>
+    </form>
+</div>
+
+<div class="FormBlock">
+    <div class="row">
+
+
+
+        <div class="col-sm-12">
+            <div class="MainHeader">List of Volunteers</div>
+        </div>
+
+        <div class="col-sm-12">
+            <div class="underline"></div>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-sm-12">
+
+            <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th><center>Sr No</center></th>
+                        <th><center>Volunteer Name</center></th>
+                        <th><center>Username</center></th>
+                        <th><center>Password</center></th>
+                        <th><center>Action</center></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @{
+				int i = 0;
+                    }
+                    @foreach (var evt in Model)
+					{
+						i++;
+						<tr class="dynamic">
+							<td><center>@i</center></td>
+							<td><center>@evt.Name</center></td>
+							<td><center>@evt.Username</center></td>
+							<td><center>@evt.Password</center></td>
+							<td><a href="JavaScript:;" onclick="JavaScript:GetVolunteer(@evt.VolunteerID)">Update</a></td>
+						</tr>
+					}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>

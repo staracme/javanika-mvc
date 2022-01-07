@@ -1,0 +1,200 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JAVANIKA :: @ViewBag.Title</title>
+
+    @*Scripts starts here*@
+    <script src="~/App_Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/App_Scripts/datatables.js"></script>
+    <script src="~/App_Scripts/bootstrap.min.js"></script>
+    <script src="~/App_Scripts/bootstrap-datatables.js"></script>
+    <script src="~/App_Scripts/Menu.js"></script>
+    <script src="~/App_Scripts/masonry.pkgd.min.js"></script>
+    <script src="~/App_Scripts/imagesloaded.pkgd.min.js"    ></script>
+
+    @*Style starts here*@
+
+    <link href="~/App_Theme/bootstrap.css" rel="stylesheet" />
+
+    <link href="~/App_Theme/Menu.css" rel="stylesheet" />
+    <link href="~/App_Theme/MasterStylesheet.css" rel="stylesheet" />
+    <link href="~/App_Theme/cards.css" rel="stylesheet" />
+    <link href="~/App_Theme/search.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="~/App_Theme/oopsPage.css" rel="stylesheet" />
+    <style>
+        .grid-item {
+            display: block;
+            padding: 7px;
+            width: 200px;
+        }
+
+            .grid-item img, .grid-item iframe, .grid-item video {
+                display: block;
+                max-width: 100%;
+                width: 100%;
+                height: auto;
+            }
+    </style>
+</head>
+<body>
+    <div class="row">
+        <div class="col-sm-2">
+            <div class="MenuWrap">
+                <div id="jquery-accordion-menu" class="jquery-accordion-menu">
+                    <div class="MainHeadLabel1"><div class="LogoSpace">JAVANIKA ENTERTAINMENTS</div></div>
+                    <ul>
+                        <!--<li>
+        <a href="#"><i class="fa fa-dashboard"></i>Dashboard </a>
+        <ul class="submenu">
+            <li><a href="/Dashboard">Today </a></li>
+            <li><a href="/MTD">Month till date </a></li>
+            <li><a href="#">Year till date </a></li>
+        </ul>
+    </li>-->
+                        @*<li class="@Html.IsActive("MyOrders")">
+                            <a onclick="navigate('myorders')" href="javascript:void(0);"><i class="fa fa-suitcase"></i>My Orders </a>
+                        </li>*@
+                        @*<li class="@Html.IsActive("Orders")">
+                            <a onclick="navigate('orders')" href="javascript:void(0);"><i class="fa fa-suitcase"></i>Orders </a>
+                        </li>*@
+                        <li class="@Html.IsActive("NewEvents")">
+                            <a onclick="navigate('newevents')" href="javascript:void(0);"><i class="fa fa-suitcase"></i>Events </a>
+                        </li>
+                        @*<li class="@Html.IsActive("Reports")">
+                            <a onclick="navigate('reports')" href="javascript:void(0);"><i class="fa fa-suitcase"></i>Reports </a>
+                        </li>*@
+                        @*<li class="@Html.IsActive("Events")">
+            <a onclick="navigate('events')" href="javascript:void(0);"><i class="fa fa-home"></i>Events </a>
+        </li>*@
+                        <li class="@Html.IsActive("BlockSeat")">
+                            <a onclick="navigate('block-seat')" href="javascript:void(0);"><i class="fa fa-eye"></i>Block Seats </a>
+                        </li>
+                        <li class="@Html.IsActive("CouponGeneration")">
+                            <a onclick="navigate('coupon-generation')" href="javascript:void(0);"><i class="fa fa-area-chart"></i>Coupon Generation </a>
+                        </li>
+						<!--<li class="@Html.IsActive("AddPastEvents")">
+                            <a onclick="navigate('gallery')" href="javascript:void(0);"><i class="fa fa-newspaper-o"></i>Event Gallery </a>
+                        </li>-->
+                        <!--<li class="">
+                            <a onclick="navigate('export-mis')" href="javascript:void(0);">
+                                <i class="fa fa-eye"></i>Download VOBA Orders
+                            </a>
+                        </li>-->
+                        <!-- <!-- <li><a href="#"><i class="fa fa-suitcase"></i>Vacant </a></li> -->
+                        <!--  <li><a href="#"><i class="fa fa-file-image-o"></i>Vacant </a></li>
+
+    <li><a href="#"><i class="fa fa-newspaper-o"></i>Vacant </a></li>
+
+    <li><a href="#"><i class="fa fa-user"></i>Vacant </a></li>
+
+    <li><a href="#"><i class="fa fa-eye"></i>Vacant </a></li>
+    <li><a href="#"><i class="fa fa-laptop"></i>Vacant </a></li> -->
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-10">
+            <div class="col-sm-12" style="padding-left:0 !important;">
+                <div class="MainTopHeaderWrap">
+                    @*<div class="MainHeadLabel1"><div class="LogoSpace">SANOFI INDIA</div></div>*@
+                    <div class="MainHeadLabel2"><div class="Namelabel">Welcome <span>@Request.Cookies["Admin"]["FirstName"] @Request.Cookies["Admin"]["LastName"]</span></div></div>
+                    @*<div class="TopHeadBtnWrap"><button class="TopHeadBtn">Nischay</button></div>
+                        <div class="TopHeadBtnWrap"><button class="TopHeadBtn">Pharmacy</button></div>
+                        <div class="TopHeadBtnWrap"><button class="TopHeadBtnActive">Wholesale</button></div>*@
+                    <div class="clr"></div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="MainContentBody">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal fade" id="modalLoader" role="dialog">
+        <div id="divLoader" class="my-img-container">
+            <div class="loader">
+                <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+            </div>
+        </div>
+        @*<div class="modal-dialog err-pop" style="">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button id="DivClose" type="button" class="close"
+                            data-dismiss="modal">
+                        &times;
+                    </button>
+                </div>
+                <div class="modal-body" style="text-align:center;">
+                    <div id="divLoader" class="my-img-container" style="display:none;">
+                        <div class="loader">
+                            <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+                        </div>
+                    </div>
+                </div>
+                <input id="hdnEventId" type="hidden" value="-1" />
+            </div>
+        </div>*@
+    </div>
+</body>
+<script type="text/javascript">
+    function navigate(menuName) {
+        $("#modalLoader").modal('show');
+        switch (menuName) {
+            case 'myorders':
+                window.location.href = '@Url.Action("Index", "MyOrders")';
+                break;
+            case 'orders':
+                window.location.href = '@Url.Action("Index", "Orders")';
+                break;
+            case 'newevents':
+                window.location.href = '@Url.Action("Index","NewEvents")';
+                break;
+            case 'events':
+                window.location.href = '@Url.Action("Index","Events")';
+                break;
+            case 'reports':
+                window.location.href = '@Url.Action("Index","Report")';
+                break;
+            case 'block-seat':
+                window.location.href = '@Url.Action("Index", "BlockSeat")';
+                break;
+            case 'coupon-generation':
+                window.location.href = '@Url.Action("Index", "CouponGeneration")';
+                break;
+            case 'export-mis':
+                window.location.href = '@Url.Action("ExportMIS", "VOBAEvent")';
+                break;
+			case 'gallery':
+                window.location.href = '@Url.Action("Index", "AddPastEvents")';
+                break;
+            default:
+                window.location.href = '@Url.Action("Index", "Home")';
+        }
+        @*if (menuName === 'events') {
+            var url = '@Url.Action("Index","Events")';
+            window.location.href = url;
+            /href = "/VOBAEvent / ExportMIS"
+        }
+        else if (menuName === 'events') {
+            var url = '@Url.Action("Index","Events")';
+            window.location.href = url;
+        }*@
+    }
+    $(document).ready(function () {
+
+        $("#addEvent").on("click", function () {
+            showAddEvent("addEvent");
+        });
+        $("#listEvent").on("click", function () {
+            showAddEvent("listEvent");
+        });
+
+    });
+</script>
+</html>
