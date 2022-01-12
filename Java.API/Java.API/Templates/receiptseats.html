@@ -84,9 +84,6 @@
                 display:none;
             }
 
-            .align-right{
-                text-align:right;
-            }
     </style>
 </head>
 <body>
@@ -175,28 +172,20 @@
                     <td>[event_name]<!--Group of 10 or more--></td>
                     <td>[individual_price] <!--$30--></td>
                     <td>[no_of_tickets]</td>
-                    <td class="align-right"><b>$[amount]</b></td>
+                    <td><b>$[amount]</b></td>
                 </tr>
-                
+                <tr>
+                    <td colspan="3">Service Charges</td>
+                    <td>$0</td>
+                </tr>
 
                 <tr class="[class_name]">
                     <td colspan="3">Discount</td>
-                    <td class="align-right">[coupon_code] - $[discount]</td>
+                    <td>[coupon_code] - $[discount]</td>
                 </tr>
-				
-				<tr class="[eb_class_name]">
-                    <td colspan="3">Early Bird Discount</td>
-                    <td class="align-right">$-[eb_discount]</td>
-                </tr>
-				
-				<tr>
-                    <td colspan="3">Service Fees</td>
-                    <td class="align-right">$[service_charge]</td>
-                </tr>
-				
                 <tr>
                     <td colspan="3">Total</td>
-                    <td class="align-right"><b>$[total_amount]</b></td>
+                    <td><b>$[total_amount]</b></td>
                 </tr>
             </table>
         </div>
@@ -208,10 +197,10 @@
             <b>Terms & Conditions:</b><br />
             <ol>
                 <li>All sales are final.</li>
-                <li>All tickets are non-refundable, non-disputable and non-transferable once purchased.</li>
+                <li>All tickets are non-refundable and non-transferable once purchased.</li>
                 <li>The person in whose name the tickets is issued must collect the tickets at the venue.</li>
                 <li>You will see a charge from Javanika.com on your credit card statement for this order.</li>
-                <li>Please present a printed or digital copy of this page along with your Photo ID to collect your tickets at the venue. Please do carry a valid Photo ID along with you to the event.</li>
+                <li>Please present a printed copy of this page along with your Photo ID to collect your tickets at the venue. Please do carry a valid Photo ID along with you to the event.</li>
                 <li>In case of cancellation or reschedule of the event you can claim for the refund. but ticket purchased Service Fee is (non-refundable).</li>
             </ol>
         </div>

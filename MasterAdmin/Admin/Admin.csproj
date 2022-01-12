@@ -1229,7 +1229,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SA.Logger\SA.Logger.csproj">
+    <ProjectReference Include="..\..\FrontEnd\SA.Logger\SA.Logger.csproj">
       <Project>{3ad9b846-8c27-424d-b918-c8140d8b3980}</Project>
       <Name>SA.Logger</Name>
     </ProjectReference>

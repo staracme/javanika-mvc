@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28307.1433
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Admin", "Admin\Admin.csproj", "{61180567-90A9-44FF-8AB7-981354A5156A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SA.Logger", "SA.Logger\SA.Logger.csproj", "{3AD9B846-8C27-424D-B918-C8140D8B3980}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SA.Logger", "..\FrontEnd\SA.Logger\SA.Logger.csproj", "{3AD9B846-8C27-424D-B918-C8140D8B3980}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
