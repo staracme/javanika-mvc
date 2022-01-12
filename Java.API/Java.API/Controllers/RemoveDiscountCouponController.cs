@@ -36,7 +36,7 @@ namespace Java.API.Controllers
             }
             catch (Exception ex)
             {
-                response.status = "OK";
+                response.status = "FAILED";
                 response.errorMessage = (ex.InnerException != null ? ex.InnerException.Message : "");
                 return response;
             }

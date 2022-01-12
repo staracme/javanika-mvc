@@ -25,7 +25,7 @@ namespace Java.API.Controllers
         public decimal Price { get; set; }
         public bool isPastEvent { get; set; }
         public List<Artist> Artists { get; set; }
-
+        public string BookingType { get; set; }
         public string SeatingChart { get; set; }
     }
 
@@ -76,6 +76,7 @@ namespace Java.API.Controllers
             response.Price = min_price;
             response.isPastEvent = isPastEvent;
             response.SeatingChart = evt.tblVenue.AppSeatingChart;
+            response.BookingType = evt.BookingType;
 
             var artists = db.tblEventArtists.Where(a => a.EventID == e.eventID).ToList();
 

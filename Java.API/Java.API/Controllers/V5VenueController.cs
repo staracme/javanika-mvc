@@ -67,8 +67,9 @@ namespace Java.API.Controllers
             {
                 var block_pricing = db.tblEventLayoutBlocks.Where(t => t.BlockID == block1.BlockID && t.EventID == v5.eventID).SingleOrDefault();
 
-                var seat_rows = db.tblSeatRows.Where(r => r.BlockID == block1.BlockID).OrderByDescending(s => s.SeatRowID).ToList();
-                
+                //var seat_rows = db.tblSeatRows.Where(r => r.BlockID == block1.BlockID).OrderByDescending(s => s.SeatRowID).ToList();
+                var seat_rows = db.tblSeatRows.Where(r => r.BlockID == block1.BlockID).OrderBy(s => s.SeatRowID).ToList();
+
                 foreach (var row in seat_rows)
                 {
                     List<SeatV5> b1_row_seats = new List<SeatV5>();

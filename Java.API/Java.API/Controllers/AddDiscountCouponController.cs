@@ -23,6 +23,7 @@ namespace Java.API.Controllers
     {
         public string status { get; set; }
         public string errorMessage { get; set; }
+        public int CouponID { get; set; }
         public string coupon_code { get; set; }
         public decimal discount_amount { get; set; }
         public decimal Percentage { get; set; }
@@ -137,7 +138,7 @@ namespace Java.API.Controllers
                             response.Percentage = coupon_discount;
 
                             response.status = "OK";
-
+                            response.CouponID = coupon.CouponID;
                             response.TotalPrice = amount;
                             response.NoOfSeats = Convert.ToInt32(seats.Sum(s => s.NoOfSeats));
                             response.TotalPriceAfterDiscount = priceAfterDiscount;

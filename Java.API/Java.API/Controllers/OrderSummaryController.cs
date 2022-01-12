@@ -23,6 +23,7 @@ namespace Java.API.Controllers
         public bool is_processing_fee { get; set; }
         public decimal processing_fee { get; set; }
         public decimal SubTotal { get; set; }
+        public decimal ActualPrice { get; set; }
         public decimal Discount { get; set; }
         public decimal processingPercentage { get; set; }
         public string ticketType { get; set; }
@@ -213,6 +214,7 @@ namespace Java.API.Controllers
             response.NoOfSeats = items.Sum(s => s.NoOfSeats);
             response.TotalPrice = Decimal.Round(Convert.ToDecimal(amount),2);
             response.SubTotal = subTotal;
+            response.ActualPrice = subTotal;
             response.is_processing_fee = (evt.ProcessingFee != null);
             response.Discount = Decimal.Round(discount_amount,2);
 

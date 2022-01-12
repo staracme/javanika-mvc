@@ -462,7 +462,7 @@ namespace Admin.Controllers
             }
             catch (Exception ex)
             {
-                Task.Run(() => ExceptionLogger.LogException("Artist Controller", "UpdateConfigs()", ex));
+                Task.Run(action: () => ExceptionLogger.LogException("Artist Controller", "UpdateConfigs()", ex));
             }
         }
         public JsonResult GetArtist(int artistID)

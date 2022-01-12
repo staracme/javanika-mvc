@@ -223,8 +223,8 @@ namespace Java.API.Controllers
                 order.QRCode = orderID.ToString() + ".png";
                 db.SaveChanges();
 
-                string username = System.Configuration.ConfigurationManager.AppSettings["Username"].ToString();
-                string password = System.Configuration.ConfigurationManager.AppSettings["Password"].ToString();
+                string username = System.Configuration.ConfigurationManager.AppSettings["SMTPUsername"].ToString();
+                string password = System.Configuration.ConfigurationManager.AppSettings["SMTPPassword"].ToString();
 
                 try
                 {
